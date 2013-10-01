@@ -2,12 +2,20 @@
 
 = Introduction =
 
-
+Tire Service IS for managing orders (customer side) an stock of tires (employee side).
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Capabilities of the system: ==
+  * Customer side
+    * Order new tires
+    * Include additional services to the order
+    * Create multiple orders
+  * System side
+    * offers different types, sizes, brands and prices
+    * records customer's order under his name, address, phone number and type of the car
+  * Employee side
+    * List all orders according to the customer, price of the order 
+
+== Diagrams ==
