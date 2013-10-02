@@ -19,5 +19,7 @@ Tire Service IS for managing orders (customer side) an stock of tires (employee 
     * List all orders according to the customer, price of the order 
 
 == Diagrams ==
+ * <a href="http://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png" alt="useCase">
+Use Case Diagram</a>
 
-<a href="https://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png" alt="UseCase">UseCase Diagram</a>
+http://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png
