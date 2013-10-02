@@ -22,4 +22,4 @@ Tire Service IS for managing orders (customer side) an stock of tires (employee 
  * <a href="http://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png" alt="useCase">
 Use Case Diagram</a>
 
-http://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png
+[http://code.google.com/p/pa165-tireservice/source/browse/wiki/UseCase.png]
