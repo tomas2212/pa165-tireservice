@@ -20,5 +20,11 @@ Tire Service IS for managing orders (customer side) an stock of tires (employee 
 
 == Diagrams ==
 
-<a href="http://pa165-tireservice.googlecode.com/svn/wiki/UseCase.png" alt="useCase">
-Use Case Diagram</a>
+<a href="http://pa165-tireservice.googlecode.com/svn/wiki/diagrams/UseCase1.jpg" alt="useCase1">
+Use Case Diagram 1</a>
+
+<a href="http://pa165-tireservice.googlecode.com/svn/wiki/diagrams/useCase2.jpg" alt="useCase2">
+Use Case Diagram 2</a>
+
+<a href="http://pa165-tireservice.googlecode.com/svn/wiki/diagrams/classDiagram.jpg" alt="classDiagram">
+Class Diagram</a>
