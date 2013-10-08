@@ -28,3 +28,6 @@ Use Case Diagram 2</a>
 
 <a href="http://pa165-tireservice.googlecode.com/svn/wiki/diagrams/classDiagram.png" alt="classDiagram">
 Class Diagram</a>
+
+<a href="http://pa165-tireservice.googlecode.com/svn/wiki/diagrams/classDiagram2.png" alt="classDiagram2">
+Class Diagram 2</a>
