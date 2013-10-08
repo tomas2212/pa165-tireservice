@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.tireservice.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,19 @@ public class Tire implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String brand;
+    
     private String type;
-    private int tireSize;
-    private int price;
+    private String manufacturer;
+    private String season;
+    
+    private int amount;
+    
+    private double tireWidth;
+    private double tireAspect;
+    private double tireRimSize;
+    
+    private BigDecimal priceForChange;
+    
     private boolean changeTire;
 
     public Long getId() {
@@ -32,14 +42,6 @@ public class Tire implements Serializable{
         this.id = id;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getType() {
         return type;
     }
@@ -48,20 +50,60 @@ public class Tire implements Serializable{
         this.type = type;
     }
 
-    public int getTireSize() {
-        return tireSize;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setTireSize(int tireSize) {
-        this.tireSize = tireSize;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
-    public int getPrice() {
-        return price;
+    public String getSeason() {
+        return season;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public double getTireWidth() {
+        return tireWidth;
+    }
+
+    public void setTireWidth(double tireWidth) {
+        this.tireWidth = tireWidth;
+    }
+
+    public double getTireAspect() {
+        return tireAspect;
+    }
+
+    public void setTireAspect(double tireAspect) {
+        this.tireAspect = tireAspect;
+    }
+
+    public double getTireRimSize() {
+        return tireRimSize;
+    }
+
+    public void setTireRimSize(double tireRimSize) {
+        this.tireRimSize = tireRimSize;
+    }
+
+    public BigDecimal getPriceForChange() {
+        return priceForChange;
+    }
+
+    public void setPriceForChange(BigDecimal priceForChange) {
+        this.priceForChange = priceForChange;
     }
 
     public boolean isChangeTire() {
@@ -74,12 +116,14 @@ public class Tire implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 89 * hash + (this.brand != null ? this.brand.hashCode() : 0);
-        hash = 89 * hash + (this.type != null ? this.type.hashCode() : 0);
-        hash = 89 * hash + this.tireSize;
-        hash = 89 * hash + this.price;
+        int hash = 5;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 17 * hash + (this.type != null ? this.type.hashCode() : 0);
+        hash = 17 * hash + (this.manufacturer != null ? this.manufacturer.hashCode() : 0);
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.tireWidth) ^ (Double.doubleToLongBits(this.tireWidth) >>> 32));
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.tireAspect) ^ (Double.doubleToLongBits(this.tireAspect) >>> 32));
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.tireRimSize) ^ (Double.doubleToLongBits(this.tireRimSize) >>> 32));
+        hash = 17 * hash + (this.priceForChange != null ? this.priceForChange.hashCode() : 0);
         return hash;
     }
 
@@ -95,16 +139,22 @@ public class Tire implements Serializable{
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if ((this.brand == null) ? (other.brand != null) : !this.brand.equals(other.brand)) {
-            return false;
-        }
         if ((this.type == null) ? (other.type != null) : !this.type.equals(other.type)) {
             return false;
         }
-        if (this.tireSize != other.tireSize) {
+        if ((this.manufacturer == null) ? (other.manufacturer != null) : !this.manufacturer.equals(other.manufacturer)) {
             return false;
         }
-        if (this.price != other.price) {
+        if (Double.doubleToLongBits(this.tireWidth) != Double.doubleToLongBits(other.tireWidth)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.tireAspect) != Double.doubleToLongBits(other.tireAspect)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.tireRimSize) != Double.doubleToLongBits(other.tireRimSize)) {
+            return false;
+        }
+        if (this.priceForChange != other.priceForChange && (this.priceForChange == null || !this.priceForChange.equals(other.priceForChange))) {
             return false;
         }
         return true;
@@ -112,7 +162,6 @@ public class Tire implements Serializable{
 
     @Override
     public String toString() {
-        return "Tire{" + "id=" + id + ", brand=" + brand + ", type=" + type + ", tireSize=" + tireSize + ", price=" + price + '}';
-    }
-    
+        return "Tire{" + "id=" + id + ", type=" + type + ", manufacturer=" + manufacturer + ", usage=" + season + ", amount=" + amount + ", tireWidth=" + tireWidth + ", tireAspect=" + tireAspect + ", tireRimSize=" + tireRimSize + ", priceForChange=" + priceForChange + ", changeTire=" + changeTire + '}';
+    }    
 }
