@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.tireservice.entities.Tire;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
 /**
@@ -11,8 +12,11 @@ import javax.persistence.TypedQuery;
  * @author Jakub Papcun(359 474)
  */
 public class TireDAOImpl implements TireDAO {
-    @PersistenceContext
     protected EntityManager entityManager;
+
+    public TireDAOImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
     
     public Tire getTireById(Long id) {
         return entityManager.find(Tire.class, id);
