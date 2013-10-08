@@ -10,7 +10,7 @@ firstName: String
 lastName: String
 address: String
 phoneNumber: String
-password: Object
+password: String
 active: boolean
 isServiceman: Boolean</string>
      </void>
@@ -48,8 +48,8 @@ isServiceman: Boolean</string>
      <void property="text">
       <string>id: Long
 customer: Account
-Tires: Map&lt;Tire,int&gt;
-Services: Map &lt;Service,int&gt;
+Tires: List&lt;Tire&gt;
+Services: List &lt;Service&gt;
 date: Date
 active: boolean</string>
      </void>
@@ -103,19 +103,19 @@ name: String</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>419.0</double>
+      <double>414.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>599.0</double>
+      <double>488.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>419.0</double>
-     <double>599.0</double>
+     <double>414.0</double>
+     <double>488.0</double>
     </void>
    </object>
   </void>
@@ -127,19 +127,15 @@ name: String</string>
 price: BigDecimal
 description: String
 active: Boolean
-type: enum (potrebujeme ?)
+type: enum
 manufacturer: String
-tireWidth : double
-tireAspect: double
 tireRimSize: double
-usage: String
-type: String
-amountToBuy: int</string>
+amountOnStore: int</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>Tire</string>
+      <string>TireType</string>
      </void>
     </void>
    </object>
@@ -148,19 +144,19 @@ amountToBuy: int</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>754.0</double>
+      <double>785.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>203.0</double>
+      <double>239.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>754.0</double>
-     <double>203.0</double>
+     <double>785.0</double>
+     <double>239.0</double>
     </void>
    </object>
   </void>
@@ -168,7 +164,7 @@ amountToBuy: int</string>
    <object class="com.horstmann.violet.NoteNode" id="NoteNode0">
     <void property="text">
      <void property="text">
-      <string>Change of own tires will be individual Service.</string>
+      <string>Change of tires will be individual Service.</string>
      </void>
     </void>
    </object>
@@ -177,19 +173,19 @@ amountToBuy: int</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>608.0</double>
+      <double>615.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>644.0</double>
+      <double>534.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>608.0</double>
-     <double>644.0</double>
+     <double>615.0</double>
+     <double>534.0</double>
     </void>
    </object>
   </void>
@@ -229,60 +225,61 @@ amountToBuy: int</string>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode1">
-    <void property="text">
-     <void property="text">
-      <string>e.g.
-tireWidth: 195 (mm)
-tireAspect: 60
-tireRimSize: (R)16
-usage: Winter
-type: Car
-</string>
-     </void>
-    </void>
-   </object>
+   <object class="com.horstmann.violet.ClassNode"/>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double6">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>984.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double6"/>
-      <double>274.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>984.0</double>
-     <double>274.0</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode"/>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double7">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double7"/>
       <double>1153.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double7"/>
+      <object idref="Point2D$Double6"/>
       <double>248.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>1153.0</double>
      <double>248.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
+    <void property="attributes">
+     <void property="text">
+      <string>id: Long
+amountToBut: int
+tyreType: TyreType</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>Tyre</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double7">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double7"/>
+      <double>591.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double7"/>
+      <double>277.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>591.0</double>
+     <double>277.0</double>
     </void>
    </object>
   </void>
@@ -313,9 +310,16 @@ type: Car
    <object idref="NoteNode0"/>
   </void>
   <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="ClassNode3"/>
-   <object idref="NoteNode1"/>
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+   </object>
+   <object idref="ClassNode4"/>
+   <object idref="ClassNode1"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
@@ -325,17 +329,8 @@ type: Car
     <void property="endArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
-    <void property="endLabel">
-     <string>1..n</string>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="V"/>
-    </void>
-    <void property="startLabel">
-     <string>1..n</string>
-    </void>
    </object>
-   <object idref="ClassNode1"/>
+   <object idref="ClassNode4"/>
    <object idref="ClassNode3"/>
   </void>
   <void method="connect">
