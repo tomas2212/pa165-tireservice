@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import junit.framework.TestCase;
+import org.jboss.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -26,6 +27,9 @@ public class TireDAOTest extends AbstractDAOTest{
     
     @Test
     public void testPersistence() {
+        
+        Logger log = Logger.getLogger(TireDAOTest.class);
+        log.error("fds");
         
         TireDAO td = new TireDAOImpl(em);
         
@@ -45,21 +49,4 @@ public class TireDAOTest extends AbstractDAOTest{
         Tire tire2 = td.getTireById(tire1.getId());
         assertEquals(tire1, tire2);
     }
-    
-//    @Test
-//    public void insertTest() {
-//        Car car1 = new Car();
-//        car1.setSpz("BR975AM");
-//
-//        carDao.insert(car1);
-//
-//        Car car2 = carDao.getCarById(car1.getId());
-//        assertEquals(car1, car2);
-//
-//        try {
-//            carDao.insert(null);
-//            fail("Inserted null entity");
-//        } catch (DataAccessException e) {
-//        }
-//    }
 }
