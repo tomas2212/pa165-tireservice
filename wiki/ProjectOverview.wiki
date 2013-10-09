@@ -16,7 +16,8 @@ Tire Service IS for managing orders (customer side) an stock of tires (employee 
     * offers different types, sizes, brands and prices
     * records customer's order under his name, address, phone number and type of the car
   * Employee side
-    * List all orders according to the customer, price of the order 
+    * List all orders according to the customer, price of the order
+    * Manage the list of tire types
 
 == Diagrams ==
 
