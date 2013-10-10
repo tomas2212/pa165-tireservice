@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 /**
- *
  * @author Jakub Papcun(359 474)
  */
 public class TireTypeDAOImpl implements TireTypeDAO {
@@ -29,7 +28,7 @@ public class TireTypeDAOImpl implements TireTypeDAO {
 
     public void insertTireType(TireType tireType) {
         if (tireType == null) {
-            throw new IllegalArgumentException("You have to set tire");
+            throw new IllegalArgumentException("You have to set tire type");
         }
         entityManager.getTransaction().begin();
         entityManager.persist(tireType);
@@ -50,7 +49,7 @@ public class TireTypeDAOImpl implements TireTypeDAO {
 
     public void removeTireType(TireType tireType) {
         if (tireType == null) {
-            throw new IllegalArgumentException("You have to set tire");
+            throw new IllegalArgumentException("You have to set tire type");
         }
         if (tireType.getId() == null) {
             throw new IllegalArgumentException("Can't remove, because entity does not contain ID");
