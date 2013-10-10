@@ -12,7 +12,8 @@ address: String
 phoneNumber: String
 password: String
 active: boolean
-isServiceman: Boolean</string>
+isServiceman: Boolean
+orders: List&lt;Order&gt;</string>
      </void>
     </void>
     <void property="name">
