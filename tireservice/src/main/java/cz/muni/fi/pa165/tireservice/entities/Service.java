@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -27,6 +28,9 @@ public class Service implements Serializable {
     private boolean active;
     
     private String name;
+    
+    @ManyToOne
+    private Order order;
 
     public Long getId() {
         return id;
@@ -66,6 +70,14 @@ public class Service implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
