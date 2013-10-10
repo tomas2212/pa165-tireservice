@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The DAO layer for managing operations with the data in Service table
  * 
- * @author Martin(359978)
+ * @author Martin Makarsky(359978)
  */
 public interface ServiceDAO {
     
