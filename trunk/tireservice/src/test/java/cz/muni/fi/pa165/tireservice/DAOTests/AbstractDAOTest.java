@@ -31,6 +31,7 @@ public class AbstractDAOTest extends TestCase {
         }
         try {
             emFactory = Persistence.createEntityManagerFactory("TireService");
+//            emFactory = Persistence.createEntityManagerFactory("TestPU");
             em = emFactory.createEntityManager();
         } catch (Exception ex) {
             ex.printStackTrace();
