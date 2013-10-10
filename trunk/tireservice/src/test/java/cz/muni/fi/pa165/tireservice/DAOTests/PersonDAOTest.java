@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.tireservice.entities.Person;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import org.jboss.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -21,7 +20,7 @@ public class PersonDAOTest extends AbstractDAOTest {
         
         PersonDAO pd = new PersonDAOImpl(em);
         
-        //Person1
+        
         Person person1 = new Person();
         person1.setFirstName("Joe");
         person1.setLastName("Black");
@@ -34,7 +33,7 @@ public class PersonDAOTest extends AbstractDAOTest {
         pd.insertPerson(person1);
         int countOfPeople1 = pd.getAllPersons().size();
         
-        //Person2
+        
         Person person2 = new Person();
         person2.setFirstName("William");
         person2.setLastName("Parrish");
@@ -47,7 +46,7 @@ public class PersonDAOTest extends AbstractDAOTest {
         pd.insertPerson(person2);
         int countOfPeople2 = pd.getAllPersons().size();
         
-        //Person3
+        
         Person person3 = new Person();
         person3.setFirstName("Eddie");
         person3.setLastName("Parrish");
@@ -127,10 +126,9 @@ public class PersonDAOTest extends AbstractDAOTest {
         assertEquals(person1, person2);
     }
     
-   //TODO dorobit test na disablovanie
     
-        @Test
-    public void testDeleteService(){
+    @Test
+    public void testRemovePerson(){
   
         PersonDAO pd = new PersonDAOImpl(em);
         
