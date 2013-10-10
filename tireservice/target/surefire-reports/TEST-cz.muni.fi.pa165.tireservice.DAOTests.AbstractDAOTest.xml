@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="1" time="0.008" errors="0" skipped="0" tests="1" name="cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest">
+<testsuite failures="1" time="0.04" errors="0" skipped="0" tests="1" name="cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_40\jre\bin"/>
     <property name="java.vm.version" value="24.0-b56"/>
+    <property name="user.country.format" value="SK"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
@@ -13,39 +14,41 @@
     <property name="user.script" value=""/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="test" value="cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Martin\Desktop\JAVA EE\trunk\tireservice"/>
+    <property name="user.dir" value="C:\Users\stefa_000\Desktop\Java\trunk\tireservice"/>
     <property name="java.runtime.version" value="1.7.0_40-b43"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.7.0_40\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\Martin\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\STEFA_~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 7"/>
+    <property name="os.name" value="Windows 8"/>
     <property name="classworlds.conf" value="C:\Program Files\NetBeans 7.3.1\java\maven\bin\m2.conf"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_40\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;C:\Ruby200\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;."/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_40\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="6.1"/>
-    <property name="user.home" value="C:\Users\Martin"/>
+    <property name="os.version" value="6.2"/>
+    <property name="user.home" value="C:\Users\stefa_000"/>
     <property name="user.timezone" value="Europe/Prague"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.7"/>
-    <property name="file.encoding" value="Cp1252"/>
-    <property name="user.name" value="Martin"/>
+    <property name="file.encoding" value="Cp1250"/>
+    <property name="user.name" value="Atares"/>
     <property name="java.class.path" value="C:\Program Files\NetBeans 7.3.1\java\maven\boot\plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_40\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest test-compile surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
+    <property name="user.language.format" value="sk"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.7.0_40"/>
@@ -60,7 +63,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.002" classname="junit.framework.TestSuite$1" name="warning">
+  <testcase time="0.005" classname="junit.framework.TestSuite$1" name="warning">
     <failure message="No tests found in cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No tests found in cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest
 	at junit.framework.Assert.fail(Assert.java:50)
 	at junit.framework.TestSuite$1.runTest(TestSuite.java:97)
