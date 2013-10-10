@@ -1,10 +1,14 @@
 package cz.muni.fi.pa165.tireservice.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -33,6 +37,9 @@ private static final long serialVersionUID = 1L;
     
     private boolean isServiceman;
 
+    @OneToMany(mappedBy="person", cascade = CascadeType.ALL)
+    private List<Order> orders;
+    
     public Long getId() {
         return id;
     }
@@ -97,7 +104,15 @@ private static final long serialVersionUID = 1L;
         this.isServiceman = isServiceman;
     }
 
-  
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 7;
