@@ -12,14 +12,12 @@ import org.junit.Test;
 
 /**
  *
- * @author Atares //
+ * @author Martin Makarsky (uco)
  */
 public class PersonDAOTest extends AbstractDAOTest {
     
     @Test
     public void testGetAllPersons() {
-        Logger log = Logger.getLogger(PersonDAOTest.class);
-        log.error("fds"); //preco fds?
         
         PersonDAO pd = new PersonDAOImpl(em);
         
@@ -67,9 +65,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     
     @Test
     public void testInsertPerson() {
-        Logger log = Logger.getLogger(PersonDAOTest.class);
-        log.error("fds"); //preco fds?
-        
+
         PersonDAO pd = new PersonDAOImpl(em);
         
         Person person1 = new Person();
@@ -89,9 +85,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     
     @Test
     public void testUpdatePerson() {
-        Logger log = Logger.getLogger(PersonDAOTest.class);
-        log.error("fds"); //preco fds?
-        
+
         PersonDAO pd = new PersonDAOImpl(em);
         
         Person person1 = new Person();
@@ -114,8 +108,6 @@ public class PersonDAOTest extends AbstractDAOTest {
     
     @Test
     public void testGetPersonByID() {
-        Logger log = Logger.getLogger(PersonDAOTest.class);
-        log.error("fds"); //preco fds?
         
         PersonDAO pd = new PersonDAOImpl(em);
         
@@ -136,4 +128,28 @@ public class PersonDAOTest extends AbstractDAOTest {
     }
     
    //TODO dorobit test na disablovanie
+    
+        @Test
+    public void testDeleteService(){
+  
+        PersonDAO pd = new PersonDAOImpl(em);
+        
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("White");
+        person1.setAddress("Elysian Fields, New York City, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.FALSE);
+        
+        pd.insertPerson(person1);
+        
+        Person person2 = pd.getPersonById(person1.getId());
+        pd.removePerson(person2);
+        
+        Person person3 = pd.getPersonById(person2.getId());
+        assertNull(person3);
+        
+    }
 }
