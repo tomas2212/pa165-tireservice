@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec <<< FAILURE!
-warning(junit.framework.TestSuite$1)  Time elapsed: 0.002 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.04 sec <<< FAILURE!
+warning(junit.framework.TestSuite$1)  Time elapsed: 0.005 sec  <<< FAILURE!
 junit.framework.AssertionFailedError: No tests found in cz.muni.fi.pa165.tireservice.DAOTests.AbstractDAOTest
 	at junit.framework.Assert.fail(Assert.java:50)
 	at junit.framework.TestSuite$1.runTest(TestSuite.java:97)
