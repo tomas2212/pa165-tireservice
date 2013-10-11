@@ -1,12 +1,10 @@
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
 import cz.muni.fi.pa165.tireservice.DAO.PersonDAO;
-import cz.muni.fi.pa165.tireservice.DAO.PersonDAOImpl;
 import cz.muni.fi.pa165.tireservice.entities.Person;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class PersonDAOTest extends AbstractDAOTest {
+public class PersonDAOTest {
     
     @Autowired
     PersonDAO personDAO;
