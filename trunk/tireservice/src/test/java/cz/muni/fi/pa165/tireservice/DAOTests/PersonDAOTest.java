@@ -70,87 +70,78 @@ public class PersonDAOTest extends AbstractDAOTest {
     @Test
     public void testInsertPerson() {
         
-//        Person person1 = new Person();
-//        person1.setFirstName("Joe");
-//        person1.setLastName("Black");
-//        person1.setAddress("Elysian Fields, New York City, NY");
-//        person1.setPhoneNumber("+555 586 358");
-//        person1.setPassword("nbusr123");
-//        person1.setActive(Boolean.TRUE);
-//        person1.setIsServiceman(Boolean.TRUE);
-//        
-//        personDAO.insertPerson(person1);        
-//        Person person2 = personDAO.getPersonById(person1.getId());
-//        System.err.println(person1.equals(person2));
-//        assertEquals(person1, person2);        
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("Black");
+        person1.setAddress("Elysian Fields, New York City, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.TRUE);
+        
+        personDAO.insertPerson(person1);        
+        Person person2 = personDAO.getPersonById(person1.getId());
+        System.err.println(person1.equals(person2));
+        assertEquals(person1, person2);        
     }
     
     @Test
     public void testUpdatePerson() {
-
-//        PersonDAO pd = new PersonDAOImpl(em);
-//        
-//        Person person1 = new Person();
-//        person1.setFirstName("Joe");
-//        person1.setLastName("Black");
-//        person1.setAddress("Elysian Fields, New York City, NY");
-//        person1.setPhoneNumber("+555 586 358");
-//        person1.setPassword("nbusr123");
-//        person1.setActive(Boolean.TRUE);
-//        person1.setIsServiceman(Boolean.TRUE);
-//        
-//        pd.insertPerson(person1);
-//        
-//        Person person2 = pd.getPersonById(person1.getId());
-//        person2.setActive(Boolean.FALSE);
-//        
-//        Person person3 = pd.getPersonById(person2.getId());
-//        assertEquals(person2.isActive(), person3.isActive());
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("Black");
+        person1.setAddress("Elysian Fields, New York City, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.TRUE);
+        
+        personDAO.insertPerson(person1);
+        
+        Person person2 = personDAO.getPersonById(person1.getId());
+        person2.setActive(Boolean.FALSE);
+        personDAO.updatePerson(person2);        
+        Person person3 = personDAO.getPersonById(person2.getId());
+        assertEquals(person2.isActive(), person3.isActive());
     }
     
     @Test
     public void testGetPersonByID() {
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("White");
+        person1.setAddress("Elysian Fields, New York City, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.FALSE);
         
-//        PersonDAO pd = new PersonDAOImpl(em);
-//        
-//        Person person1 = new Person();
-//        person1.setFirstName("Joe");
-//        person1.setLastName("White");
-//        person1.setAddress("Elysian Fields, New York City, NY");
-//        person1.setPhoneNumber("+555 586 358");
-//        person1.setPassword("nbusr123");
-//        person1.setActive(Boolean.TRUE);
-//        person1.setIsServiceman(Boolean.FALSE);
-//        
-//        pd.insertPerson(person1);
-//        
-//        Person person2 = pd.getPersonById(person1.getId());
-//        
-//        assertEquals(person1, person2);
+        personDAO.insertPerson(person1);
+        
+        Person person2 = personDAO.getPersonById(person1.getId());
+        
+        assertEquals(person1, person2);
     }
     
     
     @Test
     public void testRemovePerson(){
-  
-//        PersonDAO pd = new PersonDAOImpl(em);
-//        
-//        Person person1 = new Person();
-//        person1.setFirstName("Joe");
-//        person1.setLastName("White");
-//        person1.setAddress("Elysian Fields, New York City, NY");
-//        person1.setPhoneNumber("+555 586 358");
-//        person1.setPassword("nbusr123");
-//        person1.setActive(Boolean.TRUE);
-//        person1.setIsServiceman(Boolean.FALSE);
-//        
-//        pd.insertPerson(person1);
-//        
-//        Person person2 = pd.getPersonById(person1.getId());
-//        pd.removePerson(person2);
-//        
-//        Person person3 = pd.getPersonById(person2.getId());
-//        assertNull(person3);
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("White");
+        person1.setAddress("Elysian Fields, New York City, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.FALSE);
+        
+        personDAO.insertPerson(person1);
+        
+        Person person2 = personDAO.getPersonById(person1.getId());
+        personDAO.removePerson(person2);
+        
+        Person person3 = personDAO.getPersonById(person2.getId());
+        assertNull(person3);
         
     }
 }
