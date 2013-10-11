@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -26,20 +28,6 @@ public class TireDAOTests {
 
     @Autowired
     TireDAO tireDAO;
-
-    @Test
-    public void testInsertTire() {
-
-        //arrange
-        Tire tireToInsert = new Tire();
-
-        //act
-        tireDAO.insertTire(tireToInsert);
-
-        //assert
-        Tire actualTire = tireDAO.getTireById(tireToInsert.getId());
-        assertEquals(tireToInsert, actualTire);
-    }
 
     @Test
     public void testGetAllTires() {
@@ -58,34 +46,51 @@ public class TireDAOTests {
         //assert
         assertEquals(2, actualNumberOfTires);
     }
-
+    
     @Test
     public void testUpdateTire() {
         //act
         Tire originalTire = new Tire();
+        originalTire.setAmountOnStore(3);
         tireDAO.insertTire(originalTire);
 
         Tire tireForUpdate = tireDAO.getTireById(originalTire.getId());
-        tireForUpdate.setTireType(new TireType());
+        tireForUpdate.setAmountOnStore(5);
         tireDAO.updateTire(tireForUpdate);
 
         //assert
         Tire updatedTire = tireDAO.getTireById(tireForUpdate.getId());
-        assertEquals(tireForUpdate, updatedTire);
+        assertEquals(tireForUpdate.getAmountOnStore(), updatedTire.getAmountOnStore());
+    }
+    
+    @Test
+    public void testInsertTire() {
+
+        //arrange
+        Tire tireToInsert = new Tire();
+
+        //act
+        tireDAO.insertTire(tireToInsert);
+
+        //assert
+        Tire actualTire = tireDAO.getTireById(tireToInsert.getId());
+        assertEquals(tireToInsert, actualTire);
     }
 
     @Test
     public void testDeleteTire() {
         //arrange
         Tire tireToDelete = new Tire();
+        tireToDelete.setAmountOnStore(10);
 
         tireDAO.insertTire(tireToDelete);
+        Tire gettedTire = tireDAO.getTireById(tireToDelete.getId());
 
         //act
-        tireDAO.removeTire(tireToDelete);
+        tireDAO.removeTire(gettedTire);
 
         //asset
-        assertNull(tireDAO.getTireById(tireToDelete.getId()));
+        assertNull(tireDAO.getTireById(gettedTire.getId()));
     }
 
     @Test
