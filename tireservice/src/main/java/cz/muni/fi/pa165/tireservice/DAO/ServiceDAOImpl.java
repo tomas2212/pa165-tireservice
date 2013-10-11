@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import org.hibernate.Hibernate;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -12,19 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Martin(359978)
  */
 public class ServiceDAOImpl implements ServiceDAO {
+
     @PersistenceContext
     protected EntityManager entityManager;
-    
+
     @Transactional
     public Service getServiceById(Long id) {
         Service s = entityManager.find(Service.class, id);
-        return s.isActive() ? s : null;
+        if (s != null && s.isActive()) {
+            Hibernate.initialize(s.getOrders());
+        }
+        return s != null && s.isActive() ? s : null;
     }
 
     @Transactional
     public List<Service> getAllServices() {
         TypedQuery<Service> s = entityManager.createQuery("SELECT s FROM Service s WHERE s.active = :activity", Service.class);
         s.setParameter("activity", Boolean.TRUE);
+        List<Service> services = s.getResultList();
+        for (Service service : services) {
+            Hibernate.initialize(service.getOrders());
+        }
         return s.getResultList();
     }
 
@@ -58,6 +67,4 @@ public class ServiceDAOImpl implements ServiceDAO {
         service.setActive(Boolean.FALSE);
         entityManager.merge(service);
     }
-
-   
 }

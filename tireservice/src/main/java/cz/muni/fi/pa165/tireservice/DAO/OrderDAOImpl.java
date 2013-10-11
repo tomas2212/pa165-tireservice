@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import org.hibernate.Hibernate;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,32 +17,40 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Ivan Novak
  */
 public class OrderDAOImpl implements OrderDAO {
-    
+
     @PersistenceContext
     protected EntityManager entityManager;
-    
+
     @Transactional
     public Order getOrderById(Long id) {
         Order o = entityManager.find(Order.class, id);
-        return o.isActive() ? o : null;
+        if (o != null && o.isActive()) {
+            Hibernate.initialize(o.getServices());
+            Hibernate.initialize(o.getTires());
+        }
+        return o != null && o.isActive() ? o : null;
     }
 
     @Transactional
     public List<Order> getAllOrders() {
-        TypedQuery<Order> oList = entityManager.createQuery("SELECT o FROM Order o", Order.class);
-        return oList.getResultList();
+        List<Order> oList = entityManager.createQuery("SELECT o FROM Order o", Order.class).getResultList();
+        for (Order o : oList) {
+            Hibernate.initialize(o.getServices());
+            Hibernate.initialize(o.getTires());
+        }
+        return oList;
     }
-    
+
     @Transactional
     public List<Order> getAllActiveOrders() {
         List<Order> activeOrders = new ArrayList<Order>();
-        
-        for(Order o : getAllOrders()){
-            if(o.isActive()){
+
+        for (Order o : getAllOrders()) {
+            if (o.isActive()) {
                 activeOrders.add(o);
             }
         }
-        
+
         return activeOrders;
     }
 
@@ -51,7 +59,7 @@ public class OrderDAOImpl implements OrderDAO {
         if (order == null) {
             throw new IllegalArgumentException("You have to set order");
         }
-        
+
         entityManager.persist(order);
     }
 
@@ -63,7 +71,7 @@ public class OrderDAOImpl implements OrderDAO {
         if (order.getId() == null) {
             throw new IllegalArgumentException("Can't update, because entity does not contain ID");
         }
-        
+
         entityManager.merge(order);
     }
 
@@ -75,9 +83,8 @@ public class OrderDAOImpl implements OrderDAO {
         if (order.getId() == null) {
             throw new IllegalArgumentException("Can't remove, because entity does not contain ID");
         }
-        
+
         order.setActive(Boolean.FALSE);
         entityManager.merge(order);
     }
-    
 }

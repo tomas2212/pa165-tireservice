@@ -13,24 +13,18 @@ import javax.persistence.Id;
  * @author Jakub Papcun(359 474)
  */
 @Entity
-public class TireType implements Serializable{
-    
+public class TireType implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private String type;
     private String manufacturer;
     private String description;
-    
     private int amountOnStore;
-    
     private double tireRimSize;
-    
     private BigDecimal price;
-    
     private boolean active;
 
     public Long getId() {
@@ -147,5 +141,4 @@ public class TireType implements Serializable{
     public String toString() {
         return "Tire{" + "id=" + id + ", type=" + type + ", manufacturer=" + manufacturer + ", description=" + description + ", amountOnStore=" + amountOnStore + ", tireRimSize=" + tireRimSize + ", price=" + price + ", active=" + active + '}';
     }
-    
 }

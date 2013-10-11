@@ -6,23 +6,15 @@ package cz.muni.fi.pa165.tireservice.DAOTests;
 
 import cz.muni.fi.pa165.tireservice.DAO.TireDAO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
-import cz.muni.fi.pa165.tireservice.entities.TireType;
-import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Ivan
+ * @author Ivan Novak
  */
-
 public class TireDAOTests extends AbstractDAOTest {
 
     @Autowired
@@ -45,7 +37,7 @@ public class TireDAOTests extends AbstractDAOTest {
         //assert
         assertEquals(2, actualNumberOfTires);
     }
-    
+
     @Test
     public void testUpdateTire() {
         //act
@@ -61,7 +53,7 @@ public class TireDAOTests extends AbstractDAOTest {
         Tire updatedTire = tireDAO.getTireById(tireForUpdate.getId());
         assertEquals(tireForUpdate.getAmountOnStore(), updatedTire.getAmountOnStore());
     }
-    
+
     @Test
     public void testInsertTire() {
 
