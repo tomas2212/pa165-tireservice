@@ -49,7 +49,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceDAO.insertService(serviceA);
         
         Service serviceB = serviceDAO.getServiceById(serviceA.getId());
-        serviceB.setPrice(BigDecimal.valueOf(888));
+        serviceB.setPrice(BigDecimal.valueOf(888l));
 
         serviceDAO.updateService(serviceB);
         
@@ -61,7 +61,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
     public void testDisableService(){
 
         Service serviceA = new Service();
-        serviceA.setPrice(BigDecimal.valueOf(999));
+        serviceA.setPrice(BigDecimal.valueOf(999l));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
@@ -80,7 +80,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
     public void testGetServiceById(){
         
         Service serviceA = new Service();
-        serviceA.setPrice(BigDecimal.valueOf(999));
+        serviceA.setPrice(BigDecimal.valueOf(999l));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
@@ -106,7 +106,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
         int services = serviceDAO.getAllServices().size();
         
         Service serviceB = new Service();
-        serviceB.setPrice(BigDecimal.valueOf(9999));
+        serviceB.setPrice(BigDecimal.valueOf(9999l));
         serviceB.setDescription("McDonalds PREMIUM.");
         serviceB.setActive(Boolean.TRUE);
         serviceB.setName("Change of oil.");
