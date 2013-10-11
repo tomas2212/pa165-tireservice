@@ -59,6 +59,6 @@ public class TireDAOImpl implements TireDAO {
             throw new IllegalArgumentException("Can't remove, because entity does not contain ID");
         }
         
-        entityManager.remove(tire);
+        entityManager.remove(getTireById(tire.getId()));
     }
 }
