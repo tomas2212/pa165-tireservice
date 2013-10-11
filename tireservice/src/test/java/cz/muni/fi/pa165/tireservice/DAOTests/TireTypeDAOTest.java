@@ -23,6 +23,7 @@ public class TireTypeDAOTest {
     TireTypeDAO tireTypeDAO;
 
     
+    
     @Test
     public void testInsertTireType() {
 
@@ -71,7 +72,7 @@ public class TireTypeDAOTest {
         int actualNumberOfTires = tireTypeDAO.getAllTireTypes().size();
         
         //assert
-        assertEquals(2, actualNumberOfTires);
+        assertEquals(3, actualNumberOfTires);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class TireTypeDAOTest {
         
         //assert
         TireType updatedTireType = tireTypeDAO.getTireTypeById(tireTypeForUpdate.getId());
-        assertEquals(tireTypeForUpdate.getPrice(), updatedTireType);
+        assertEquals(tireTypeForUpdate.getPrice(), updatedTireType.getPrice());
     }
 
     @Test

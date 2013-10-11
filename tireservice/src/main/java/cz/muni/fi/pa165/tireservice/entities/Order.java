@@ -26,16 +26,16 @@ import javax.persistence.TemporalType;
 public class Order implements Serializable 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @ManyToOne
     private Person person;
    
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="order")
     private List<Tire> tires;
     
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="order")
     private List<Service> services;
     
     @Temporal(TemporalType.DATE)

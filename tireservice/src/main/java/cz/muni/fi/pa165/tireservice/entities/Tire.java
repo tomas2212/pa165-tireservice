@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 public class Tire implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
     private TireType tireType;

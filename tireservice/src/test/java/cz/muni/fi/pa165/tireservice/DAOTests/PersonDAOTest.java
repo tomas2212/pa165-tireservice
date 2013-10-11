@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
 import cz.muni.fi.pa165.tireservice.DAO.PersonDAO;
+import cz.muni.fi.pa165.tireservice.DAO.PersonDAOImpl;
 import cz.muni.fi.pa165.tireservice.entities.Person;
 
 import static junit.framework.Assert.assertEquals;
@@ -17,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class PersonDAOTest {
+public class PersonDAOTest{
     
     @Autowired
     PersonDAO personDAO;
@@ -97,10 +98,10 @@ public class PersonDAOTest {
         personDAO.insertPerson(person1);
         
         Person person2 = personDAO.getPersonById(person1.getId());
-        person2.setActive(Boolean.FALSE);
+        person2.setLastName("White");
         personDAO.updatePerson(person2);        
         Person person3 = personDAO.getPersonById(person2.getId());
-        assertEquals(person2.isActive(), person3.isActive());
+        assertEquals(person2.getLastName(), person3.getLastName());
     }
     
     @Test

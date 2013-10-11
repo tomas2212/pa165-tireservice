@@ -22,10 +22,10 @@ public class ServiceDAOTest {
     @Autowired
     ServiceDAO serviceDAO;
 
-        @Test
-        public void testInsertService() {
+    @Test
+    public void testInsertService() {
         
-        Service serviceA = new Service();
+            Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);

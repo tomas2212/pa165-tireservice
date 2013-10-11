@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Person implements Serializable{
 private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     private String firstName;
@@ -37,7 +38,7 @@ private static final long serialVersionUID = 1L;
     
     private boolean isServiceman;
 
-    @OneToMany(mappedBy="person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="person")
     private List<Order> orders;
     
     public Long getId() {
