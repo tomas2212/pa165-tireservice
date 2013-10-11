@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.tireservice.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -85,7 +86,7 @@ public class TireType implements Serializable{
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        this.price = price.setScale(2, RoundingMode.CEILING);
     }
 
     public boolean isActive() {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- uses the persistence unit defined in the META-INF/persistence.xml JPA configuration file -->
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="TireService" /> 
+  </bean>
+
+    <bean id="tireTypeDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireTypeDAOImpl" />
+
+  <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
+       access to EntityManagerFactory/EntityManager -->
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+  <!-- transaction manager for use with a single JPA EntityManagerFactory for transactional data access
+       to a single datasource -->
+  <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="entityManagerFactory"/>
+  </bean>
+
+  <!-- enables interpretation of the @Transactional annotation for declerative transaction managment
+       using the specified JpaTransactionManager -->
+  <tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="false"/>
+
+</beans>
