@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.tireservice.entities.TireType;
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +22,31 @@ public class TireTypeDAOTest {
     @Autowired
     TireTypeDAO tireTypeDAO;
 
+    
     @Test
     public void testInsertTireType() {
 
-        TireType tireType1 = new TireType();
-        tireType1.setManufacturer("Man");
-        tireType1.setTireRimSize(1d);
-        tireType1.setType("Zima");
-        tireType1.setActive(Boolean.TRUE);
-        tireType1.setAmountOnStore(10);
-        tireType1.setPrice(BigDecimal.valueOf(1000l));
+        //arrange
+        TireType tireTypeToInsert = new TireType();
+        tireTypeToInsert.setManufacturer("Man");
+        tireTypeToInsert.setTireRimSize(1d);
+        tireTypeToInsert.setType("Zima");
+        tireTypeToInsert.setActive(Boolean.TRUE);
+        tireTypeToInsert.setAmountOnStore(10);
+        tireTypeToInsert.setPrice(BigDecimal.valueOf(1000l));
 
-        tireTypeDAO.insertTireType(tireType1);
-        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
-        System.err.println(tireType1.equals(tireType2));
-        assertEquals(tireType1, tireType2);
+        //act
+        tireTypeDAO.insertTireType(tireTypeToInsert);
+        
+        //assert
+        TireType actualTireType = tireTypeDAO.getTireTypeById(tireTypeToInsert.getId());
+        assertEquals(tireTypeToInsert, actualTireType);
     }
 
     @Test
     public void testGetAllTireTypes() {
+        
+        //arrange
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
         tireType1.setTireRimSize(1d);
@@ -62,61 +67,71 @@ public class TireTypeDAOTest {
         tireType2.setPrice(BigDecimal.valueOf(2000l));
 
         tireTypeDAO.insertTireType(tireType2);
-        int tires2 = tireTypeDAO.getAllTireTypes().size();
-        assertEquals(tires1 + 1, tires2);
+        //act
+        int actualNumberOfTires = tireTypeDAO.getAllTireTypes().size();
+        
+        //assert
+        assertEquals(2, actualNumberOfTires);
     }
 
     @Test
     public void testUpdateTireTypes() {
-        TireType tireType1 = new TireType();
-        tireType1.setManufacturer("Man");
-        tireType1.setTireRimSize(1d);
-        tireType1.setType("Zima");
-        tireType1.setActive(true);
-        tireType1.setAmountOnStore(10);
-        tireType1.setPrice(BigDecimal.valueOf(1000l));
-        tireTypeDAO.insertTireType(tireType1);
+        //act
+        TireType originalTireType = new TireType();
+        originalTireType.setManufacturer("Man");
+        originalTireType.setTireRimSize(1d);
+        originalTireType.setType("Zima");
+        originalTireType.setActive(true);
+        originalTireType.setAmountOnStore(10);
+        originalTireType.setPrice(BigDecimal.valueOf(1000l));
+        tireTypeDAO.insertTireType(originalTireType);
 
-        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
-        tireType2.setPrice(BigDecimal.valueOf(500l));
-        tireTypeDAO.updateTireType(tireType2);
-        TireType tireType3 = tireTypeDAO.getTireTypeById(tireType2.getId());
-        assertEquals(tireType3.getPrice(), tireType2.getPrice());
+        TireType tireTypeForUpdate = tireTypeDAO.getTireTypeById(originalTireType.getId());
+        tireTypeForUpdate.setPrice(BigDecimal.valueOf(500l));
+        tireTypeDAO.updateTireType(tireTypeForUpdate);
+        
+        //assert
+        TireType updatedTireType = tireTypeDAO.getTireTypeById(tireTypeForUpdate.getId());
+        assertEquals(tireTypeForUpdate.getPrice(), updatedTireType);
     }
 
     @Test
     public void testDeleteTireType() {
-        TireType tireType1 = new TireType();
-        tireType1.setManufacturer("Man");
-        tireType1.setTireRimSize(1d);
-        tireType1.setType("Zima");
-        tireType1.setActive(true);
-        tireType1.setAmountOnStore(10);
-        tireType1.setPrice(BigDecimal.valueOf(1000l));
+        //arrange
+        TireType tireTypeToDelete = new TireType();
+        tireTypeToDelete.setManufacturer("Man");
+        tireTypeToDelete.setTireRimSize(1d);
+        tireTypeToDelete.setType("Zima");
+        tireTypeToDelete.setActive(true);
+        tireTypeToDelete.setAmountOnStore(10);
+        tireTypeToDelete.setPrice(BigDecimal.valueOf(1000l));
 
-        tireTypeDAO.insertTireType(tireType1);
+        tireTypeDAO.insertTireType(tireTypeToDelete);
+        
+        //act
+        tireTypeDAO.removeTireType(tireTypeToDelete);
 
-        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
-        tireTypeDAO.removeTireType(tireType2);
-
-        TireType tireType3 = tireTypeDAO.getTireTypeById(tireType2.getId());
-        assertNull(tireType3);
+        //asset
+        assertNull(tireTypeDAO.getTireTypeById(tireTypeToDelete.getId()));
     }
 
     @Test
     public void testGetTireTypeById() {
-        TireType tireType1 = new TireType();
-        tireType1.setManufacturer("Man");
-        tireType1.setTireRimSize(1d);
-        tireType1.setType("Zima");
-        tireType1.setActive(true);
-        tireType1.setAmountOnStore(10);
-        tireType1.setPrice(BigDecimal.valueOf(1000l));
+        //arrange
+        TireType tireType = new TireType();
+        tireType.setManufacturer("Man");
+        tireType.setTireRimSize(1d);
+        tireType.setType("Zima");
+        tireType.setActive(true);
+        tireType.setAmountOnStore(10);
+        tireType.setPrice(BigDecimal.valueOf(1000l));
 
-        tireTypeDAO.insertTireType(tireType1);
+        tireTypeDAO.insertTireType(tireType);
 
-        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
+        //act
+        TireType actualTireType = tireTypeDAO.getTireTypeById(tireType.getId());
 
-        assertEquals(tireType1, tireType2);
+        //assert
+        assertEquals(tireType, actualTireType);
     }
 }
