@@ -27,7 +27,6 @@ public class TireDAOTests {
     @Autowired
     TireDAO tireDAO;
 
-    
     @Test
     public void testInsertTire() {
 
@@ -36,15 +35,15 @@ public class TireDAOTests {
 
         //act
         tireDAO.insertTire(tireToInsert);
-        
+
         //assert
-        TireType actualTire = tireDAO.getTireById(tireToInsert.getId());
+        Tire actualTire = tireDAO.getTireById(tireToInsert.getId());
         assertEquals(tireToInsert, actualTire);
     }
 
     @Test
     public void testGetAllTires() {
-        
+
         //arrange
         Tire tire = new Tire();
 
@@ -55,7 +54,7 @@ public class TireDAOTests {
         tireDAO.insertTire(anotherTire);
         //act
         int actualNumberOfTires = tireDAO.getAllTires().size();
-        
+
         //assert
         assertEquals(2, actualNumberOfTires);
     }
@@ -69,7 +68,7 @@ public class TireDAOTests {
         Tire tireForUpdate = tireDAO.getTireById(originalTire.getId());
         tireForUpdate.setTireType(new TireType());
         tireDAO.updateTire(tireForUpdate);
-        
+
         //assert
         Tire updatedTire = tireDAO.getTireById(tireForUpdate.getId());
         assertEquals(tireForUpdate, updatedTire);
@@ -81,7 +80,7 @@ public class TireDAOTests {
         Tire tireToDelete = new Tire();
 
         tireDAO.insertTire(tireToDelete);
-        
+
         //act
         tireDAO.removeTire(tireToDelete);
 
