@@ -9,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Stefan Sakala (359772)
+ * @author Stefan Sakala(359772)
  */
 public class PersonDAOImpl implements PersonDAO {
+    
     @PersistenceContext
     protected EntityManager entityManager;
     
