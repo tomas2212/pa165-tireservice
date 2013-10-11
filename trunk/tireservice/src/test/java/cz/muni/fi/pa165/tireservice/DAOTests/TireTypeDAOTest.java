@@ -1,27 +1,27 @@
 package cz.muni.fi.pa165.tireservice.DAOTests;
-
 import cz.muni.fi.pa165.tireservice.DAO.TireTypeDAO;
-import cz.muni.fi.pa165.tireservice.DAO.TireTypeDAOImpl;
 import cz.muni.fi.pa165.tireservice.entities.TireType;
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import org.jboss.logging.Logger;
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  *
  * @author Ivan Novak
  */
-public class TireTypeDAOTest extends AbstractDAOTest{
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:applicationContext.xml"} )
+public class TireTypeDAOTest{
+    @Autowired
+    TireTypeDAO tireTypeDAO;
     
     @Test
     public void testInsertTireType() {
-        Logger log = Logger.getLogger(TireTypeDAOTest.class);
-        log.error("fds");
-        
-        TireTypeDAO td = new TireTypeDAOImpl(em);
         
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
@@ -31,19 +31,14 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType1.setAmountOnStore(10);
         tireType1.setPrice(BigDecimal.valueOf(1000l));
         
-        td.insertTireType(tireType1);
-
-        TireType tireType2 = td.getTireTypeById(tireType1.getId());
+        tireTypeDAO.insertTireType(tireType1);
+        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
+        System.err.println(tireType1.equals(tireType2));
         assertEquals(tireType1, tireType2);
     }
     
     @Test
     public void testGetAllTireTypes() {
-        Logger log = Logger.getLogger(TireTypeDAOTest.class);
-        log.error("fds");
-        
-        TireTypeDAO td = new TireTypeDAOImpl(em);
-        
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
         tireType1.setTireRimSize(1d);
@@ -52,8 +47,8 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType1.setAmountOnStore(10);
         tireType1.setPrice(BigDecimal.valueOf(1000l));
         
-        td.insertTireType(tireType1);
-        int tires1 = td.getAllTireTypes().size();
+        tireTypeDAO.insertTireType(tireType1);
+        int tires1 = tireTypeDAO.getAllTireTypes().size();
         
         TireType tireType2 = new TireType();
         tireType2.setManufacturer("Man");
@@ -63,19 +58,13 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType2.setAmountOnStore(100);
         tireType2.setPrice(BigDecimal.valueOf(2000l));
         
-        td.insertTireType(tireType2);
-        int tires2 = td.getAllTireTypes().size();
-
+        tireTypeDAO.insertTireType(tireType2);
+        int tires2 = tireTypeDAO.getAllTireTypes().size();
         assertEquals(tires1 + 1, tires2);
     }
     
     @Test
     public void testUpdateTireTypes() {
-        Logger log = Logger.getLogger(TireTypeDAOTest.class);
-        log.error("fds");
-        
-        TireTypeDAO td = new TireTypeDAOImpl(em);
-        
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
         tireType1.setTireRimSize(1d);
@@ -83,21 +72,17 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType1.setActive(true);
         tireType1.setAmountOnStore(10);
         tireType1.setPrice(BigDecimal.valueOf(1000l));
+        tireTypeDAO.insertTireType(tireType1);
         
-        td.insertTireType(tireType1);
-        
-        TireType tireType2 = td.getTireTypeById(tireType1.getId());
+        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
         tireType2.setPrice(BigDecimal.valueOf(500l));
-
-        TireType tireType3 = td.getTireTypeById(tireType2.getId());
-        assertEquals(tireType2.getPrice(), tireType3.getPrice());
+        tireTypeDAO.updateTireType(tireType2);
+        TireType tireType3 = tireTypeDAO.getTireTypeById(tireType2.getId());
+        assertEquals(tireType3.getPrice(), tireType2.getPrice());
     }
     
     @Test
     public void testDeleteTireType(){
-        
-        TireTypeDAO td = new TireTypeDAOImpl(em);
-        
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
         tireType1.setTireRimSize(1d);
@@ -106,21 +91,17 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType1.setAmountOnStore(10);
         tireType1.setPrice(BigDecimal.valueOf(1000l));
         
-        td.insertTireType(tireType1);
+        tireTypeDAO.insertTireType(tireType1);
         
-        TireType tireType2 = td.getTireTypeById(tireType1.getId());
-        td.removeTireType(tireType2);
+        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
+        tireTypeDAO.removeTireType(tireType2);
         
-        TireType tireType3 = td.getTireTypeById(tireType2.getId());
+        TireType tireType3 = tireTypeDAO.getTireTypeById(tireType2.getId());
         assertNull(tireType3);
-        
     }
     
     @Test
     public void testGetTireTypeById(){
-        
-        TireTypeDAO td = new TireTypeDAOImpl(em);
-        
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
         tireType1.setTireRimSize(1d);
@@ -129,11 +110,10 @@ public class TireTypeDAOTest extends AbstractDAOTest{
         tireType1.setAmountOnStore(10);
         tireType1.setPrice(BigDecimal.valueOf(1000l));
         
-        td.insertTireType(tireType1);
+        tireTypeDAO.insertTireType(tireType1);
         
-        TireType tireType2 = td.getTireTypeById(tireType1.getId());
+        TireType tireType2 = tireTypeDAO.getTireTypeById(tireType1.getId());
         
         assertEquals(tireType1, tireType2);
-        
     }
 }
