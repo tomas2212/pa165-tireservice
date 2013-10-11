@@ -6,6 +6,7 @@ package cz.muni.fi.pa165.tireservice.DAOTests;
 
 import cz.muni.fi.pa165.tireservice.DAO.OrderDAO;
 import cz.muni.fi.pa165.tireservice.DAO.OrderDAOImpl;
+import cz.muni.fi.pa165.tireservice.DAO.PersonDAO;
 import cz.muni.fi.pa165.tireservice.DAO.ServiceDAO;
 import cz.muni.fi.pa165.tireservice.DAO.ServiceDAOImpl;
 import cz.muni.fi.pa165.tireservice.DAO.TireDAOImpl;
@@ -23,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,12 +36,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext.xml"} )
-public class OrderDAOTest extends AbstractDAOTest {
+public class OrderDAOTest{
     @Autowired
     OrderDAO orderDAO;
+    @Autowired
+    PersonDAO personDAO;
     
-    @Test
-    public void testGetPriceExpectedEleven() {
+//    @Test
+//    public void testGetPriceExpectedEleven() {
         //arrange
 //        BigDecimal expectedPrice = new BigDecimal(11);
 //        Order order = createOrder();
@@ -57,10 +61,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        
 //        //assert
 //        assertEquals(expectedPrice, actualPrice);        
-    }
-    
-    @Test
-    public void testGetPriceExpectedZero() {
+//    }
+//    
+//    @Test
+//    public void testGetPriceExpectedZero() {
 //        //arrange
 //        BigDecimal expectedPrice = BigDecimal.ZERO;
 //        Order order = createOrder();
@@ -70,41 +74,45 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        
 //        //assert
 //        assertEquals(expectedPrice, actualPrice);        
-    }
+//    }
     
     @Test
     public void testGetAllOrdersExpectedTwo() {
-        Person person = new Person();
-        person.setFirstName("Janko");
-        person.setLastName("Majko");
-        person.setActive(Boolean.TRUE);
-        person.setIsServiceman(Boolean.TRUE);
-        person.setPassword("pass");
+        Person person1 = new Person();
+        person1.setFirstName("Joe");
+        person1.setLastName("Black");
+        person1.setAddress("Elysian Fields, New York, NY");
+        person1.setPhoneNumber("+555 586 358");
+        person1.setPassword("nbusr123");
+        person1.setActive(Boolean.TRUE);
+        person1.setIsServiceman(Boolean.TRUE);
+        
         
         Order order1 = new Order();
         order1.setActive(Boolean.TRUE);
         order1.setCarType("Porsche");
         order1.setDate(new GregorianCalendar(2013, 9, 15).getTime());
-        order1.setPerson(person);
+        order1.setPerson(person1);
         
-        Order order2 = new Order();
-        order2.setActive(Boolean.TRUE);
-        order2.setCarType("Audi");
-        order2.setDate(new GregorianCalendar(2013, 9, 15).getTime());
-        order2.setPerson(person);
+//        Order order2 = new Order();
+//        order2.setActive(Boolean.TRUE);
+//        order2.setCarType("Audi");
+//        order2.setDate(new GregorianCalendar(2013, 9, 15).getTime());
+//        order2.setPerson(person1);
         
+        List<Order> orders = new ArrayList<Order>();
+        orders.add(order1);
+//        orders.add(order2);
+        person1.setOrders(orders);
+        
+        personDAO.insertPerson(person1);
         orderDAO.insertOrder(order1);
-        orderDAO.insertOrder(order2);
-        
-        //act
-        int size = orderDAO.getAllOrders().size();
-        
-        //assert
-        assertEquals(2, size);
+        Person p = personDAO.getPersonById(person1.getId());
+        System.out.println(p.getOrders());
     }
-    
-    @Test
-    public void testGetAllActiveOrdersExpectedOne() {
+//    
+//    @Test
+//    public void testGetAllActiveOrdersExpectedOne() {
         //arrange
 //        OrderDAO orderManager = new OrderDAOImpl(em);
 //        Order order1 = createOrder();
@@ -121,10 +129,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        
 //        //assert
 //        assertEquals(1, size);
-    }
-    
-    @Test
-    public void testRemoveOrder() {
+//    }
+//    
+//    @Test
+//    public void testRemoveOrder() {
         //arrange
 //        OrderDAO orderManager = new OrderDAOImpl(em);
 //        Order order1 = createOrder();
@@ -137,10 +145,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        
 //        //assert
 //        assertFalse(inActiveOrder.isActive());
-    }
-    
-    @Test
-    public void testUpdateOrder() {
+//    }
+//    
+//    @Test
+//    public void testUpdateOrder() {
 //        //arrange
 //        OrderDAO orderManager = new OrderDAOImpl(em);
 //        Order order = createOrder();
@@ -154,10 +162,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        //assert
 //        Order actualOrder = orderManager.getOrderById(changedOrder.getId());
 //        assertEquals(changedOrder, actualOrder);
-    }
-    
-    @Test
-    public void testGetOrderByID() {
+//    }
+//    
+//    @Test
+//    public void testGetOrderByID() {
         //arrange
 //        OrderDAO orderManager = new OrderDAOImpl(em);
 //        Order order = createOrder();
@@ -168,10 +176,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        //assert
 //        Order actualOrder = orderManager.getOrderById(order.getId());
 //        assertEquals(order, actualOrder);        
-    }
-    
-    @Test
-    public void testInsertOrder() {
+//    }
+//    
+//    @Test
+//    public void testInsertOrder() {
         //arrange
 //        OrderDAO orderManager = new OrderDAOImpl(em);
 //        ServiceDAO serviceManager = new ServiceDAOImpl(em);
@@ -209,22 +217,7 @@ public class OrderDAOTest extends AbstractDAOTest {
 //        order.setServices(new ArrayList<Service>());
 //        
 //        return order;
-    }
-    
-    private Tire createTire(TireType tireType, int amount){
-        Tire tire = new Tire();
-        tire.setAmountOnStore(amount);
-        tire.setTireType(tireType);
-        
-        return tire;
-    }
-    
-    private Service createService(){
-        Service s = new Service();
-        s.setName("testService");
-        
-        return s;
-    }
+//    }
     
     
 }
