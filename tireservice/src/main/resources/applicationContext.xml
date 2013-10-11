@@ -16,6 +16,7 @@
 
     <bean id="tireTypeDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireTypeDAOImpl" />
     <bean id="orderDAO" class="cz.muni.fi.pa165.tireservice.DAO.OrderDAOImpl" />
+    <bean id="personDAO" class="cz.muni.fi.pa165.tireservice.DAO.PersonDAOImpl" />
 
   <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
        access to EntityManagerFactory/EntityManager -->
