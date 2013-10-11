@@ -20,8 +20,8 @@ public class TireDAOImpl implements TireDAO {
     protected EntityManager entityManager;
     
     @Transactional
-    public TireType getTireById(Long id) {
-        return entityManager.find(TireType.class, id);
+    public Tire getTireById(Long id) {
+        return entityManager.find(Tire.class, id);
     }
 
     @Transactional

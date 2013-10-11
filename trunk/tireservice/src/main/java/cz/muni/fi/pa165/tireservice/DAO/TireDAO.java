@@ -19,7 +19,7 @@ public interface TireDAO {
      * @param id the ID of tire
      * @return Tire with active status by id from the database
      */    
-    public TireType getTireById(Long id);
+    public Tire getTireById(Long id);
     
     /**
      * Gets all tire with active status
