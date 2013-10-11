@@ -9,12 +9,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,6 +25,7 @@ import javax.persistence.TemporalType;
  * @author Ivan Novák
  */
 @Entity
+@Table(name = "OrderOO")
 public class Order implements Serializable 
 {
     @Id
@@ -39,6 +42,7 @@ public class Order implements Serializable
     private List<Service> services;
     
     @Temporal(TemporalType.DATE)
+    @Column(name = "executionDate")
     private Date date;
     
     private boolean active;

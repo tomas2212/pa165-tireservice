@@ -33,9 +33,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         if (service == null) {
             throw new IllegalArgumentException("You have to set service");
         }
-        entityManager.getTransaction().begin();
         entityManager.persist(service);
-        entityManager.getTransaction().commit();
     }
 
     @Transactional
