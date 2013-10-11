@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,33 +22,27 @@ import javax.persistence.TemporalType;
  * @author Ivan Novák
  */
 @Entity
-@Table(name = "OrderOO")
-public class Order implements Serializable 
-{
+@Table(name = "OrderTable")
+public class Order implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     @ManyToOne
     private Person person;
-   
-    @OneToMany(mappedBy="order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<Tire> tires;
-    
-    @OneToMany(mappedBy="order")
+    @ManyToMany
     private List<Service> services;
-    
     @Temporal(TemporalType.DATE)
     @Column(name = "executionDate")
     private Date date;
-    
     private boolean active;
-    
     private String carType;
 
     public Order() {
     }
-    
+
     public Order(Person person, List<Tire> tires, List<Service> services, Date date, boolean active) {
         this.person = person;
         this.tires = tires;
@@ -111,35 +102,35 @@ public class Order implements Serializable
     public void setCarType(String carType) {
         this.carType = carType;
     }
-    
-    public BigDecimal getOrderPrice(){
+
+    public BigDecimal getOrderPrice() {
         BigDecimal price = BigDecimal.ZERO;
-        
-        if(services== null && tires == null){
+
+        if (services == null && tires == null) {
             return price;
         }
-        
-        for(Tire t : tires){
-            price.add(t.getTireType().getPrice());
+        if (tires != null) {
+            for (Tire t : tires) {
+                price = price.add(t.getTireType().getPrice());
+            }
         }
-        
-        for(Service s : services){
-            price.add(s.getPrice());
+
+        if (services != null) {
+            for (Service s : services) {
+                price = price.add(s.getPrice());
+            }
         }
-        
+
         return price;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.person != null ? this.person.hashCode() : 0);
-        hash = 97 * hash + (this.tires != null ? this.tires.hashCode() : 0);
-        hash = 97 * hash + (this.services != null ? this.services.hashCode() : 0);
-        hash = 97 * hash + (this.date != null ? this.date.hashCode() : 0);
-        hash = 97 * hash + (this.active ? 1 : 0);
-        hash = 97 * hash + (this.carType != null ? this.carType.hashCode() : 0);
+        int hash = 3;
+        hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 79 * hash + (this.person != null ? this.person.hashCode() : 0);
+        hash = 79 * hash + (this.active ? 1 : 0);
+        hash = 79 * hash + (this.carType != null ? this.carType.hashCode() : 0);
         return hash;
     }
 
@@ -156,15 +147,6 @@ public class Order implements Serializable
             return false;
         }
         if (this.person != other.person && (this.person == null || !this.person.equals(other.person))) {
-            return false;
-        }
-        if (this.tires != other.tires && (this.tires == null || !this.tires.equals(other.tires))) {
-            return false;
-        }
-        if (this.services != other.services && (this.services == null || !this.services.equals(other.services))) {
-            return false;
-        }
-        if (this.date != other.date && (this.date == null || !this.date.equals(other.date))) {
             return false;
         }
         if (this.active != other.active) {

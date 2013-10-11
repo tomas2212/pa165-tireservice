@@ -13,9 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class TireTypeDAOImpl implements TireTypeDAO {
+
     @PersistenceContext
     protected EntityManager entityManager;
-    
+
     @Transactional
     public TireType getTireTypeById(Long id) {
         TireType t = entityManager.find(TireType.class, id);
@@ -28,7 +29,7 @@ public class TireTypeDAOImpl implements TireTypeDAO {
         t.setParameter("activity", Boolean.TRUE);
         return t.getResultList();
     }
-    
+
     @Transactional
     public void insertTireType(TireType tireType) {
         if (tireType == null) {
@@ -59,5 +60,4 @@ public class TireTypeDAOImpl implements TireTypeDAO {
         tireType.setActive(Boolean.FALSE);
         entityManager.merge(tireType);
     }
-    
 }

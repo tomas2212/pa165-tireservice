@@ -1,39 +1,32 @@
-
 package cz.muni.fi.pa165.tireservice.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Martin(359978)
  */
-
 @Entity
 public class Service implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private BigDecimal price;
-    
     private String description;
-    
     private boolean active;
-    
     private String name;
-    
-    @ManyToOne
-    private Order order;
+    @ManyToMany(mappedBy = "services")
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -75,12 +68,12 @@ public class Service implements Serializable {
         this.name = name;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(List<Order> order) {
+        this.orders = orders;
     }
 
     @Override
@@ -118,10 +111,8 @@ public class Service implements Serializable {
         return true;
     }
 
-    
     @Override
     public String toString() {
         return "Service{" + "id=" + id + ", price=" + price + ", description=" + description + ", active=" + active + ", name=" + name + '}';
     }
-    
 }

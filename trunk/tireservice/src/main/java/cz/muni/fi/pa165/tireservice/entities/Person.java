@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -16,31 +14,23 @@ import javax.persistence.OneToMany;
  * @author Stefan Sakala (359772)
  */
 @Entity
-public class Person implements Serializable{
-    
-private static final long serialVersionUID = 1L;
-    
+public class Person implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private String firstName;
-    
     private String lastName;
-    
     private String address;
-    
     private String phoneNumber;
     //Password type will change later in the semester.
     private String password;
-    
     private boolean active;
-    
     private boolean isServiceman;
-
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Order> orders;
-    
+
     public Long getId() {
         return id;
     }
@@ -113,7 +103,6 @@ private static final long serialVersionUID = 1L;
         this.orders = orders;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -168,5 +157,4 @@ private static final long serialVersionUID = 1L;
     public String toString() {
         return "Person{" + "id=" + id + ", First Name= " + firstName + ", Last Name= " + lastName + ", Address= " + address + ", Phone Number= " + phoneNumber + ", Active= " + active + ", Serviceman=" + isServiceman + '}';
     }
-    
 }

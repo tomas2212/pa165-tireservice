@@ -6,23 +6,17 @@ import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Ivan Novak
  */
-
 public class TireTypeDAOTest extends AbstractDAOTest {
 
     @Autowired
     TireTypeDAO tireTypeDAO;
 
-    
-    
     @Test
     public void testInsertTireType() {
 
@@ -37,7 +31,7 @@ public class TireTypeDAOTest extends AbstractDAOTest {
 
         //act
         tireTypeDAO.insertTireType(tireTypeToInsert);
-        
+
         //assert
         TireType actualTireType = tireTypeDAO.getTireTypeById(tireTypeToInsert.getId());
         assertEquals(tireTypeToInsert, actualTireType);
@@ -45,7 +39,7 @@ public class TireTypeDAOTest extends AbstractDAOTest {
 
     @Test
     public void testGetAllTireTypes() {
-        
+
         //arrange
         TireType tireType1 = new TireType();
         tireType1.setManufacturer("Man");
@@ -69,7 +63,7 @@ public class TireTypeDAOTest extends AbstractDAOTest {
         tireTypeDAO.insertTireType(tireType2);
         //act
         int actualNumberOfTires = tireTypeDAO.getAllTireTypes().size();
-        
+
         //assert
         assertEquals(2, actualNumberOfTires);
     }
@@ -89,7 +83,7 @@ public class TireTypeDAOTest extends AbstractDAOTest {
         TireType tireTypeForUpdate = tireTypeDAO.getTireTypeById(originalTireType.getId());
         tireTypeForUpdate.setPrice(BigDecimal.valueOf(500l));
         tireTypeDAO.updateTireType(tireTypeForUpdate);
-        
+
         //assert
         TireType updatedTireType = tireTypeDAO.getTireTypeById(tireTypeForUpdate.getId());
         assertEquals(tireTypeForUpdate.getPrice(), updatedTireType.getPrice());
@@ -107,7 +101,7 @@ public class TireTypeDAOTest extends AbstractDAOTest {
         tireTypeToDelete.setPrice(BigDecimal.valueOf(1000l));
 
         tireTypeDAO.insertTireType(tireTypeToDelete);
-        
+
         //act
         tireTypeDAO.removeTireType(tireTypeToDelete);
 
