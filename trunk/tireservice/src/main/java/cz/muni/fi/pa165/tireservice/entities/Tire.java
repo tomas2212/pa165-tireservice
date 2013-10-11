@@ -16,21 +16,17 @@ import javax.persistence.ManyToOne;
  * @author Ivan Novak
  */
 @Entity
-public class Tire implements Serializable
-{
+public class Tire implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    
     @ManyToOne
     private TireType tireType;
-
     @ManyToOne
     private Order order;
+    private int amountOnStore;
 
-    public Tire() {
-    }
-    
     public Long getId() {
         return id;
     }
@@ -43,10 +39,6 @@ public class Tire implements Serializable
         this.tireType = tireType;
     }
 
-    public Tire(TireType tireType) {
-        this.tireType = tireType;
-    }
-
     public Order getOrder() {
         return order;
     }
@@ -55,11 +47,21 @@ public class Tire implements Serializable
         this.order = order;
     }
 
+    public int getAmountOnStore() {
+        return amountOnStore;
+    }
+
+    public void setAmountOnStore(int amountOnStore) {
+        this.amountOnStore = amountOnStore;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 53 * hash + (this.tireType != null ? this.tireType.hashCode() : 0);
+        int hash = 3;
+        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 37 * hash + (this.tireType != null ? this.tireType.hashCode() : 0);
+        hash = 37 * hash + (this.order != null ? this.order.hashCode() : 0);
+        hash = 37 * hash + this.amountOnStore;
         return hash;
     }
 
@@ -78,13 +80,17 @@ public class Tire implements Serializable
         if (this.tireType != other.tireType && (this.tireType == null || !this.tireType.equals(other.tireType))) {
             return false;
         }
+        if (this.order != other.order && (this.order == null || !this.order.equals(other.order))) {
+            return false;
+        }
+        if (this.amountOnStore != other.amountOnStore) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Tire{" + "id=" + id + ", tireType=" + tireType + '}';
+        return "Tire{" + "id=" + id + ", tireType=" + tireType + ", order=" + order + ", amountOnStore=" + amountOnStore + '}';
     }
-    
-    
 }
