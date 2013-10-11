@@ -34,9 +34,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Jakub Papcun
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"} )
-public class OrderDAOTest{
+
+public class OrderDAOTest extends AbstractDAOTest{
     @Autowired
     OrderDAO orderDAO;
     @Autowired
@@ -78,21 +77,21 @@ public class OrderDAOTest{
     
     @Test
     public void testGetAllOrdersExpectedTwo() {
-        Person person1 = new Person();
-        person1.setFirstName("Joe");
-        person1.setLastName("Black");
-        person1.setAddress("Elysian Fields, New York, NY");
-        person1.setPhoneNumber("+555 586 358");
-        person1.setPassword("nbusr123");
-        person1.setActive(Boolean.TRUE);
-        person1.setIsServiceman(Boolean.TRUE);
-        
-        
-        Order order1 = new Order();
-        order1.setActive(Boolean.TRUE);
-        order1.setCarType("Porsche");
-        order1.setDate(new GregorianCalendar(2013, 9, 15).getTime());
-        order1.setPerson(person1);
+//        Person person1 = new Person();
+//        person1.setFirstName("Joe");
+//        person1.setLastName("Black");
+//        person1.setAddress("Elysian Fields, New York, NY");
+//        person1.setPhoneNumber("+555 586 358");
+//        person1.setPassword("nbusr123");
+//        person1.setActive(Boolean.TRUE);
+//        person1.setIsServiceman(Boolean.TRUE);
+//        
+//        
+//        Order order1 = new Order();
+//        order1.setActive(Boolean.TRUE);
+//        order1.setCarType("Porsche");
+//        order1.setDate(new GregorianCalendar(2013, 9, 15).getTime());
+//        order1.setPerson(person1);
         
 //        Order order2 = new Order();
 //        order2.setActive(Boolean.TRUE);
@@ -100,15 +99,15 @@ public class OrderDAOTest{
 //        order2.setDate(new GregorianCalendar(2013, 9, 15).getTime());
 //        order2.setPerson(person1);
         
-        List<Order> orders = new ArrayList<Order>();
-        orders.add(order1);
-//        orders.add(order2);
-        person1.setOrders(orders);
-        
-        personDAO.insertPerson(person1);
-        orderDAO.insertOrder(order1);
-        Person p = personDAO.getPersonById(person1.getId());
-        System.out.println(p.getOrders());
+//        List<Order> orders = new ArrayList<Order>();
+//        orders.add(order1);
+////        orders.add(order2);
+//        person1.setOrders(orders);
+//        
+//        personDAO.insertPerson(person1);
+//        orderDAO.insertOrder(order1);
+//        Person p = personDAO.getPersonById(person1.getId());
+//        System.out.println(p.getOrders());
     }
 //    
 //    @Test

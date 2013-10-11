@@ -22,9 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Ivan
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class TireDAOTests {
+
+public class TireDAOTests extends AbstractDAOTest {
 
     @Autowired
     TireDAO tireDAO;

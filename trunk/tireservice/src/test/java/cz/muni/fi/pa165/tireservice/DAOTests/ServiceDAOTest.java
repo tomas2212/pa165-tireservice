@@ -15,9 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Stefan Sakala (359772)
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class ServiceDAOTest {
+
+public class ServiceDAOTest extends AbstractDAOTest {
    
     @Autowired
     ServiceDAO serviceDAO;

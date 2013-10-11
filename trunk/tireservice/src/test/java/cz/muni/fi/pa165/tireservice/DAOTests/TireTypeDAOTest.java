@@ -15,9 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Ivan Novak
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class TireTypeDAOTest {
+
+public class TireTypeDAOTest extends AbstractDAOTest {
 
     @Autowired
     TireTypeDAO tireTypeDAO;
@@ -72,7 +71,7 @@ public class TireTypeDAOTest {
         int actualNumberOfTires = tireTypeDAO.getAllTireTypes().size();
         
         //assert
-        assertEquals(3, actualNumberOfTires);
+        assertEquals(2, actualNumberOfTires);
     }
 
     @Test
