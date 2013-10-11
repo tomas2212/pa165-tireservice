@@ -1,44 +1,45 @@
-
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
 import cz.muni.fi.pa165.tireservice.DAO.ServiceDAO;
-import cz.muni.fi.pa165.tireservice.DAO.ServiceDAOImpl;
 import cz.muni.fi.pa165.tireservice.entities.Service;
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Stefan Sakala (359772)
  */
-public class ServiceDAOTest extends AbstractDAOTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+public class ServiceDAOTest {
    
+    @Autowired
+    ServiceDAO serviceDAO;
 
         @Test
         public void testInsertService() {
-        
-        ServiceDAO sd = new ServiceDAOImpl(em);
         
         Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
-       
+   
+        serviceDAO.insertService(serviceA);
         
-        sd.insertService(serviceA);
-
-        Service serviceB = sd.getServiceById(serviceA.getId());
+        Service serviceB = serviceDAO.getServiceById(serviceA.getId());
+        
         assertEquals(serviceA, serviceB);
     }
     
     @Test
     public void testUpdateService() {
-
-        ServiceDAO sd = new ServiceDAOImpl(em);
         
         Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
@@ -46,40 +47,38 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
         
-        sd.insertService(serviceA);
+        serviceDAO.insertService(serviceA);
         
-        Service serviceB = sd.getServiceById(serviceA.getId());
+        Service serviceB = serviceDAO.getServiceById(serviceA.getId());
         serviceB.setPrice(BigDecimal.valueOf(888));
 
-        Service serviceC = sd.getServiceById(serviceB.getId());
+        serviceDAO.updateService(serviceB);
+        
+        Service serviceC = serviceDAO.getServiceById(serviceB.getId());
         assertEquals(serviceB.getPrice(), serviceC.getPrice());
     }
     
     @Test
-    public void testDeleteService(){
-  
-        ServiceDAO sd = new ServiceDAOImpl(em);
-        
+    public void testDisableService(){
+
         Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
         
-        sd.insertService(serviceA);
+        serviceDAO.insertService(serviceA);
         
-        Service serviceB = sd.getServiceById(serviceA.getId());
-        sd.removeService(serviceB);
+        Service serviceB = serviceDAO.getServiceById(serviceA.getId());
+        serviceDAO.removeService(serviceB);
         
-        Service serviceC = sd.getServiceById(serviceB.getId());
+        Service serviceC = serviceDAO.getServiceById(serviceB.getId());
         assertNull(serviceC);
         
     }
     
     @Test
     public void testGetServiceById(){
-
-        ServiceDAO sd = new ServiceDAOImpl(em);
         
         Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
@@ -87,9 +86,9 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
         
-        sd.insertService(serviceA);
+        serviceDAO.insertService(serviceA);
         
-        Service serviceB = sd.getServiceById(serviceA.getId());
+        Service serviceB = serviceDAO.getServiceById(serviceA.getId());
         
         assertEquals(serviceA, serviceB);
         
@@ -98,16 +97,14 @@ public class ServiceDAOTest extends AbstractDAOTest {
     @Test
     public void testGetAllServices() {
         
-        ServiceDAO sd = new ServiceDAOImpl(em);
-        
         Service serviceA = new Service();
         serviceA.setPrice(BigDecimal.valueOf(999));
         serviceA.setDescription("4 tires on standard vehicle.");
         serviceA.setActive(Boolean.TRUE);
         serviceA.setName("Change of 4 tires.");
         
-        sd.insertService(serviceA);
-        int services = sd.getAllServices().size();
+        serviceDAO.insertService(serviceA);
+        int services = serviceDAO.getAllServices().size();
         
         Service serviceB = new Service();
         serviceB.setPrice(BigDecimal.valueOf(9999));
@@ -115,8 +112,8 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceB.setActive(Boolean.TRUE);
         serviceB.setName("Change of oil.");
         
-        sd.insertService(serviceB);
-        int services2 = sd.getAllServices().size();
+        serviceDAO.insertService(serviceB);
+        int services2 = serviceDAO.getAllServices().size();
 
         assertEquals(services + 1, services2);
     }
