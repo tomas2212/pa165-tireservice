@@ -32,11 +32,11 @@
         <!--<property name="persistenceUnitName" value="TestPU" />--> 
   
 
-    <bean id="tireTypeDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireTypeDAOImpl" />
-    <bean id="orderDAO" class="cz.muni.fi.pa165.tireservice.DAO.OrderDAOImpl" />
-    <bean id="personDAO" class="cz.muni.fi.pa165.tireservice.DAO.PersonDAOImpl" />
-     <bean id="tireDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireDAOImpl" />
-     <bean id="serviceDAO" class="cz.muni.fi.pa165.tireservice.DAO.ServiceDAOImpl" />
+    <bean id="tireTypeDAO" class="cz.muni.fi.pa165.tireservice.dao.TireTypeDAOImpl" />
+    <bean id="orderDAO" class="cz.muni.fi.pa165.tireservice.dao.OrderDAOImpl" />
+    <bean id="personDAO" class="cz.muni.fi.pa165.tireservice.dao.PersonDAOImpl" />
+     <bean id="tireDAO" class="cz.muni.fi.pa165.tireservice.dao.TireDAOImpl" />
+     <bean id="serviceDAO" class="cz.muni.fi.pa165.tireservice.dao.ServiceDAOImpl" />
      
   <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
        access to EntityManagerFactory/EntityManager -->

@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
-import cz.muni.fi.pa165.tireservice.DAO.PersonDAO;
+import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
 import cz.muni.fi.pa165.tireservice.entities.Person;
 
 import static junit.framework.Assert.assertEquals;

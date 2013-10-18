@@ -18,15 +18,21 @@ import javax.persistence.ManyToMany;
 public class Service implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private BigDecimal price;
-    private String description;
-    private boolean active;
-    private String name;
+    
     @ManyToMany(mappedBy = "services")
     private List<Order> orders;
+    
+    private BigDecimal price;
+    
+    private String description;
+    private String name;
+    
+    private boolean active;
+    
 
     public Long getId() {
         return id;

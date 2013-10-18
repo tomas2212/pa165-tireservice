@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
-import cz.muni.fi.pa165.tireservice.DAO.TireDAO;
+import cz.muni.fi.pa165.tireservice.dao.TireDAO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;

@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
-import cz.muni.fi.pa165.tireservice.DAO.TireTypeDAO;
+import cz.muni.fi.pa165.tireservice.dao.TireTypeDAO;
 import cz.muni.fi.pa165.tireservice.entities.TireType;
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;

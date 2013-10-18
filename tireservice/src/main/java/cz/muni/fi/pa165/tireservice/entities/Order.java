@@ -28,16 +28,22 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @ManyToOne
     private Person person;
+    
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<Tire> tires;
+    
     @ManyToMany
     private List<Service> services;
+    
     @Temporal(TemporalType.DATE)
     @Column(name = "executionDate")
     private Date date;
+    
     private boolean active;
+    
     private String carType;
 
     public Order() {

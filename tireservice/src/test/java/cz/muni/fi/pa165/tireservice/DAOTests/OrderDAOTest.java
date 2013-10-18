@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.DAOTests;
 
-import cz.muni.fi.pa165.tireservice.DAO.OrderDAO;
-import cz.muni.fi.pa165.tireservice.DAO.PersonDAO;
-import cz.muni.fi.pa165.tireservice.DAO.ServiceDAO;
+import cz.muni.fi.pa165.tireservice.dao.OrderDAO;
+import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
+import cz.muni.fi.pa165.tireservice.dao.ServiceDAO;
 import cz.muni.fi.pa165.tireservice.entities.Order;
 import cz.muni.fi.pa165.tireservice.entities.Service;
 import static junit.framework.Assert.assertEquals;
@@ -28,8 +24,10 @@ public class OrderDAOTest extends AbstractDAOTest {
 
     @Autowired
     OrderDAO orderDAO;
+    
     @Autowired
     PersonDAO personDAO;
+    
     @Autowired
     ServiceDAO serviceDAO;
 
