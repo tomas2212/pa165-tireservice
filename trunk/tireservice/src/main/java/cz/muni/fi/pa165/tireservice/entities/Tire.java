@@ -21,10 +21,13 @@ public class Tire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @ManyToOne
     private TireType tireType;
+    
     @ManyToOne
     private Order order;
+    
     private int amountOnStore;
 
     public Long getId() {

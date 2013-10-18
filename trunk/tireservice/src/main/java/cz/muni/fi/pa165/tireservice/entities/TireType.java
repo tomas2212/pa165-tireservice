@@ -19,12 +19,17 @@ public class TireType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     private String type;
     private String manufacturer;
     private String description;
+    
     private int amountOnStore;
+    
     private double tireRimSize;
+    
     private BigDecimal price;
+    
     private boolean active;
 
     public Long getId() {

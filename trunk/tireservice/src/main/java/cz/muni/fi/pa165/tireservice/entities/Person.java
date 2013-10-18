@@ -17,19 +17,23 @@ import javax.persistence.OneToMany;
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Order> orders;
+    
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
-    //Password type will change later in the semester.
-    private String password;
+    private String password; //Password type will change later in the semester.
+    
     private boolean active;
     private boolean isServiceman;
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    
 
     public Long getId() {
         return id;
