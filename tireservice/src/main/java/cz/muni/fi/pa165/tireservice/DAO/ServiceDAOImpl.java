@@ -28,6 +28,16 @@ public class ServiceDAOImpl implements ServiceDAO {
 
     @Transactional
     public List<Service> getAllServices() {
+        TypedQuery<Service> s = entityManager.createQuery("SELECT s FROM Service s", Service.class);
+        List<Service> services = s.getResultList();
+        for (Service service : services) {
+            Hibernate.initialize(service.getOrders());
+        }
+        return s.getResultList();
+    }
+
+    @Transactional
+    public List<Service> getAllActiveServices() {
         TypedQuery<Service> s = entityManager.createQuery("SELECT s FROM Service s WHERE s.active = :activity", Service.class);
         s.setParameter("activity", Boolean.TRUE);
         List<Service> services = s.getResultList();

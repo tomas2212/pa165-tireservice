@@ -17,8 +17,11 @@ public interface ServiceServices {
      */  
     public ServiceDTO getServiceById(Long id);
     
-    public ServiceDTO getServiceByName(String name);
-    
+    /**
+     * Gets services active and inactive services as well
+     * 
+     * @return all active and inactive services
+     */
     public List<ServiceDTO> getAllServices();
     
     /**

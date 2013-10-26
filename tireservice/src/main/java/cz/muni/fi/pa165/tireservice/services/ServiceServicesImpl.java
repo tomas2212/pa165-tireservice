@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.tireservice.dao.ServiceDAO;
 import cz.muni.fi.pa165.tireservice.dto.ServiceDTO;
 import cz.muni.fi.pa165.tireservice.entities.Service;
 import cz.muni.fi.pa165.tireservice.utils.ServicesUtils;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,16 +26,24 @@ public class ServiceServicesImpl implements ServiceServices {
         return serviceDTO;
     }
 
-    public ServiceDTO getServiceByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public List<ServiceDTO> getAllServices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
+        List<Service> services = serviceDAO.getAllServices();
+        for(Service service : services){
+            ServiceDTO serviceDTO = ServicesUtils.getServiceDTOFromEntity(service);
+            toReturn.add(serviceDTO);
+        }
+        return toReturn;
     }
 
     public List<ServiceDTO> getAllEnabledServices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
+        List<Service> services = serviceDAO.getAllActiveServices();
+        for(Service service : services){
+            ServiceDTO serviceDTO = ServicesUtils.getServiceDTOFromEntity(service);
+            toReturn.add(serviceDTO);
+        }
+        return toReturn;
     }
 
     public void createService(ServiceDTO serviceDTO) {
