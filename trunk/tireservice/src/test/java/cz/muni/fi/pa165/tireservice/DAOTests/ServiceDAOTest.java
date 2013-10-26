@@ -99,7 +99,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceA.setName("Change of 4 tires.");
 
         serviceDAO.insertService(serviceA);
-        int services = serviceDAO.getAllServices().size();
+        int services = serviceDAO.getAllActiveServices().size();
 
         Service serviceB = new Service();
         serviceB.setPrice(BigDecimal.valueOf(9999l));
@@ -108,7 +108,7 @@ public class ServiceDAOTest extends AbstractDAOTest {
         serviceB.setName("Change of oil.");
 
         serviceDAO.insertService(serviceB);
-        int services2 = serviceDAO.getAllServices().size();
+        int services2 = serviceDAO.getAllActiveServices().size();
 
         assertEquals(services + 1, services2);
     }

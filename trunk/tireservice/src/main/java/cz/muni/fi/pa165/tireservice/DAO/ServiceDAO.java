@@ -19,11 +19,18 @@ public interface ServiceDAO {
     public Service getServiceById(Long id);
     
     /**
+     * Gets all active and inactive services
+     * 
+     * @return all active and inactive services
+     */
+    public List<Service> getAllServices();
+    
+    /**
      * Gets all services with active status
      * 
      * @return All services with active status
      */
-    public List<Service> getAllServices();
+    public List<Service> getAllActiveServices();
     
     /**
      * Inserts new service into database
