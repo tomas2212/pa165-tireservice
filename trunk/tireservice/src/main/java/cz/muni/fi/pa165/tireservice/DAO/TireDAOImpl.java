@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.tireservice.dao;
 
 import cz.muni.fi.pa165.tireservice.entities.Tire;
+import cz.muni.fi.pa165.tireservice.utils.ValidationHelper;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,33 +28,23 @@ public class TireDAOImpl implements TireDAO {
 
     @Transactional
     public void insertTire(Tire tire) {
-        if (tire == null) {
-            throw new IllegalArgumentException("You have to set the tire");
-        }
+        ValidationHelper.ArgumentNull(tire);
 
         entityManager.persist(tire);
     }
 
     @Transactional
     public void updateTire(Tire tire) {
-        if (tire == null) {
-            throw new IllegalArgumentException("You have to set tire");
-        }
-        if (tire.getId() == null) {
-            throw new IllegalArgumentException("Can't update, because entity does not contain ID");
-        }
+        ValidationHelper.ArgumentNull(tire);
+        ValidationHelper.IdIsZero(tire.getId());
 
         entityManager.merge(tire);
     }
 
     @Transactional
     public void removeTire(Tire tire) {
-        if (tire == null) {
-            throw new IllegalArgumentException("You have to set tire");
-        }
-        if (tire.getId() == null) {
-            throw new IllegalArgumentException("Can't remove, because entity does not contain ID");
-        }
+        ValidationHelper.ArgumentNull(tire);
+        ValidationHelper.IdIsZero(tire.getId());
 
         entityManager.remove(getTireById(tire.getId()));
     }
