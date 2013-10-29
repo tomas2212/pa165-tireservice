@@ -19,7 +19,6 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
 /**
  *
