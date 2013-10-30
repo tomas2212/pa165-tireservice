@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Stefan Sakala
  */
-class OrderDTO {
+    public class OrderDTO {
     
     private long id;
     private PersonDTO person;
