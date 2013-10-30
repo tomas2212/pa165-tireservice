@@ -34,7 +34,7 @@ public class TireTypeDTOImplTests {
     private ServiceTireType serviceTireType = new ServiceTireTypeImpl();
     
     @Test
-    public void GetAllTireTypes(){
+    public void getAllTireTypes(){
        
        //arrange
        TireType tt = new TireType();
