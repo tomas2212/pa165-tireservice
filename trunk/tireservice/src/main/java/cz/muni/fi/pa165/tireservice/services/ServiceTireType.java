@@ -16,7 +16,7 @@ public interface ServiceTireType {
      * Gets tire type with active status by id from the database
      *
      * @param id the ID of tire type
-     * @return Tire type with active status by id from the database
+     * @return TireTypeDTO with active status by id from the database
      */
     public TireTypeDTO getTireTypeById(Long id);
 
@@ -30,14 +30,14 @@ public interface ServiceTireType {
     /**
      * Creates new tireTypeDTO
      *
-     * @param tireType The tire type that is to be inserted into DB
+     * @param tireTypeDTO The tire type that is to be inserted into DB
      */
     public void createTireType(TireTypeDTO tireTypeDTO);
 
     /**
      * Updates the tire type and it's attributes
      *
-     * @param tireType The tire type to be updated
+     * @param tireTypeDTO The tire type to be updated
      */
     public void updateTireType(TireTypeDTO tireTypeDTO);
 
@@ -45,7 +45,7 @@ public interface ServiceTireType {
      * Removes the tire type from the list of available tire types (sets the
      * active attribute to false)
      *
-     * @param tireType The tire type to be removed
+     * @param tireTypeDTO The tire type to be removed
      */
     public void removeTireType(TireTypeDTO tireTypeDTO);
 }
