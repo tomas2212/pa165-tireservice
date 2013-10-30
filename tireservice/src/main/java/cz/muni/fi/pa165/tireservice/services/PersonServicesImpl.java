@@ -41,6 +41,7 @@ public class PersonServicesImpl implements PersonServices{
 
     public void insertPerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
+        ValidationHelper.ArgumentIsNull(personDTO.getId());
         ValidationHelper.IdIsZero(personDTO.getId());
         
         Person person = PersonUtils.personDTOToEntity(personDTO);
