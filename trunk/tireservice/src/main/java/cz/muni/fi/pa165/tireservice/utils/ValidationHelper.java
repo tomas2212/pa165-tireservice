@@ -19,10 +19,24 @@ public class ValidationHelper {
      */
     public static boolean ArgumentNull(Object obj){
         if(obj == null){
-            throw new  IllegalArgumentException("This parameter cannot be null " + obj.toString());
+            throw new  IllegalArgumentException("The parameter cannot be null");
         }
         
         return false;
+    }
+    
+    /**
+     * Throws exception when argument is not null.
+     *
+     * @param obj parameter set into a method
+     * @return false if argument is not null
+     */
+    public static boolean ArgumentIsNull(Object obj){
+        if(obj != null){
+            throw new  IllegalArgumentException("This parameter be null " + obj.toString());
+        }
+        
+        return true;
     }
     
     /**
@@ -32,10 +46,11 @@ public class ValidationHelper {
      * @return false if argument is not zero
      */
     public static boolean IdIsZero(Long id){
-        if(id == 0){
+        if(id != null && id == 0){
             throw new  IllegalArgumentException("The id cannot be zero");
         }
         
         return false;
     }
+    
 }
