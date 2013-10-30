@@ -22,7 +22,7 @@ public class TireTypeDTO
     
     private double tireRimSize;
     
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.ZERO;
     
     private boolean active;
 

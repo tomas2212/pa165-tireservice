@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOTests;
+package cz.muni.fi.pa165.tireservice.DTOTests;
 
 import cz.muni.fi.pa165.tireservice.dao.TireTypeDAO;
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
@@ -115,7 +115,6 @@ public class TireTypeDTOImplTests {
     @Test(expected=IllegalArgumentException.class)
     public void updateTireTypeThrowsException(){
        TireTypeDTO ttDTO = new TireTypeDTO();
-       ttDTO.setId(0l);
         
        serviceTireType.updateTireType(ttDTO);
     }

@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOTests;
+package cz.muni.fi.pa165.tireservice.DTOTests;
 
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
-import cz.muni.fi.pa165.tireservice.dao.TireTypeDAO;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
 import cz.muni.fi.pa165.tireservice.entities.Person;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
@@ -33,6 +32,64 @@ public class PersonDTOImplTests {
     
     @InjectMocks
     private PersonServices personService = new PersonServicesImpl();
+    
+    @Test
+    public void getPersonIdIsRight(){
+       Person p = new Person();
+       p.setActive(true);
+       p.setFirstName("Janko");
+       
+       PersonDTO expected = new PersonDTO();
+       expected.setActive(true);
+       expected.setFirstName("Janko");
+       
+       when(personDAO.getPersonById(1l)).thenReturn(p);
+       
+       PersonDTO actual = personService.getPersonById(1l);
+       
+       assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void getPersonIdIsWrong(){
+       Person p = new Person();
+       p.setActive(true);
+       p.setFirstName("Janko");
+       
+       when(personDAO.getPersonById(2l)).thenReturn(p);
+       
+       PersonDTO actual = personService.getPersonById(1l);
+       
+       assertNull(actual);
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void updateNullPerson(){
+        personService.updatePerson(null);
+        fail("IllegalArgument expected as the person for updating was NULL");
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void updatePersonWithId(){
+        PersonDTO p = new PersonDTO();
+        p.setId(1L);
+        personService.updatePerson(p);
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void removeNullPerson(){
+        personService.removePerson(null);
+        
+        fail();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void removePersonWithId(){
+        PersonDTO p = new PersonDTO();
+        p.setId(1L);
+        personService.removePerson(p);
+       fail();
+    }
     
     @Test(expected = IllegalArgumentException.class)
     public void insertNullPerson(){
