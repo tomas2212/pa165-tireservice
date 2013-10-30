@@ -27,15 +27,18 @@ public class ServicesUtils {
         service.setDescription(serviceDTO.getDescription());
         service.setName(serviceDTO.getName());
         
-        List<OrderDTO> listOrdersDTO = serviceDTO.getOrders();
-        if(listOrdersDTO != null && !listOrdersDTO.isEmpty()){
-            List<Order> listOrders = new ArrayList<Order>();
-            for(OrderDTO orderDTO : listOrdersDTO){
-                Order order = OrderUtils.orderDTOToEntity(orderDTO);
-                listOrders.add(order);
-            }
-            service.setOrder(listOrders);
-        }
+        // setting order probably not necessary as the relationship between 
+        // orders and services is saved through cascade when order is saved
+        // new services have no orders
+//        List<OrderDTO> listOrdersDTO = serviceDTO.getOrders();
+//        if(listOrdersDTO != null && !listOrdersDTO.isEmpty()){
+//            List<Order> listOrders = new ArrayList<Order>();
+//            for(OrderDTO orderDTO : listOrdersDTO){
+//                Order order = OrderUtils.orderDTOToEntity(orderDTO);
+//                listOrders.add(order);
+//            }
+//            service.setOrder(listOrders);
+//        }
         
         return service;
     }
@@ -62,7 +65,6 @@ public class ServicesUtils {
             serviceDTO.setOrders(listOrdersDTO);
         }
         
-        //TODO setting orders
         return serviceDTO;
         
     }

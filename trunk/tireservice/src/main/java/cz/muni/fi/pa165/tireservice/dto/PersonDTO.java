@@ -16,7 +16,7 @@ public class PersonDTO {
     private Long id;
     
 
-    private List<Order> orders;
+    private List<OrderDTO> orders;
     
     private String firstName;
     private String lastName;
@@ -92,11 +92,11 @@ public class PersonDTO {
         this.isServiceman = isServiceman;
     }
 
-    public List<Order> getOrders() {
+    public List<OrderDTO> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
     }
 

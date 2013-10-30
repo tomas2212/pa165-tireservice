@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.utils;
 
 import cz.muni.fi.pa165.tireservice.dto.TireDTO;
@@ -24,8 +20,8 @@ public class TireUtils {
         
         tire.setId(tireDTO.getId());
         tire.setAmountOnStore(tireDTO.getAmountOnStore());
-        tire.setTireType(tire.getTireType());
-        tire.setOrder(tire.getOrder());
+        tire.setTireType(TireTypeUtils.tireTypeDTOToEntity(tireDTO.getTireType()));
+        //tire.setOrder(tire.getOrder());
 
         return tire;
     }
@@ -39,18 +35,10 @@ public class TireUtils {
         tireDTO.setId(tire.getId());
         tireDTO.setAmountOnStore(tire.getAmountOnStore());
         tireDTO.setTireType(TireTypeUtils.getTireTypeDTOFromEntity(tire.getTireType()));
-        tireDTO.setOrder(OrderUtils.getOrderDTOFromEntity(tire.getOrder()));
+        //tireDTO.setOrder(OrderUtils.getOrderDTOFromEntity(tire.getOrder()));
         
         return tireDTO;
         
     }
-
-  /*  public static TireDTO getTireDTOFromEntity(Tire tire) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static Tire tireDTOToEntity(TireDTO tireDTO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
 }

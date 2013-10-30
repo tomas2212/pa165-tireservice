@@ -1,11 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.utils;
 
+import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
+import cz.muni.fi.pa165.tireservice.entities.Order;
 import cz.muni.fi.pa165.tireservice.entities.Person;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,7 +31,8 @@ public class PersonUtils {
         person.setActive(personDTO.isActive());
         person.setIsServiceman(personDTO.isIsServiceman());
         
-        person.setOrders(personDTO.getOrders());  
+        // when we insert a person he has no orders created
+        //person.setOrders(personDTO.getOrders());  
         
         return person;
     }
@@ -54,7 +55,16 @@ public class PersonUtils {
         personDTO.setActive(person.isActive());
         personDTO.setIsServiceman(person.isIsServiceman());
         
-        personDTO.setOrders(person.getOrders());
+        
+        List<Order> listOrders = person.getOrders();
+        if(listOrders != null && !listOrders.isEmpty()){
+            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
+            for(Order order : listOrders){
+                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
+                listOrdersDTO.add(orderDTO);
+            }
+            personDTO.setOrders(listOrdersDTO);
+        }
         
         return personDTO;
     }
