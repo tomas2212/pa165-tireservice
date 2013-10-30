@@ -6,6 +6,7 @@ package cz.muni.fi.pa165.tireservice.utils;
 
 import cz.muni.fi.pa165.tireservice.dto.TireDTO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
+import cz.muni.fi.pa165.tireservice.entities.TireType;
 
 /**
  *
@@ -38,8 +39,8 @@ public class TireUtils {
         
         tireDTO.setId(tire.getId());
         tireDTO.setAmountOnStore(tire.getAmountOnStore());
-        tireDTO.setTireType(tire.getTireType());
-        tireDTO.setOrder(tire.getOrder());      
+   //     tireDTO.setTireType(tire.getTireType());
+   //     tireDTO.setOrder(tire.getOrder());      
         //problem s typom - spytat sa Kuba.
         
         return tireDTO;
