@@ -34,6 +34,42 @@ public class TireTypeDTOImplTests {
     private ServiceTireType serviceTireType = new ServiceTireTypeImpl();
     
     @Test
+    public void getTireTypeIdIsRight(){
+       //arrange 
+       TireType tt = new TireType();
+       tt.setActive(true);
+       tt.setManufacturer("SomeType");
+       
+       TireTypeDTO expected = new TireTypeDTO();
+       expected.setActive(true);
+       expected.setManufacturer("SomeType");
+       
+       when(tireTypeDAO.getTireTypeById(1l)).thenReturn(tt);
+       
+       //act
+       TireTypeDTO actual = serviceTireType.getTireTypeById(1l);
+       
+       //assert
+       assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void getTireTypeIdIsWrong(){
+       //arrange 
+       TireType tt = new TireType();
+       tt.setActive(true);
+       tt.setManufacturer("SomeType");
+       
+       when(tireTypeDAO.getTireTypeById(2l)).thenReturn(tt);
+       
+       //act
+       TireTypeDTO actual = serviceTireType.getTireTypeById(1l);
+       
+       //assert
+       assertNull(actual);
+    }
+            
+    @Test
     public void getAllTireTypes(){
        
        //arrange
@@ -70,4 +106,39 @@ public class TireTypeDTOImplTests {
        assertEquals(typesDTOExpected, actual);
     }
     
+    @Test(expected=IllegalArgumentException.class)
+    public void updateTireTypeThrowsExceptionBecauseObjectIsNull(){
+        serviceTireType.updateTireType(null);
+        fail();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void updateTireTypeThrowsException(){
+       TireTypeDTO ttDTO = new TireTypeDTO();
+       ttDTO.setId(0l);
+        
+       serviceTireType.updateTireType(ttDTO);
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void removeTireTypeThrowsExceptionBecauseObjectIsNull(){
+        serviceTireType.removeTireType(null);
+        
+        fail();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void removeTireTypeThrowsExceptionIdIsNull(){
+       TireTypeDTO ttDTO = new TireTypeDTO();
+       ttDTO.setId(0l);
+        
+       serviceTireType.removeTireType(null);
+       fail();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void createTireTypeThrowsExceptionObjectIsNull(){
+       serviceTireType.createTireType(null);
+       fail();
+    }
 }
