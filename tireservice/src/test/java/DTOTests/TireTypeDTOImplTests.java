@@ -68,7 +68,6 @@ public class TireTypeDTOImplTests {
        
        //assert
        assertEquals(typesDTOExpected, actual);
-              
     }
     
 }
