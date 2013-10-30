@@ -49,8 +49,6 @@ public class ServiceDTOImplTTests {
         services.add(s1);
         services.add(s2);
         
-        
-        
         ServiceDTO s1DTO = new ServiceDTO();
         s1DTO.setActive(true);
         s1DTO.setName("Service 1");
@@ -63,12 +61,10 @@ public class ServiceDTOImplTTests {
         servicesDTOExpected.add(s1DTO);
         servicesDTOExpected.add(s2DTO);
         
-        
-        
         when(serviceDAO.getAllServices()).thenReturn(services);
         
         //act
-        List<Service> actual = serviceDAO.getAllServices();
+        List<ServiceDTO> actual = service.getAllServices();
         
         //assert
         assertEquals(servicesDTOExpected, actual);
