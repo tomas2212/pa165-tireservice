@@ -1,7 +1,11 @@
 package cz.muni.fi.pa165.tireservice.utils;
 
+import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
 import cz.muni.fi.pa165.tireservice.dto.ServiceDTO;
+import cz.muni.fi.pa165.tireservice.entities.Order;
 import cz.muni.fi.pa165.tireservice.entities.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,7 +27,15 @@ public class ServicesUtils {
         service.setDescription(serviceDTO.getDescription());
         service.setName(serviceDTO.getName());
         
-        //TODO setting orders
+        List<OrderDTO> listOrdersDTO = serviceDTO.getOrders();
+        if(listOrdersDTO != null && !listOrdersDTO.isEmpty()){
+            List<Order> listOrders = new ArrayList<Order>();
+            for(OrderDTO orderDTO : listOrdersDTO){
+                Order order = OrderUtils.orderDTOToEntity(orderDTO);
+                listOrders.add(order);
+            }
+            service.setOrder(listOrders);
+        }
         
         return service;
     }
@@ -39,6 +51,16 @@ public class ServicesUtils {
         serviceDTO.setPrice(service.getPrice());
         serviceDTO.setDescription(service.getDescription());
         serviceDTO.setName(service.getName());
+        
+        List<Order> listOrders = service.getOrders();
+        if(listOrders != null && !listOrders.isEmpty()){
+            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
+            for(Order order : listOrders){
+                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
+                listOrdersDTO.add(orderDTO);
+            }
+            serviceDTO.setOrders(listOrdersDTO);
+        }
         
         //TODO setting orders
         return serviceDTO;
