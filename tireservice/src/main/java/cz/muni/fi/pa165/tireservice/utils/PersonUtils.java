@@ -37,7 +37,10 @@ public class PersonUtils {
     }
     // TODO dorobit (setnut)zoznam orderov kazdemu personovi
     public static PersonDTO getPersonDTOFromEntity(Person person){
-        ValidationHelper.ArgumentNull(person);
+//        ValidationHelper.ArgumentNull(person);
+        if(person == null){
+            return null;
+        }
         ValidationHelper.IdIsZero(person.getId());
         
         PersonDTO personDTO = new PersonDTO();

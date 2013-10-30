@@ -50,6 +50,7 @@ public class PersonServicesImpl implements PersonServices{
 
     public void updatePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
+        ValidationHelper.ArgumentIsNull(personDTO.getId());
         ValidationHelper.IdIsZero(personDTO.getId());
         
         Person person = PersonUtils.personDTOToEntity(personDTO);
@@ -57,6 +58,10 @@ public class PersonServicesImpl implements PersonServices{
     }
 
     public void removePerson(PersonDTO personDTO) {
+        ValidationHelper.ArgumentNull(personDTO);
+        ValidationHelper.ArgumentIsNull(personDTO.getId());
+        ValidationHelper.IdIsZero(personDTO.getId());
+        
         Person person = PersonUtils.personDTOToEntity(personDTO);
         personDAO.removePerson(person);
     }
