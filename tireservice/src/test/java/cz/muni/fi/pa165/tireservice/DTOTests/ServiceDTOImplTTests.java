@@ -20,10 +20,9 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 /**
  *
- * @author Martin
+ * @author Martin Makarsky 359978
  */
 
-//je to dojebane, nefunguje to asi ot mam napicu
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceDTOImplTTests {
     
@@ -33,6 +32,42 @@ public class ServiceDTOImplTTests {
     @InjectMocks
     private ServiceServices service = new ServiceServicesImpl();
     
+    @Test
+    public void getServiceIdIsRight(){
+        //arrange
+        Service s = new Service();
+        s.setActive(true);
+        s.setName("Change tires");
+        
+        ServiceDTO expected = new ServiceDTO();
+        expected.setActive(true);
+        expected.setName("Change tires");
+        
+        when(serviceDAO.getServiceById(1l)).thenReturn(s);
+        
+        //acr
+        ServiceDTO actual = service.getServiceById(1l);
+        
+        //assert
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void getServiceIdIsWrong() {
+        //arrange
+        Service s = new Service();
+        s.setActive(true);
+        s.setName("Change tires");
+        
+        when(serviceDAO.getServiceById(2l)).thenReturn(s);
+        
+        //act
+        ServiceDTO actual = service.getServiceById(1l);
+        
+        //assert
+        assertNull(actual);
+    }
+     
     @Test
     public void getAllServices() {
         
@@ -68,5 +103,40 @@ public class ServiceDTOImplTTests {
         
         //assert
         assertEquals(servicesDTOExpected, actual);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void updateServiceThrowsExceptionBecauseObjectISNull() {
+        service.updateService(null);
+        fail();
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void updateServiceThrowsException() {
+        ServiceDTO s = new ServiceDTO();
+        
+        service.updateService(s);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void removeServiceThrowsExceptionBecauseObjectIsNull(){
+        service.removeService(null);
+        
+        fail();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ServiceThrowsExceptionIdIsNull(){
+       ServiceDTO s = new ServiceDTO();
+       s.setId(0l);
+        
+       service.removeService(null);
+       fail();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void createServiceThrowsExceptionObjectIsNull(){
+       service.createService(null);
+       fail();
     }
 }
