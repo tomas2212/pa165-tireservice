@@ -21,7 +21,10 @@ public class TireUtils {
         tire.setId(tireDTO.getId());
         tire.setAmountOnStore(tireDTO.getAmountOnStore());
         tire.setTireType(TireTypeUtils.tireTypeDTOToEntity(tireDTO.getTireType()));
-        tire.setOrder(tire.getOrder());
+        
+        if(tire.getOrder() != null){
+            tire.setOrder(OrderUtils.orderDTOToEntity(tireDTO.getOrder()));
+        }
 
         return tire;
     }
@@ -35,7 +38,10 @@ public class TireUtils {
         tireDTO.setId(tire.getId());
         tireDTO.setAmountOnStore(tire.getAmountOnStore());
         tireDTO.setTireType(TireTypeUtils.getTireTypeDTOFromEntity(tire.getTireType()));
-        tireDTO.setOrder(OrderUtils.getOrderDTOFromEntity(tire.getOrder()));
+        
+        if(tire.getOrder() != null){
+            tireDTO.setOrder(OrderUtils.getOrderDTOFromEntity(tire.getOrder()));
+        }
         
         return tireDTO;
         
