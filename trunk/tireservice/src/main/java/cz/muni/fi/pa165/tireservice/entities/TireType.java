@@ -85,7 +85,9 @@ public class TireType implements Serializable {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price.setScale(2, RoundingMode.CEILING);
+        if(price != null){
+            this.price = price.setScale(2, RoundingMode.CEILING);
+        }
     }
 
     public boolean isActive() {

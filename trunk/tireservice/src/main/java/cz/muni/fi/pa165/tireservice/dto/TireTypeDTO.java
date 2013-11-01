@@ -5,6 +5,7 @@
 package cz.muni.fi.pa165.tireservice.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  *
@@ -22,7 +23,7 @@ public class TireTypeDTO
     
     private double tireRimSize;
     
-    private BigDecimal price = BigDecimal.ZERO;
+    private BigDecimal price;
     
     private boolean active;
 
@@ -79,7 +80,9 @@ public class TireTypeDTO
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        if(price != null){
+            this.price = price.setScale(2, RoundingMode.CEILING);
+        }
     }
 
     public boolean isActive() {
