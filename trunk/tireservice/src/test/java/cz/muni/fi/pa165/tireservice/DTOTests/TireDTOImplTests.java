@@ -11,6 +11,8 @@ import cz.muni.fi.pa165.tireservice.dto.TireDTO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
 import cz.muni.fi.pa165.tireservice.services.TireServices;
 import cz.muni.fi.pa165.tireservice.services.TireServicesImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,6 +21,7 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
+import org.mockito.Spy;
 
 /**
  *
@@ -27,18 +30,19 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class TireDTOImplTests {
 
-    @Mock
-    private TireDAO tireDAO;
+    @Spy
+    private TireDAOImpl tireDAO = new TireDAOImpl();
     @InjectMocks
     private TireServices tireService = new TireServicesImpl();
 
     @Test
-    public void getTireIdIsRight() {
+    public void getTireTypeIdIsRight() {
         Tire t = new Tire();
 
         TireDTO expected = new TireDTO();
 
-        when(tireDAO.getTireById(1l)).thenReturn(t);
+        doReturn(t).when(tireDAO).getTireById((Long) any());
+
 
         TireDTO actual = tireService.getTireById(1l);
 
@@ -46,54 +50,70 @@ public class TireDTOImplTests {
     }
 
     @Test
-    public void getTireIdIsWrong() {
-        Tire t = new Tire();
+    public void getTireTypeIdIsWrong() {
 
-        when(tireDAO.getTireById(2l)).thenReturn(t);
+        doReturn(null).when(tireDAO).getTireById(anyLong());
 
         TireDTO actual = tireService.getTireById(1l);
 
         assertNull(actual);
     }
 
+    @Test
+    public void getAllTireTypes() {
+
+
+        Tire t = new Tire();
+
+        Tire t2 = new Tire();
+
+        List<Tire> tires = new ArrayList<Tire>();
+        tires.add(t);
+        tires.add(t2);
+
+        TireDTO tireDTO = new TireDTO();
+
+        TireDTO tireDTO2 = new TireDTO();
+
+        List<TireDTO> tiresDTOexp = new ArrayList<TireDTO>();
+        tiresDTOexp.add(tireDTO);
+        tiresDTOexp.add(tireDTO2);
+
+        doReturn(tires).when(tireDAO).getAllTires();
+
+        List<TireDTO> actual = tireService.getAllTires();
+
+        assertEquals(tiresDTOexp, actual);
+    }
+
     @Test(expected = IllegalArgumentException.class)
-    public void updateNullTire() {
+    public void updateTireTypeThrowsExceptionBecauseObjectIsNull() {
         tireService.updateTire(null);
-        fail("IllegalArgument expected as the tire for updating was NULL");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void updateTireWithNullId() {
-        TireDTO t = new TireDTO();
-        tireService.updateTire(t);
+    public void updateTireTypeThrowsException() {
+        TireDTO tireDTO = new TireDTO();
 
+        tireService.updateTire(tireDTO);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void removeNullTire() {
+    public void removeTireTypeThrowsExceptionBecauseObjectIsNull() {
         tireService.removeTire(null);
 
-        fail("err");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void removeTireWithId() {
-        TireDTO t = new TireDTO();
-        tireService.removeTire(t);
-        fail("err");
+    public void removeTireTypeThrowsExceptionIdIsNull() {
+        TireDTO tireDTO = new TireDTO();
+        tireDTO.setId(0l);
+
+        tireService.removeTire(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void insertNullTire() {
+    public void createTireTypeThrowsExceptionObjectIsNull() {
         tireService.createTire(null);
-        fail("IllegalArgument expected");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void insertTireDTOWithId() {
-        TireDTO t = new TireDTO();
-        t.setId(1L);
-        tireService.createTire(t);
-        fail("Creating tire with ID which is set is not allowed");
     }
 }
