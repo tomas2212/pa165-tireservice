@@ -63,7 +63,7 @@ public class OrderUtils {
         order.setActive(orderDTO.isActive());
         order.setCarType(orderDTO.getCarType());
         order.setDate(orderDTO.getDate());
-        //order.setId(orderDTO.getId());
+        order.setId(orderDTO.getId());
         
         if(orderDTO.getPerson() != null){
             order.setPerson(PersonUtils.personDTOToEntity(orderDTO.getPerson()));
