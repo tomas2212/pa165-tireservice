@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.servicestests;
 
 import cz.muni.fi.pa165.tireservice.dao.TireTypeDAO;
@@ -16,12 +12,10 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.mockito.Spy;
 
 /**
