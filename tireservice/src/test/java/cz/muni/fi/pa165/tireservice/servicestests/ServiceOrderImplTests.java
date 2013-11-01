@@ -133,7 +133,7 @@ public class ServiceOrderImplTests {
     }
     
     @Test(expected=IllegalArgumentException.class)
-    public void createORderThrowsExceptionObjectIsNull(){
+    public void createOrderThrowsExceptionObjectIsNull(){
        serviceOrder.createOrder(null);
     }
 }
