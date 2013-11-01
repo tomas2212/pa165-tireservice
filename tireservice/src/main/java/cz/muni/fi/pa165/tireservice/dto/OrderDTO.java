@@ -1,5 +1,8 @@
 package cz.muni.fi.pa165.tireservice.dto;
 
+import cz.muni.fi.pa165.tireservice.entities.Service;
+import cz.muni.fi.pa165.tireservice.entities.Tire;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class OrderDTO {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,6 +74,27 @@ public class OrderDTO {
 
     public void setCarType(String carType) {
         this.carType = carType;
+    }
+
+    public BigDecimal getOrderPrice() {
+        BigDecimal price = BigDecimal.ZERO;
+
+        if (services == null && tires == null) {
+            return price;
+        }
+        if (tires != null) {
+            for (TireDTO t : tires) {
+                price = price.add(t.getTireType().getPrice());
+            }
+        }
+
+        if (services != null) {
+            for (ServiceDTO s : services) {
+                price = price.add(s.getPrice());
+            }
+        }
+
+        return price;
     }
 
     @Override
