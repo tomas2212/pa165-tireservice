@@ -26,81 +26,74 @@ import static org.junit.Assert.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TireDTOImplTests {
-    
+
     @Mock
     private TireDAO tireDAO;
-    
     @InjectMocks
     private TireServices tireService = new TireServicesImpl();
-    
+
     @Test
-    public void getTireIdIsRight(){
-       Tire t = new Tire();
-       
-       TireDTO expected = new TireDTO();
-       
-       when(tireDAO.getTireById(1l)).thenReturn(t);
-       
-       TireDTO actual = tireService.getTireById(1l);
-       
-       assertEquals(expected, actual);
+    public void getTireIdIsRight() {
+        Tire t = new Tire();
+
+        TireDTO expected = new TireDTO();
+
+        when(tireDAO.getTireById(1l)).thenReturn(t);
+
+        TireDTO actual = tireService.getTireById(1l);
+
+        assertEquals(expected, actual);
     }
-    
+
     @Test
-    public void getTireIdIsWrong(){
-       Tire t = new Tire();
-        
-       when(tireDAO.getTireById(2l)).thenReturn(t);
-       
-       TireDTO actual = tireService.getTireById(1l);
-       
-       assertNull(actual);
+    public void getTireIdIsWrong() {
+        Tire t = new Tire();
+
+        when(tireDAO.getTireById(2l)).thenReturn(t);
+
+        TireDTO actual = tireService.getTireById(1l);
+
+        assertNull(actual);
     }
-     
-    
-    @Test(expected=IllegalArgumentException.class)
-    public void updateNullTire(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void updateNullTire() {
         tireService.updateTire(null);
         fail("IllegalArgument expected as the tire for updating was NULL");
     }
-    
-    @Test(expected=IllegalArgumentException.class)
-    public void updateTireWithId(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void updateTireWithNullId() {
         TireDTO t = new TireDTO();
-        t.setId(1L);
         tireService.updateTire(t);
-        
+
     }
-    
-    @Test(expected=IllegalArgumentException.class)
-    public void removeNullTire(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void removeNullTire() {
         tireService.removeTire(null);
-        
+
         fail("err");
     }
-    
-    @Test(expected=IllegalArgumentException.class)
-    public void removeTireWithId(){
-        TireDTO t = new TireDTO();
-        t.setId(1L);
-        tireService.removeTire(t);
-       fail("err");
-    }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void insertNullTire(){
+    public void removeTireWithId() {
+        TireDTO t = new TireDTO();
+        tireService.removeTire(t);
+        fail("err");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void insertNullTire() {
         tireService.createTire(null);
         fail("IllegalArgument expected");
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void insertTireDTOWithId(){
+    public void insertTireDTOWithId() {
         TireDTO t = new TireDTO();
         t.setId(1L);
         tireService.createTire(t);
         fail("Creating tire with ID which is set is not allowed");
     }
-    
-    
 }
-

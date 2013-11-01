@@ -6,10 +6,10 @@ package cz.muni.fi.pa165.tireservice.dto;
 
 /**
  *
- * @author Stefan Sakala
+ * @author Stefan Sakala (359772)
  */
 public class TireDTO {
-    
+
     private Long id;
     private TireTypeDTO tireType;
     private OrderDTO order;
@@ -80,9 +80,4 @@ public class TireDTO {
         }
         return true;
     }
-    
-    
-    
-    
-    
 }
