@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.services;
 
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
@@ -9,11 +5,11 @@ import java.util.List;
 
 /**
  *
- * @author Martin
+ * @author Martin Makarsky 359978
  */
 public interface PersonServices {
      /**
-     * Returns person with active status by id from the database
+     * Gets person with active status by id from the database
      * 
      * @param id the ID of person
      * @return Person with active status by id from the database
@@ -21,7 +17,7 @@ public interface PersonServices {
     public PersonDTO getPersonById(Long id);
     
     /**
-     * Returns all persons with active status
+     * Gets all persons with active status
      * 
      * @return All persons with active status
      */
@@ -30,14 +26,14 @@ public interface PersonServices {
      /**
      * Adds new person into database
      * 
-     * @param person The person that will be inserted into DB  
+     * @param personDTO The person that will be inserted into DB  
      */
     public void insertPerson (PersonDTO personDTO);
     
     /**
      * Updates the person's attributes
      * 
-     * @param person The person which will be updated
+     * @param personDTO The person which will be updated
      */
     public void updatePerson (PersonDTO personDTO);
     
@@ -45,7 +41,7 @@ public interface PersonServices {
      * Removes person from the list of active persons 
      * (sets the active attribute to false)
      * 
-     * @param person The person which will be removed(set inactive).
+     * @param personDTO The person which will be removed(set inactive).
      */
     public void removePerson (PersonDTO personDTO);
 }

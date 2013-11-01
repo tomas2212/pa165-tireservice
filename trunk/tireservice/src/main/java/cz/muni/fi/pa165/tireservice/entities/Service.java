@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 
 /**
  *
- * @author Martin(359978)
+ * @author Martin Makarsky(359978)
  */
 @Entity
 public class Service implements Serializable {
