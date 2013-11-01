@@ -32,7 +32,7 @@ import org.mockito.Spy;
 public class TireTypeDTOImplTests {
     
     @Spy
-    private TireTypeDAOImpl tireTypeDAO = new TireTypeDAOImpl();
+    private TireTypeDAO tireTypeDAO = new TireTypeDAOImpl();
     
     @InjectMocks
     private ServiceTireType serviceTireType = new ServiceTireTypeImpl();
@@ -48,7 +48,7 @@ public class TireTypeDTOImplTests {
        expected.setActive(true);
        expected.setManufacturer("SomeType");
        
-       doReturn(tt).when(tireTypeDAO).getTireTypeById((Long) any());
+       doReturn(tt).when(tireTypeDAO).getTireTypeById(anyLong());
        
        //act
        TireTypeDTO actual = serviceTireType.getTireTypeById(1l);
