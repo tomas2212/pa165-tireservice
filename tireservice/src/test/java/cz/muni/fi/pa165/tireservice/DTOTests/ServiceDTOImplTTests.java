@@ -1,23 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.DTOTests;
 
 import cz.muni.fi.pa165.tireservice.dao.ServiceDAO;
+import cz.muni.fi.pa165.tireservice.dao.ServiceDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.ServiceDTO;
 import cz.muni.fi.pa165.tireservice.entities.Service;
 import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceServicesImpl;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+
 /**
  *
  * @author Martin Makarsky 359978
@@ -26,11 +25,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceDTOImplTTests {
     
-    @Mock
-    private ServiceDAO serviceDAO;
+    @Spy
+    private ServiceDAO serviceDAO = new ServiceDAOImpl();
     
     @InjectMocks
-    private ServiceServices service = new ServiceServicesImpl();
+    private ServiceServices serviceServices = new ServiceServicesImpl();
     
     @Test
     public void getServiceIdIsRight(){
@@ -43,10 +42,10 @@ public class ServiceDTOImplTTests {
         expected.setActive(true);
         expected.setName("Change tires");
         
-        when(serviceDAO.getServiceById(1l)).thenReturn(s);
+        doReturn(s).when(serviceDAO).getServiceById(anyLong());
         
         //acr
-        ServiceDTO actual = service.getServiceById(1l);
+        ServiceDTO actual = serviceServices.getServiceById(1l);
         
         //assert
         assertEquals(expected, actual);
@@ -55,14 +54,10 @@ public class ServiceDTOImplTTests {
     @Test
     public void getServiceIdIsWrong() {
         //arrange
-        Service s = new Service();
-        s.setActive(true);
-        s.setName("Change tires");
-        
-        when(serviceDAO.getServiceById(2l)).thenReturn(s);
+        doReturn(null).when(serviceDAO).getServiceById(anyLong());
         
         //act
-        ServiceDTO actual = service.getServiceById(1l);
+        ServiceDTO actual = serviceServices.getServiceById(1l);
         
         //assert
         assertNull(actual);
@@ -96,10 +91,10 @@ public class ServiceDTOImplTTests {
         servicesDTOExpected.add(s1DTO);
         servicesDTOExpected.add(s2DTO);
         
-        when(serviceDAO.getAllServices()).thenReturn(services);
+        doReturn(services).when(serviceDAO).getAllServices();
         
         //act
-        List<ServiceDTO> actual = service.getAllServices();
+        List<ServiceDTO> actual = serviceServices.getAllServices();
         
         //assert
         assertEquals(servicesDTOExpected, actual);
@@ -107,36 +102,33 @@ public class ServiceDTOImplTTests {
     
     @Test(expected = IllegalArgumentException.class)
     public void updateServiceThrowsExceptionBecauseObjectISNull() {
-        service.updateService(null);
-        fail();
+        serviceServices.updateService(null);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void updateServiceThrowsException() {
         ServiceDTO s = new ServiceDTO();
+        s.setPrice(BigDecimal.ZERO);
+        s.setId(null);
         
-        service.updateService(s);
+        serviceServices.updateService(s);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void removeServiceThrowsExceptionBecauseObjectIsNull(){
-        service.removeService(null);
-        
-        fail();
+        serviceServices.removeService(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ServiceThrowsExceptionIdIsNull(){
+    public void removeServiceThrowsExceptionIdIsNull(){
        ServiceDTO s = new ServiceDTO();
        s.setId(0l);
         
-       service.removeService(null);
-       fail();
+       serviceServices.removeService(null);
     }
     
     @Test(expected=IllegalArgumentException.class)
     public void createServiceThrowsExceptionObjectIsNull(){
-       service.createService(null);
-       fail();
+       serviceServices.createService(null);
     }
 }
