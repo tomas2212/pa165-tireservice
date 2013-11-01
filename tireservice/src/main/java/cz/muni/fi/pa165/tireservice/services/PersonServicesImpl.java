@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.services;
 
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
@@ -15,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author Martin
+ * @author Martin Makarsky 359978
  */
 public class PersonServicesImpl implements PersonServices{
 

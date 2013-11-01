@@ -9,16 +9,17 @@ import java.util.List;
 
 /**
  *
- * @author Martin
+ * @author Martin Makarsky 359978
  */
 public class PersonUtils {
     
-    private PersonUtils(){};
+    private PersonUtils(){
+    }
     
-
     public static Person personDTOToEntity(PersonDTO personDTO) {
-        ValidationHelper.ArgumentNull(personDTO);
-        ValidationHelper.IdIsZero(personDTO.getId());
+        if (personDTO == null){
+            return null;
+        }
         
         Person person = new Person();
         
@@ -30,19 +31,14 @@ public class PersonUtils {
         person.setPassword(personDTO.getPassword());
         person.setActive(personDTO.isActive());
         person.setIsServiceman(personDTO.isIsServiceman());
-        
-        // when we insert a person he has no orders created
-        //person.setOrders(personDTO.getOrders());  
-        
+
         return person;
     }
-    // TODO dorobit (setnut)zoznam orderov kazdemu personovi
+    
     public static PersonDTO getPersonDTOFromEntity(Person person){
-//        ValidationHelper.ArgumentNull(person);
-        if(person == null){
+        if (person == null){
             return null;
         }
-        ValidationHelper.IdIsZero(person.getId());
         
         PersonDTO personDTO = new PersonDTO();
         
@@ -64,8 +60,7 @@ public class PersonUtils {
                 listOrdersDTO.add(orderDTO);
             }
             personDTO.setOrders(listOrdersDTO);
-        }
-        
+        }       
         return personDTO;
     }
 }
