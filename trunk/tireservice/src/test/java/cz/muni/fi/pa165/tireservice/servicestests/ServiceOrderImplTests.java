@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.tireservice.DTOTests;
+package cz.muni.fi.pa165.tireservice.servicestests;
 
 import cz.muni.fi.pa165.tireservice.dao.OrderDAO;
 import cz.muni.fi.pa165.tireservice.dao.OrderDAOImpl;

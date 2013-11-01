@@ -41,7 +41,7 @@ public interface ServiceServices {
     /**
      * Updates the service and it's attributes
      * 
-     * @param service The service to be updated
+     * @param serviceDTO The service to be updated
      */
     public void updateService(ServiceDTO serviceDTO);
     
@@ -49,7 +49,7 @@ public interface ServiceServices {
      * Removes the service from the list of available services
      * (sets the active attribute to false)
      * 
-     * @param service The service to be removed
+     * @param serviceDTO The service to be removed
      */
     public void removeService(ServiceDTO serviceDTO);
     

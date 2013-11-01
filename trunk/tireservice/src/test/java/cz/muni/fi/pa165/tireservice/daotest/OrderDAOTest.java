@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.tireservice.DAOTests;
+package cz.muni.fi.pa165.tireservice.daotest;
 
 import cz.muni.fi.pa165.tireservice.dao.OrderDAO;
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
