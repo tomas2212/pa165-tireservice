@@ -82,8 +82,8 @@ public class ServiceOrderImplTests {
        o.setCarType("test");
        
        Order o2 = new Order();
-       o.setActive(true);
-       o.setCarType("test2");
+       o2.setActive(true);
+       o2.setCarType("test2");
        
        List<Order> orders = new ArrayList<Order>();
        orders.add(o);
@@ -101,7 +101,7 @@ public class ServiceOrderImplTests {
        ordersDTOExpected.add(oDTO);
        ordersDTOExpected.add(o2DTO);
        
-       doReturn(ordersDTOExpected).when(orderDAO).getAllOrders();
+       doReturn(orders).when(orderDAO).getAllOrders();
        
        //act
        List<OrderDTO> actual = serviceOrder.getAllOrders();
