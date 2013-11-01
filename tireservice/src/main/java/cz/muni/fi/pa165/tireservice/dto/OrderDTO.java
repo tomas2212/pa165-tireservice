@@ -5,10 +5,10 @@ import java.util.List;
 
 /**
  *
- * @author Stefan Sakala
+ * @author Stefan Sakala (359772)
  */
-    public class OrderDTO {
-    
+public class OrderDTO {
+
     private long id;
     private PersonDTO person;
     private List<TireDTO> tires;
@@ -118,7 +118,4 @@ import java.util.List;
         }
         return true;
     }
-    
-    
-    
 }

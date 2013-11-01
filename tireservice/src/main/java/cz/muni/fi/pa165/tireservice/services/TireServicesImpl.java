@@ -14,59 +14,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author Atares
+ * @author Stefan Sakala (359772)
  */
-public class TireServicesImpl implements TireServices{
-    
+public class TireServicesImpl implements TireServices {
+
     @Autowired
     private TireDAO tireDAO;
 
     public TireDTO getTireById(Long id) {
-        if(id == null){
+        if (id == null) {
             throw new IllegalArgumentException("ID of tire cannot be null");
         }
         Tire tire = tireDAO.getTireById(id);
         TireDTO tireDTO = TireUtils.getTireDTOFromEntity(tire);
         return tireDTO;
     }
-    
+
     public List<TireDTO> getAllTires() {
         List<TireDTO> toReturn = new ArrayList<TireDTO>();
         List<Tire> tires = tireDAO.getAllTires();
-        for(Tire tire : tires){
-            TireDTO tireDTO = TireUtils.getTireDTOFromEntity(tire);
-            toReturn.add(tireDTO);
-        }
-        return toReturn;
-}    
-        
-     public List<TireDTO> getAllEnabledTires() {
-        List<TireDTO> toReturn = new ArrayList<TireDTO>();
-        List<Tire> tires = tireDAO.getAllTires();
-        for(Tire tire : tires){
+        for (Tire tire : tires) {
             TireDTO tireDTO = TireUtils.getTireDTOFromEntity(tire);
             toReturn.add(tireDTO);
         }
         return toReturn;
     }
-    
-     public void createTire(TireDTO tireDTO) {
-        if(tireDTO == null){
+
+    public List<TireDTO> getAllEnabledTires() {
+        List<TireDTO> toReturn = new ArrayList<TireDTO>();
+        List<Tire> tires = tireDAO.getAllTires();
+        for (Tire tire : tires) {
+            TireDTO tireDTO = TireUtils.getTireDTOFromEntity(tire);
+            toReturn.add(tireDTO);
+        }
+        return toReturn;
+    }
+
+    public void createTire(TireDTO tireDTO) {
+        if (tireDTO == null) {
             throw new IllegalArgumentException("Tire cannot be null");
         }
-        if(tireDTO.getId() != null){
+        if (tireDTO.getId() != null) {
             throw new IllegalArgumentException("New Tire ID must be null");
-        }       
+        }
         Tire tire = TireUtils.tireDTOToEntity(tireDTO);
         tireDAO.insertTire(tire);
         tireDTO.setId(tire.getId());
     }
 
     public void updateTire(TireDTO tireDTO) {
-        if(tireDTO == null){
+        if (tireDTO == null) {
             throw new IllegalArgumentException("Tire for updating cannot be null");
         }
-        if(tireDTO.getId() == null){
+        if (tireDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Tire for updating cannot be null");
         }
         Tire tire = TireUtils.tireDTOToEntity(tireDTO);
@@ -74,14 +74,13 @@ public class TireServicesImpl implements TireServices{
     }
 
     public void removeTire(TireDTO tireDTO) {
-        if(tireDTO == null){
+        if (tireDTO == null) {
             throw new IllegalArgumentException("Tire for removing cannot be null");
         }
-        if(tireDTO.getId() == null){
+        if (tireDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Tire for removing cannot be null");
         }
         Tire tire = TireUtils.tireDTOToEntity(tireDTO);
         tireDAO.removeTire(tire);
     }
-    
 }

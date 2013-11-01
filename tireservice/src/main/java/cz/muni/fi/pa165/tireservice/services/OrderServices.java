@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Atares
+ * @author Stefan Sakala (359772)
  */
 public interface OrderServices {
     /**

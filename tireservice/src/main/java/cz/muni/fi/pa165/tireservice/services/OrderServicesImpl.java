@@ -14,15 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author Atares
+ * @author Stefan Sakala (359772)
  */
 public class OrderServicesImpl implements OrderServices {
-    
+
     @Autowired
     private OrderDAO orderDAO;
 
     public OrderDTO getOrderById(Long id) {
-        if(id == null){
+        if (id == null) {
             throw new IllegalArgumentException("ID of order cannot be null");
         }
         Order order = orderDAO.getOrderById(id);
@@ -33,7 +33,7 @@ public class OrderServicesImpl implements OrderServices {
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
         List<Order> orders = orderDAO.getAllOrders();
-        for(Order order : orders){
+        for (Order order : orders) {
             OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
             toReturn.add(orderDTO);
         }
@@ -43,7 +43,7 @@ public class OrderServicesImpl implements OrderServices {
     public List<OrderDTO> getAllEnabledOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
         List<Order> orders = orderDAO.getAllActiveOrders();
-        for(Order order : orders){
+        for (Order order : orders) {
             OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
             toReturn.add(orderDTO);
         }
@@ -51,28 +51,27 @@ public class OrderServicesImpl implements OrderServices {
     }
 
     public void createOrder(OrderDTO orderDTO) {
-        if(orderDTO == null){
+        if (orderDTO == null) {
             throw new IllegalArgumentException("Order cannot be null");
-        }              
+        }
         Order order = OrderUtils.orderDTOToEntity(orderDTO);
         orderDAO.insertOrder(order);
         orderDTO.setId(order.getId());
     }
 
     public void updateOrder(OrderDTO orderDTO) {
-        if(orderDTO == null){
+        if (orderDTO == null) {
             throw new IllegalArgumentException("Order for updating cannot be null");
-        }                       
+        }
         Order order = OrderUtils.orderDTOToEntity(orderDTO);
         orderDAO.updateOrder(order);
     }
 
     public void removeOrder(OrderDTO orderDTO) {
-        if(orderDTO == null){
+        if (orderDTO == null) {
             throw new IllegalArgumentException("Order for removing cannot be null");
         }
         Order order = OrderUtils.orderDTOToEntity(orderDTO);
         orderDAO.removeOrder(order);
     }
-    
 }
