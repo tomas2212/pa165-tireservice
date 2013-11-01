@@ -56,6 +56,10 @@ public class Order implements Serializable {
         this.date = date;
         this.active = active;
     }
+    
+    public void setId(Long id){
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
