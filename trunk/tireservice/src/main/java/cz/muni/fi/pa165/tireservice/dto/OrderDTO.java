@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class OrderDTO {
 
-    private long id;
+    private Long id;
     private PersonDTO person;
     private List<TireDTO> tires;
     private List<ServiceDTO> services;
@@ -20,7 +20,7 @@ public class OrderDTO {
     private boolean active;
     private String carType;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -99,14 +99,14 @@ public class OrderDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 97 * hash + (this.person != null ? this.person.hashCode() : 0);
-        hash = 97 * hash + (this.tires != null ? this.tires.hashCode() : 0);
-        hash = 97 * hash + (this.services != null ? this.services.hashCode() : 0);
-        hash = 97 * hash + (this.date != null ? this.date.hashCode() : 0);
-        hash = 97 * hash + (this.active ? 1 : 0);
-        hash = 97 * hash + (this.carType != null ? this.carType.hashCode() : 0);
+        int hash = 3;
+        hash = 59 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 59 * hash + (this.person != null ? this.person.hashCode() : 0);
+        hash = 59 * hash + (this.tires != null ? this.tires.hashCode() : 0);
+        hash = 59 * hash + (this.services != null ? this.services.hashCode() : 0);
+        hash = 59 * hash + (this.date != null ? this.date.hashCode() : 0);
+        hash = 59 * hash + (this.active ? 1 : 0);
+        hash = 59 * hash + (this.carType != null ? this.carType.hashCode() : 0);
         return hash;
     }
 
