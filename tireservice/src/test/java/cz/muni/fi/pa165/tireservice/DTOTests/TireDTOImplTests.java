@@ -36,7 +36,7 @@ public class TireDTOImplTests {
     private TireServices tireService = new TireServicesImpl();
 
     @Test
-    public void getTireTypeIdIsRight() {
+    public void getTireIdIsRight() {
         Tire t = new Tire();
 
         TireDTO expected = new TireDTO();
@@ -50,7 +50,7 @@ public class TireDTOImplTests {
     }
 
     @Test
-    public void getTireTypeIdIsWrong() {
+    public void getTireIdIsWrong() {
 
         doReturn(null).when(tireDAO).getTireById(anyLong());
 
@@ -60,7 +60,7 @@ public class TireDTOImplTests {
     }
 
     @Test
-    public void getAllTireTypes() {
+    public void getAllTires() {
 
 
         Tire t = new Tire();
@@ -87,25 +87,25 @@ public class TireDTOImplTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void updateTireTypeThrowsExceptionBecauseObjectIsNull() {
+    public void updateTireThrowsExceptionBecauseObjectIsNull() {
         tireService.updateTire(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void updateTireTypeThrowsException() {
+    public void updateTireThrowsException() {
         TireDTO tireDTO = new TireDTO();
 
         tireService.updateTire(tireDTO);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void removeTireTypeThrowsExceptionBecauseObjectIsNull() {
+    public void removeTireThrowsExceptionBecauseObjectIsNull() {
         tireService.removeTire(null);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void removeTireTypeThrowsExceptionIdIsNull() {
+    public void removeTireThrowsExceptionIdIsNull() {
         TireDTO tireDTO = new TireDTO();
         tireDTO.setId(0l);
 
@@ -113,7 +113,7 @@ public class TireDTOImplTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createTireTypeThrowsExceptionObjectIsNull() {
+    public void createTireThrowsExceptionObjectIsNull() {
         tireService.createTire(null);
     }
 }
