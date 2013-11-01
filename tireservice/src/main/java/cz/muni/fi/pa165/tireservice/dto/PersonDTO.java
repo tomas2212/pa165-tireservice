@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.tireservice.dto;
 
-import cz.muni.fi.pa165.tireservice.entities.Order;
 import java.util.List;
 
 /**
