@@ -4,9 +4,7 @@
  */
 package cz.muni.fi.pa165.tireservice.servicestests;
 
-import cz.muni.fi.pa165.tireservice.dao.TireDAO;
 import cz.muni.fi.pa165.tireservice.dao.TireDAOImpl;
-import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
 import cz.muni.fi.pa165.tireservice.dto.TireDTO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
 import cz.muni.fi.pa165.tireservice.services.TireServices;
@@ -16,9 +14,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.*;
-
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 import org.mockito.Spy;
@@ -28,7 +24,7 @@ import org.mockito.Spy;
  * @author Stefan Sakala (359772)
  */
 @RunWith(MockitoJUnitRunner.class)
-public class TireDTOImplTests {
+public class ServiceTireImplTest {
 
     @Spy
     private TireDAOImpl tireDAO = new TireDAOImpl();
