@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.tireservice.dto;
 
-import cz.muni.fi.pa165.tireservice.entities.Service;
-import cz.muni.fi.pa165.tireservice.entities.Tire;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -141,5 +139,9 @@ public class OrderDTO {
             return false;
         }
         return true;
+    }
+
+    public void setId(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
