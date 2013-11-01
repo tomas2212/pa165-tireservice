@@ -3,11 +3,14 @@ package cz.muni.fi.pa165.tireservice.DTOTests;
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
 import cz.muni.fi.pa165.tireservice.dao.PersonDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
+import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.entities.Person;
+import cz.muni.fi.pa165.tireservice.entities.TireType;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
 import cz.muni.fi.pa165.tireservice.services.PersonServicesImpl;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,6 +19,7 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
+import org.mockito.Spy;
 
 /**
  *
@@ -24,8 +28,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonDTOImplTests {
     
-    @Mock 
-    private PersonDAOImpl personDAO;
+    @Spy 
+    private PersonDAO personDAO = new PersonDAOImpl();
     
     @InjectMocks
     private PersonServices personService = new PersonServicesImpl();
@@ -40,7 +44,7 @@ public class PersonDTOImplTests {
        expected.setActive(true);
        expected.setFirstName("Janko");
        
-       when(personDAO.getPersonById(1l)).thenReturn(p);
+       doReturn(p).when(personDAO).getPersonById((Long) any());
        
        PersonDTO actual = personService.getPersonById(1l);
        
@@ -49,11 +53,7 @@ public class PersonDTOImplTests {
     
     @Test
     public void getPersonIdIsWrong(){
-       Person p = new Person();
-       p.setActive(true);
-       p.setFirstName("Janko");
-       
-       when(personDAO.getPersonById(2l)).thenReturn(p);
+       doReturn(null).when(personDAO).getPersonById(anyLong());
        
        PersonDTO actual = personService.getPersonById(1l);
        
@@ -127,7 +127,7 @@ public class PersonDTOImplTests {
         expectedPersons.add(pDto1);
         expectedPersons.add(pDto2);
        
-        when(personDAO.getAllPersons()).thenReturn(persons);
+        doReturn(persons).when(personDAO).getAllPersons();
         
         List<PersonDTO> actualPersons = personService.getAllPersons();
         
