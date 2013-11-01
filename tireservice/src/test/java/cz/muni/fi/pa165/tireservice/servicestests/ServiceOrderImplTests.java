@@ -6,16 +6,10 @@ package cz.muni.fi.pa165.tireservice.servicestests;
 
 import cz.muni.fi.pa165.tireservice.dao.OrderDAO;
 import cz.muni.fi.pa165.tireservice.dao.OrderDAOImpl;
-import cz.muni.fi.pa165.tireservice.dao.TireTypeDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
-import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.entities.Order;
-import cz.muni.fi.pa165.tireservice.entities.TireType;
 import cz.muni.fi.pa165.tireservice.services.OrderServices;
 import cz.muni.fi.pa165.tireservice.services.OrderServicesImpl;
-import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
-import cz.muni.fi.pa165.tireservice.services.ServiceTireTypeImpl;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -31,7 +25,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  *
- * @author Ivan
+ * @author Ivan(373892)
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceOrderImplTests {
