@@ -109,7 +109,6 @@ public class TireTypeDTOImplTests {
     @Test(expected=IllegalArgumentException.class)
     public void updateTireTypeThrowsExceptionBecauseObjectIsNull(){
         serviceTireType.updateTireType(null);
-        fail();
     }
     
     @Test(expected=IllegalArgumentException.class)
