@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.DTOTests;
 
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
+import cz.muni.fi.pa165.tireservice.dao.PersonDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
 import cz.muni.fi.pa165.tireservice.entities.Person;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
@@ -27,8 +24,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonDTOImplTests {
     
-    @Mock
-    private PersonDAO personDAO;
+    @Mock 
+    private PersonDAOImpl personDAO;
     
     @InjectMocks
     private PersonServices personService = new PersonServicesImpl();
@@ -70,9 +67,8 @@ public class PersonDTOImplTests {
     }
     
     @Test(expected=IllegalArgumentException.class)
-    public void updatePersonWithId(){
+    public void updatePersonWithNullId(){
         PersonDTO p = new PersonDTO();
-        p.setId(1L);
         personService.updatePerson(p);
     }
     
@@ -84,11 +80,10 @@ public class PersonDTOImplTests {
     }
     
     @Test(expected=IllegalArgumentException.class)
-    public void removePersonWithId(){
+    public void removePersonWithNullId(){
         PersonDTO p = new PersonDTO();
-        p.setId(1L);
         personService.removePerson(p);
-       fail();
+        fail();
     }
     
     @Test(expected = IllegalArgumentException.class)
@@ -139,55 +134,5 @@ public class PersonDTOImplTests {
         assertEquals(expectedPersons, actualPersons);
               
     }
-    
-//    @Test
-//    public void updatePerson(){
-//        PersonDTO personDTO = new PersonDTO();
-//        personDTO.setFirstName("John");
-//        personDTO.setLastName("Makovicka");
-//        personDTO.setAddress("Brnenska ulica");
-//        personDTO.setPhoneNumber("+420 111 111");
-//        personDTO.setActive(true);
-//        
-//        
-//    }
-//    
-//    @Test
-//    public void removePerson(){
-//        PersonDTO personDTO = new PersonDTO();
-//        personDTO.setFirstName("John");
-//        personDTO.setLastName("Makovicka");
-//        personDTO.setAddress("Brnenska ulica");
-//        personDTO.setPhoneNumber("+420 111 111");
-//        personDTO.setActive(true);
-//        
-//        
-//        
-//    }
-//    
-//    @Test
-//    public void getPersonById(){
-//    
-//    }
-//    
-//    private PersonDTO makePersonDTO() {
-//        PersonDTO person = new PersonDTO();
-//        person.setFirstName("John");
-//        person.setLastName("Makovicka");
-//        person.setAddress("Brnenska ulica");
-//        person.setPhoneNumber("+420 111 111");
-//        person.setActive(true);
-//        return person;
-//    }
-//    
-//    private Person makePersonEntity() {
-//        Person person = new Person();
-//        person.setFirstName("John");
-//        person.setLastName("Makovicka");
-//        person.setAddress("Brnenska ulica");
-//        person.setPhoneNumber("+420 111 111");
-//        person.setActive(true);
-//        return person;
-//    }
     
 }
