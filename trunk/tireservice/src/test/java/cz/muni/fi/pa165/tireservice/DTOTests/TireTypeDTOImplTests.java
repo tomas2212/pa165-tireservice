@@ -2,13 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.tireservice.DTOTests;
+package DTOTests;
 
 import cz.muni.fi.pa165.tireservice.dao.TireTypeDAO;
+import cz.muni.fi.pa165.tireservice.dao.TireTypeDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.entities.TireType;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireTypeImpl;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -19,6 +21,8 @@ import static org.mockito.Mockito.*;
 
 import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.mockito.Spy;
 
 /**
  *
@@ -27,8 +31,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class TireTypeDTOImplTests {
     
-    @Mock
-    private TireTypeDAO tireTypeDAO;
+    @Spy
+    private TireTypeDAOImpl tireTypeDAO = new TireTypeDAOImpl();
     
     @InjectMocks
     private ServiceTireType serviceTireType = new ServiceTireTypeImpl();
@@ -44,7 +48,7 @@ public class TireTypeDTOImplTests {
        expected.setActive(true);
        expected.setManufacturer("SomeType");
        
-       when(tireTypeDAO.getTireTypeById(1l)).thenReturn(tt);
+       doReturn(tt).when(tireTypeDAO).getTireTypeById((Long) any());
        
        //act
        TireTypeDTO actual = serviceTireType.getTireTypeById(1l);
@@ -56,11 +60,7 @@ public class TireTypeDTOImplTests {
     @Test
     public void getTireTypeIdIsWrong(){
        //arrange 
-       TireType tt = new TireType();
-       tt.setActive(true);
-       tt.setManufacturer("SomeType");
-       
-       when(tireTypeDAO.getTireTypeById(2l)).thenReturn(tt);
+       doReturn(null).when(tireTypeDAO).getTireTypeById(anyLong());
        
        //act
        TireTypeDTO actual = serviceTireType.getTireTypeById(1l);
@@ -97,7 +97,7 @@ public class TireTypeDTOImplTests {
        typesDTOExpected.add(ttDTO);
        typesDTOExpected.add(tt2DTO);
        
-       when(tireTypeDAO.getAllTireTypes()).thenReturn(types);
+       doReturn(types).when(tireTypeDAO).getAllTireTypes();
        
        //act
        List<TireTypeDTO> actual = serviceTireType.getAllTireTypes();
@@ -115,6 +115,8 @@ public class TireTypeDTOImplTests {
     @Test(expected=IllegalArgumentException.class)
     public void updateTireTypeThrowsException(){
        TireTypeDTO ttDTO = new TireTypeDTO();
+       ttDTO.setPrice(BigDecimal.ZERO);
+       ttDTO.setId(null);
         
        serviceTireType.updateTireType(ttDTO);
     }
@@ -123,7 +125,6 @@ public class TireTypeDTOImplTests {
     public void removeTireTypeThrowsExceptionBecauseObjectIsNull(){
         serviceTireType.removeTireType(null);
         
-        fail();
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -132,12 +133,10 @@ public class TireTypeDTOImplTests {
        ttDTO.setId(0l);
         
        serviceTireType.removeTireType(null);
-       fail();
     }
     
     @Test(expected=IllegalArgumentException.class)
     public void createTireTypeThrowsExceptionObjectIsNull(){
        serviceTireType.createTireType(null);
-       fail();
     }
 }
