@@ -9,16 +9,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 
+ *
  * @author Jakub Papcun(359 474)
  */
 public class ServiceServicesImpl implements ServiceServices {
-    
+
     @Autowired
     private ServiceDAO serviceDAO;
 
     public ServiceDTO getServiceById(Long id) {
-        if(id == null){
+        if (id == null) {
             throw new IllegalArgumentException("ID of service cannot be null");
         }
         Service service = serviceDAO.getServiceById(id);
@@ -29,7 +29,7 @@ public class ServiceServicesImpl implements ServiceServices {
     public List<ServiceDTO> getAllServices() {
         List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
         List<Service> services = serviceDAO.getAllServices();
-        for(Service service : services){
+        for (Service service : services) {
             ServiceDTO serviceDTO = ServicesUtils.getServiceDTOFromEntity(service);
             toReturn.add(serviceDTO);
         }
@@ -39,7 +39,7 @@ public class ServiceServicesImpl implements ServiceServices {
     public List<ServiceDTO> getAllEnabledServices() {
         List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
         List<Service> services = serviceDAO.getAllActiveServices();
-        for(Service service : services){
+        for (Service service : services) {
             ServiceDTO serviceDTO = ServicesUtils.getServiceDTOFromEntity(service);
             toReturn.add(serviceDTO);
         }
@@ -47,10 +47,10 @@ public class ServiceServicesImpl implements ServiceServices {
     }
 
     public void createService(ServiceDTO serviceDTO) {
-        if(serviceDTO == null){
+        if (serviceDTO == null) {
             throw new IllegalArgumentException("Service cannot be null");
         }
-        if(serviceDTO.getId() != null){
+        if (serviceDTO.getId() != null) {
             throw new IllegalArgumentException("New Service ID must be null");
         }
         // TODO some validation maybe
@@ -60,10 +60,10 @@ public class ServiceServicesImpl implements ServiceServices {
     }
 
     public void updateService(ServiceDTO serviceDTO) {
-        if(serviceDTO == null){
+        if (serviceDTO == null) {
             throw new IllegalArgumentException("Service for updating cannot be null");
         }
-        if(serviceDTO.getId() == null){
+        if (serviceDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Service for updating cannot be null");
         }
         // validation of service?
@@ -72,15 +72,14 @@ public class ServiceServicesImpl implements ServiceServices {
     }
 
     public void removeService(ServiceDTO serviceDTO) {
-        if(serviceDTO == null){
+        if (serviceDTO == null) {
             throw new IllegalArgumentException("Service for removing cannot be null");
         }
-        if(serviceDTO.getId() == null){
+        if (serviceDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Service for removing cannot be null");
         }
         // validation of service?
         Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
         serviceDAO.removeService(service);
     }
-    
 }

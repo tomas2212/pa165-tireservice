@@ -15,81 +15,83 @@ import java.util.List;
  */
 public class OrderUtils {
 
+    private OrderUtils() {
+    }
+
     public static OrderDTO getOrderDTOFromEntity(Order order) {
-        if(order == null){
+        if (order == null) {
             return null;
         }
-        
+
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setActive(order.isActive());
         orderDTO.setCarType(order.getCarType());
         orderDTO.setDate(order.getDate());
         orderDTO.setId(order.getId());
-        
-        if(order.getPerson() != null){
+
+        if (order.getPerson() != null) {
             orderDTO.setPerson(PersonUtils.getPersonDTOFromEntity(order.getPerson()));
         }
-        
+
         List<Tire> listTires = order.getTires();
-        if(listTires != null && !listTires.isEmpty()){
+        if (listTires != null && !listTires.isEmpty()) {
             List<TireDTO> listTiresDTO = new ArrayList<TireDTO>();
-            for(Tire tire : listTires){
+            for (Tire tire : listTires) {
                 TireDTO tireDTO = TireUtils.getTireDTOFromEntity(tire);
                 listTiresDTO.add(tireDTO);
             }
             orderDTO.setTires(listTiresDTO);
         }
-        
+
         List<Service> listServices = order.getServices();
-        if(listServices != null && !listServices.isEmpty()){
+        if (listServices != null && !listServices.isEmpty()) {
             List<ServiceDTO> listServiceDTO = new ArrayList<ServiceDTO>();
-            for(Service service : listServices){
+            for (Service service : listServices) {
                 ServiceDTO serviceDTO = ServicesUtils.getServiceDTOFromEntity(service);
                 listServiceDTO.add(serviceDTO);
             }
             orderDTO.setServices(listServiceDTO);
         }
-        
+
         return orderDTO;
-        
+
     }
 
     public static Order orderDTOToEntity(OrderDTO orderDTO) {
-        if(orderDTO == null){
+        if (orderDTO == null) {
             return null;
         }
-        
+
         Order order = new Order();
         order.setActive(orderDTO.isActive());
         order.setCarType(orderDTO.getCarType());
         order.setDate(orderDTO.getDate());
         order.setId(orderDTO.getId());
-        
-        if(orderDTO.getPerson() != null){
+
+        if (orderDTO.getPerson() != null) {
             order.setPerson(PersonUtils.personDTOToEntity(orderDTO.getPerson()));
         }
-        
+
         List<TireDTO> listTiresDTO = orderDTO.getTires();
-        if(listTiresDTO != null && !listTiresDTO.isEmpty()){
-            List<Tire> listTires  = new ArrayList<Tire>();
-            for(TireDTO tireDTO : listTiresDTO){
+        if (listTiresDTO != null && !listTiresDTO.isEmpty()) {
+            List<Tire> listTires = new ArrayList<Tire>();
+            for (TireDTO tireDTO : listTiresDTO) {
                 Tire tire = TireUtils.tireDTOToEntity(tireDTO);
                 listTiresDTO.add(tireDTO);
             }
             order.setTires(listTires);
         }
-        
+
         List<ServiceDTO> listServiceDTO = orderDTO.getServices();
-        if(listServiceDTO != null && !listServiceDTO.isEmpty()){
+        if (listServiceDTO != null && !listServiceDTO.isEmpty()) {
             List<Service> listServices = new ArrayList<Service>();
-            for(ServiceDTO serviceDTO : listServiceDTO){
+            for (ServiceDTO serviceDTO : listServiceDTO) {
                 Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
                 listServices.add(service);
             }
             order.setServices(listServices);
         }
-        
+
         return order;
     }
-    
 }

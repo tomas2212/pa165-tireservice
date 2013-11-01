@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.tireservice.DAOTests;
+package cz.muni.fi.pa165.tireservice.daotest;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

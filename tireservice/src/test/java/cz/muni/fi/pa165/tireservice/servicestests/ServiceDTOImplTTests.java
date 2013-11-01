@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.tireservice.DTOTests;
+package cz.muni.fi.pa165.tireservice.servicestests;
 
 import cz.muni.fi.pa165.tireservice.dao.ServiceDAO;
 import cz.muni.fi.pa165.tireservice.dao.ServiceDAOImpl;

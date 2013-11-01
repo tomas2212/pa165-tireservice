@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.tireservice.DTOTests;
+package cz.muni.fi.pa165.tireservice.servicestests;
 
 import cz.muni.fi.pa165.tireservice.dao.PersonDAO;
 import cz.muni.fi.pa165.tireservice.dao.PersonDAOImpl;
@@ -22,7 +22,7 @@ import org.mockito.Spy;
  * @author Jakub Papcun(359 474)
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PersonDTOImplTests {
+public class ServicePersonImplTests {
 
     @Spy
     private PersonDAO personDAO = new PersonDAOImpl();
@@ -40,7 +40,7 @@ public class PersonDTOImplTests {
         expected.setActive(true);
         expected.setFirstName("Janko");
 
-        doReturn(p).when(personDAO).getPersonById((Long) any());
+        doReturn(p).when(personDAO).getPersonById(anyLong());
 
         PersonDTO actual = personService.getPersonById(1l);
 
