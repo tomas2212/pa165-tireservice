@@ -4,8 +4,8 @@
  */
 package cz.muni.fi.pa165.tireservice.servicestests;
 
-import cz.muni.fi.pa165.tireservice.dao.OrderDAO;
-import cz.muni.fi.pa165.tireservice.dao.OrderDAOImpl;
+import cz.muni.fi.pa165.tireservice.DAO.OrderDAO;
+import cz.muni.fi.pa165.tireservice.DAO.OrderDAOImpl;
 import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
 import cz.muni.fi.pa165.tireservice.entities.Order;
 import cz.muni.fi.pa165.tireservice.services.OrderServices;

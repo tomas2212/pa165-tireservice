@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.tireservice.daotest;
 
-import cz.muni.fi.pa165.tireservice.dao.TireDAO;
+import cz.muni.fi.pa165.tireservice.DAO.TireDAO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
