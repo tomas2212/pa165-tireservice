@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.pa165.tireservice.services;
 
-import cz.muni.fi.pa165.tireservice.dao.TireDAO;
+import cz.muni.fi.pa165.tireservice.DAO.TireDAO;
 import cz.muni.fi.pa165.tireservice.dto.TireDTO;
 import cz.muni.fi.pa165.tireservice.entities.Tire;
 import cz.muni.fi.pa165.tireservice.utils.TireUtils;

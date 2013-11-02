@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.tireservice.services;
 
-import cz.muni.fi.pa165.tireservice.dao.ServiceDAO;
+import cz.muni.fi.pa165.tireservice.DAO.ServiceDAO;
 import cz.muni.fi.pa165.tireservice.dto.ServiceDTO;
 import cz.muni.fi.pa165.tireservice.entities.Service;
 import cz.muni.fi.pa165.tireservice.utils.ServicesUtils;

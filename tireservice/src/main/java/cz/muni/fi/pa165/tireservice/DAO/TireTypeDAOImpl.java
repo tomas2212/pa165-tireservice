@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.tireservice.dao;
+package cz.muni.fi.pa165.tireservice.DAO;
 
 import cz.muni.fi.pa165.tireservice.entities.TireType;
 import java.util.List;
