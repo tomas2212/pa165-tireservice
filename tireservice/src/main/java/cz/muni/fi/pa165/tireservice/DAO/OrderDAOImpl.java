@@ -6,18 +6,18 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Ivan Novak
  */
+@Repository
 public class OrderDAOImpl implements OrderDAO {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    @Transactional
     public Order getOrderById(Long id) {
         Order o = entityManager.find(Order.class, id);
         if (o != null && o.isActive()) {
@@ -27,7 +27,6 @@ public class OrderDAOImpl implements OrderDAO {
         return o != null && o.isActive() ? o : null;
     }
 
-    @Transactional
     public List<Order> getAllOrders() {
         List<Order> oList = entityManager.createQuery("SELECT o FROM Order o", Order.class).getResultList();
         for (Order o : oList) {
@@ -37,7 +36,6 @@ public class OrderDAOImpl implements OrderDAO {
         return oList;
     }
 
-    @Transactional
     public List<Order> getAllActiveOrders() {
         List<Order> activeOrders = new ArrayList<Order>();
 
@@ -50,7 +48,6 @@ public class OrderDAOImpl implements OrderDAO {
         return activeOrders;
     }
 
-    @Transactional
     public void insertOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("You have to set order");
@@ -59,7 +56,6 @@ public class OrderDAOImpl implements OrderDAO {
         entityManager.persist(order);
     }
 
-    @Transactional
     public void updateOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("You have to set order");
@@ -71,7 +67,6 @@ public class OrderDAOImpl implements OrderDAO {
         entityManager.merge(order);
     }
 
-    @Transactional
     public void removeOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("You have to set order");

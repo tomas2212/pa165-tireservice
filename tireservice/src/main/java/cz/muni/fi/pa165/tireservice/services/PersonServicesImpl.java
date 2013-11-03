@@ -8,16 +8,20 @@ import cz.muni.fi.pa165.tireservice.utils.ValidationHelper;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Martin Makarsky 359978
  */
+@Service
 public class PersonServicesImpl implements PersonServices{
 
     @Autowired
     private PersonDAO personDAO;
     
+    @Transactional
     public PersonDTO getPersonById(Long id) {
         ValidationHelper.IdIsZero(id);
         Person person = personDAO.getPersonById(id);
@@ -25,6 +29,7 @@ public class PersonServicesImpl implements PersonServices{
         return personDTO;
     }
 
+    @Transactional
     public List<PersonDTO> getAllPersons() {
         List<PersonDTO> toReturn = new ArrayList<PersonDTO>();
         List<Person> persons = personDAO.getAllPersons();
@@ -35,6 +40,7 @@ public class PersonServicesImpl implements PersonServices{
         return toReturn;
     }
 
+    @Transactional
     public void insertPerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
         ValidationHelper.ArgumentIsNull(personDTO.getId());
@@ -44,6 +50,7 @@ public class PersonServicesImpl implements PersonServices{
         personDAO.updatePerson(person);
     }
 
+    @Transactional
     public void updatePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
         ValidationHelper.ArgumentNull(personDTO.getId());
@@ -53,6 +60,7 @@ public class PersonServicesImpl implements PersonServices{
         personDAO.updatePerson(person);
     }
 
+    @Transactional
     public void removePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
         ValidationHelper.ArgumentNull(personDTO.getId());

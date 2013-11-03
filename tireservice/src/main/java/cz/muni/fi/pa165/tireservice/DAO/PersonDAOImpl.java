@@ -6,18 +6,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.hibernate.Hibernate;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Stefan Sakala (359772)
  */
+@Repository
 public class PersonDAOImpl implements PersonDAO {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    @Transactional
     public Person getPersonById(Long id) {
         Person p = entityManager.find(Person.class, id);
         if(p != null && p.isActive()){
@@ -26,7 +26,6 @@ public class PersonDAOImpl implements PersonDAO {
         return p != null && p.isActive() ? p : null;
     }
 
-    @Transactional
     public List<Person> getAllPersons() {
         TypedQuery<Person> p = entityManager.createQuery("SELECT p FROM Person p WHERE p.active = :activity", Person.class);
         p.setParameter("activity", Boolean.TRUE);
@@ -37,7 +36,6 @@ public class PersonDAOImpl implements PersonDAO {
         return p.getResultList();
     }
 
-    @Transactional
     public void insertPerson(Person person) {
         if (person == null) {
             throw new IllegalArgumentException("You have to set person");
@@ -46,7 +44,6 @@ public class PersonDAOImpl implements PersonDAO {
         entityManager.persist(person);
     }
 
-    @Transactional
     public void updatePerson(Person person) {
         if (person == null) {
             throw new IllegalArgumentException("You have to set person.");
@@ -58,7 +55,6 @@ public class PersonDAOImpl implements PersonDAO {
         entityManager.merge(person);
     }
 
-    @Transactional
     public void removePerson(Person person) {
         if (person == null) {
             throw new IllegalArgumentException("You have to set person.");

@@ -7,16 +7,20 @@ import cz.muni.fi.pa165.tireservice.utils.ServicesUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Jakub Papcun(359 474)
  */
+@org.springframework.stereotype.Service
+@Transactional
 public class ServiceServicesImpl implements ServiceServices {
 
     @Autowired
     private ServiceDAO serviceDAO;
 
+    @Transactional
     public ServiceDTO getServiceById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("ID of service cannot be null");
@@ -26,6 +30,7 @@ public class ServiceServicesImpl implements ServiceServices {
         return serviceDTO;
     }
 
+    @Transactional
     public List<ServiceDTO> getAllServices() {
         List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
         List<Service> services = serviceDAO.getAllServices();
@@ -36,6 +41,7 @@ public class ServiceServicesImpl implements ServiceServices {
         return toReturn;
     }
 
+    @Transactional
     public List<ServiceDTO> getAllEnabledServices() {
         List<ServiceDTO> toReturn = new ArrayList<ServiceDTO>();
         List<Service> services = serviceDAO.getAllActiveServices();
@@ -46,6 +52,7 @@ public class ServiceServicesImpl implements ServiceServices {
         return toReturn;
     }
 
+    @Transactional
     public void createService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
             throw new IllegalArgumentException("Service cannot be null");
@@ -59,6 +66,7 @@ public class ServiceServicesImpl implements ServiceServices {
         serviceDTO.setId(service.getId());
     }
 
+    @Transactional
     public void updateService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
             throw new IllegalArgumentException("Service for updating cannot be null");
@@ -71,6 +79,7 @@ public class ServiceServicesImpl implements ServiceServices {
         serviceDAO.updateService(service);
     }
 
+    @Transactional
     public void removeService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
             throw new IllegalArgumentException("Service for removing cannot be null");
