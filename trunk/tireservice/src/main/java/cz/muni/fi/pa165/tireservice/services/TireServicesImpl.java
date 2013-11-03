@@ -11,16 +11,21 @@ import cz.muni.fi.pa165.tireservice.utils.TireUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Stefan Sakala (359772)
  */
+@Service
+@Transactional
 public class TireServicesImpl implements TireServices {
 
     @Autowired
     private TireDAO tireDAO;
 
+    @Transactional
     public TireDTO getTireById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("ID of tire cannot be null");
@@ -30,6 +35,7 @@ public class TireServicesImpl implements TireServices {
         return tireDTO;
     }
 
+    @Transactional
     public List<TireDTO> getAllTires() {
         List<TireDTO> toReturn = new ArrayList<TireDTO>();
         List<Tire> tires = tireDAO.getAllTires();
@@ -40,6 +46,7 @@ public class TireServicesImpl implements TireServices {
         return toReturn;
     }
 
+    @Transactional
     public List<TireDTO> getAllEnabledTires() {
         List<TireDTO> toReturn = new ArrayList<TireDTO>();
         List<Tire> tires = tireDAO.getAllTires();
@@ -50,6 +57,7 @@ public class TireServicesImpl implements TireServices {
         return toReturn;
     }
 
+    @Transactional
     public void createTire(TireDTO tireDTO) {
         if (tireDTO == null) {
             throw new IllegalArgumentException("Tire cannot be null");
@@ -62,6 +70,7 @@ public class TireServicesImpl implements TireServices {
         tireDTO.setId(tire.getId());
     }
 
+    @Transactional
     public void updateTire(TireDTO tireDTO) {
         if (tireDTO == null) {
             throw new IllegalArgumentException("Tire for updating cannot be null");
@@ -73,6 +82,7 @@ public class TireServicesImpl implements TireServices {
         tireDAO.updateTire(tire);
     }
 
+    @Transactional
     public void removeTire(TireDTO tireDTO) {
         if (tireDTO == null) {
             throw new IllegalArgumentException("Tire for removing cannot be null");

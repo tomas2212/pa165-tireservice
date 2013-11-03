@@ -6,18 +6,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.hibernate.Hibernate;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Martin(359978)
  */
+@Repository
 public class ServiceDAOImpl implements ServiceDAO {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    @Transactional
     public Service getServiceById(Long id) {
         Service s = entityManager.find(Service.class, id);
         if (s != null && s.isActive()) {
@@ -26,7 +26,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         return s != null && s.isActive() ? s : null;
     }
 
-    @Transactional
     public List<Service> getAllServices() {
         TypedQuery<Service> s = entityManager.createQuery("SELECT s FROM Service s", Service.class);
         List<Service> services = s.getResultList();
@@ -36,7 +35,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         return s.getResultList();
     }
 
-    @Transactional
     public List<Service> getAllActiveServices() {
         TypedQuery<Service> s = entityManager.createQuery("SELECT s FROM Service s WHERE s.active = :activity", Service.class);
         s.setParameter("activity", Boolean.TRUE);
@@ -47,7 +45,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         return s.getResultList();
     }
 
-    @Transactional
     public void insertService(Service service) {
         if (service == null) {
             throw new IllegalArgumentException("You have to set service");
@@ -55,7 +52,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         entityManager.persist(service);
     }
 
-    @Transactional
     public void updateService(Service service) {
         if (service == null) {
             throw new IllegalArgumentException("You have to set service");
@@ -66,7 +62,6 @@ public class ServiceDAOImpl implements ServiceDAO {
         entityManager.merge(service);
     }
 
-    @Transactional
     public void removeService(Service service) {
         if (service == null) {
             throw new IllegalArgumentException("You have to set service");

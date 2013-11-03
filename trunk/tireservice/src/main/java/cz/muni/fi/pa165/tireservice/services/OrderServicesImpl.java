@@ -11,16 +11,21 @@ import cz.muni.fi.pa165.tireservice.utils.OrderUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Stefan Sakala (359772)
  */
+@Service
+@Transactional
 public class OrderServicesImpl implements OrderServices {
 
     @Autowired
     private OrderDAO orderDAO;
 
+    @Transactional
     public OrderDTO getOrderById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("ID of order cannot be null");
@@ -30,6 +35,7 @@ public class OrderServicesImpl implements OrderServices {
         return orderDTO;
     }
 
+    @Transactional
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
         List<Order> orders = orderDAO.getAllOrders();
@@ -40,6 +46,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
 
+    @Transactional
     public List<OrderDTO> getAllEnabledOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
         List<Order> orders = orderDAO.getAllActiveOrders();
@@ -50,6 +57,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
 
+    @Transactional
     public void createOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
             throw new IllegalArgumentException("Order cannot be null");
@@ -59,6 +67,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDTO.setId(order.getId());
     }
 
+    @Transactional
     public void updateOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
             throw new IllegalArgumentException("Order for updating cannot be null");
@@ -67,6 +76,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDAO.updateOrder(order);
     }
 
+    @Transactional
     public void removeOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
             throw new IllegalArgumentException("Order for removing cannot be null");
