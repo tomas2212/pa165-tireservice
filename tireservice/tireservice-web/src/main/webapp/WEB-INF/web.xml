@@ -1,56 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    
+    <!-- applies log4j configuration -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    
     <!-- Spring -->
     <listener>
-        <description>activates Spring IoC container during start</description>
+        <description>aktivace Springu při startu aplikace</description>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <context-param>
-        <description>config file for Spring</description>
+        <description>umístění konfiguračního souboru pro Spring</description>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
+    <!-- location of log4j config file -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/log4j.xml</param-value>
+    </context-param>     
+
 
     <!-- JSTL -->
     <context-param>
-        <description>JSTL tags will use localized string from the same source as Stripes</description>
+        <description>JSTL tagy použijí lokalizované texty ze stejného zdroje jako Stripes tagy</description>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
         <param-value>StripesResources</param-value>
     </context-param>
-
+    
     <!-- Stripes -->
     <filter>
-        <description>Stripes main conf</description>
-        <display-name>Stripes Filter</display-name>
+        <description>hlavní místo konfigurace Stripes</description>
         <filter-name>StripesFilter</filter-name>
         <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
         <init-param>
-            <description>where Stripes searches for ActionBeans</description>
+            <description>kde Stripes hledá ActionBeans</description>
             <param-name>ActionResolver.Packages</param-name>
-            <param-value>cz.muni.fi.pa165.tireservice</param-value>
+            <param-value>cz.muni.fi.pa165.tireservice.web</param-value>
         </init-param>
         <init-param>
-            <description>locales and encodings in the app</description>
+            <description>jaká locale a kódování aplikace podporuje</description>
             <param-name>LocalePicker.Locales</param-name>
             <param-value>cs:utf-8,en:utf-8</param-value>
         </init-param>
         <init-param>
-            <description>Stripes injects Spring beans</description>
+            <description>propojení Stripes se Spring</description>
             <param-name>Interceptor.Classes</param-name>
             <param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
-        </init-param>
+        </init-param>      
     </filter>
     <filter-mapping>
         <filter-name>StripesFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-
     <filter>
+        <description>dynamicky mapuje URL na ActionBeans</description>
         <display-name>Stripes Dynamic Mapping Filter</display-name>
         <filter-name>DynamicMappingFilter</filter-name>
         <filter-class>net.sourceforge.stripes.controller.DynamicMappingFilter</filter-class>
@@ -61,6 +68,6 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
-
+    </filter-mapping> 
+     
 </web-app>

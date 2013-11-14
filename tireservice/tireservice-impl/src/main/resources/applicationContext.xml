@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans
-        xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-        xmlns:tx="http://www.springframework.org/schema/tx"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
-
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-  
-    
-  <context:component-scan base-package="cz.muni.fi.pa165.tireservice"/>
-    <import resource="dataSource.xml"/>
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <context:component-scan base-package="cz.muni.fi.pa165.tireservice"/>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />  
+    <!-- Configuration file for database settings -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+       
+    <!--   -->
+    <tx:annotation-driven/>
+
+    <!--   -->
+    <aop:aspectj-autoproxy/>
     
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" /> 
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <!-- Security -->    
+    <!--<import resource="classpath:security-app-context.xml"/>-->
+
     
-  <!-- uses the persistence unit defined in the META-INF/persistence.xml JPA configuration file -->
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="TireService"/>
-        <property name="dataSource" ref="dataSource"/>
+    <!-- Repository (DAO) exceptions translation to DataAccessException -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="TestPU"/>
+        <property name="dataSource" ref="dataSource" />
     </bean>
+
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     
-        <!--<property name="persistenceUnitName" value="TestPU" />--> 
-  
-
     <bean id="tireTypeDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireTypeDAOImpl" />
     <bean id="orderDAO" class="cz.muni.fi.pa165.tireservice.DAO.OrderDAOImpl" />
     <bean id="personDAO" class="cz.muni.fi.pa165.tireservice.DAO.PersonDAOImpl" />
      <bean id="tireDAO" class="cz.muni.fi.pa165.tireservice.DAO.TireDAOImpl" />
      <bean id="serviceDAO" class="cz.muni.fi.pa165.tireservice.DAO.ServiceDAOImpl" />
      
-  <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
-       access to EntityManagerFactory/EntityManager -->
-  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    
+    <!-- Standard dataSource -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="cleanUp"
+          p:driverClassName="${jdbc.dev.driverClassName}" p:url="${jdbc.dev.url}" p:username="${jdbc.dev.username}"
+          p:password="${jdbc.dev.password}"/>
+    
+    <!-- Special settings for tests -->
+    <beans profile="test">
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+              p:driverClassName="${jdbc.test.driverClassName}" p:url="${jdbc.test.url}" p:username="${jdbc.test.username}"
+              p:password="${jdbc.test.password}"/>
+    </beans>        
+    
 
-  <!-- transaction manager for use with a single JPA EntityManagerFactory for transactional data access
-       to a single datasource -->
-  <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-      <property name="entityManagerFactory" ref="entityManagerFactory"/>
-  </bean>
-
-  <!-- enables interpretation of the @Transactional annotation for declerative transaction managment
-       using the specified JpaTransactionManager -->
-  <tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="false"/>
-
+    
 </beans>
