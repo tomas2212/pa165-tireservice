@@ -53,7 +53,7 @@ public class PersonActionBean implements ActionBean{
     @DefaultHandler
     public Resolution list() {
         people = getPeople();
-        return new ForwardResolution(LIST);
+        return new ForwardResolution("/p/list.jsp");
     }
     
     public Resolution edit(){
@@ -68,7 +68,7 @@ public class PersonActionBean implements ActionBean{
         catch(Exception ex){
            getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
         }            
-        return new RedirectResolution(this.getClass(), "list");
+        return new RedirectResolution(this.getClass(), "index");
     }
     
     public Resolution delete(){
