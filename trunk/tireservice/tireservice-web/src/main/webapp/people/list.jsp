@@ -5,7 +5,7 @@
 
 <s:layout-render name="/layout.jsp" titlekey="book.list.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.web.PersonActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" var="actionBean"/>
 
         <p><f:message key="book.list.allbooks"/></p>
         
@@ -25,12 +25,21 @@
                     <td>${person.id}</td>
                     <td><c:out value="${person.firstName}"/></td>
                     <td><c:out value="${person.lastName}"/></td>
+                    <td>
+                     <s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="edit"><s:param name="person.id" value="${person.id}"/>edit</s:link>
+                    </td>
+                    <td>
+                        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean">
+                            <s:hidden name="person.id" value="${person.id}"/>
+                            <s:submit name="delete"><f:message key="book.list.delete"/></s:submit>
+                        </s:form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
         ahoj ${actionBean.people}
         
-        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.PersonActionBean">
+        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean">
             <fieldset><legend><f:message key="book.list.newbook"/></legend>
                 <%@include file="form.jsp"%>
                 <s:submit name="add">Vytvořit novou knihu</s:submit>
