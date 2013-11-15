@@ -48,7 +48,7 @@
      
     
     <!-- Standard dataSource -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="cleanUp"
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="${jdbc.dev.driverClassName}" p:url="${jdbc.dev.url}" p:username="${jdbc.dev.username}"
           p:password="${jdbc.dev.password}"/>
     

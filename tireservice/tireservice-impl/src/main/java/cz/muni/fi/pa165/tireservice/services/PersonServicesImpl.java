@@ -47,7 +47,7 @@ public class PersonServicesImpl implements PersonServices{
         ValidationHelper.IdIsZero(personDTO.getId());
         
         Person person = PersonUtils.personDTOToEntity(personDTO);
-        personDAO.updatePerson(person);
+        personDAO.insertPerson(person);
     }
 
     @Transactional
