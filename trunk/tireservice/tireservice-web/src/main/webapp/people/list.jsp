@@ -37,13 +37,5 @@
                 </tr>
             </c:forEach>
         </table>
-        ahoj ${actionBean.people}
-        
-        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean">
-            <fieldset><legend><f:message key="book.list.newbook"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="add">Vytvořit novou knihu</s:submit>
-            </fieldset>
-        </s:form>
     </s:layout-component>
 </s:layout-render>
