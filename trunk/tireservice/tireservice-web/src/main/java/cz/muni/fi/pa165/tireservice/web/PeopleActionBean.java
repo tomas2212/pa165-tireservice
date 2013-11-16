@@ -100,7 +100,7 @@ public class PeopleActionBean implements ActionBean{
     
     
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save", "delete"})
     public void loadPersonFromDatabase() {
         String ids = getContext().getRequest().getParameter("person.id");
         if (ids == null) return;
