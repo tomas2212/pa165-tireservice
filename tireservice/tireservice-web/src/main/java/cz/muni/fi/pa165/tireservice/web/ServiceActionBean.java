@@ -74,7 +74,7 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution delete() {
         try{
             serviceServices.removeService(serviceDTO);
-            getContext().getMessages().add(new SimpleMessage("User disabled"));
+            getContext().getMessages().add(new SimpleMessage("Service disabled"));
         }
         catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
