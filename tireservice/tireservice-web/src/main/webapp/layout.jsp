@@ -8,22 +8,52 @@
 <head>
   <title><f:message key="${titlekey}"/></title>
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/docs/img/favicon.png" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/aui/css/aui-all.css" media="all">
+        <!--[if lt IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath}/aui/css/aui-ie.css" media="all"><![endif]-->
+        <!--[if IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath}/aui/css/aui-ie9.css" media="all"><![endif]-->
+        <script src="${pageContext.request.contextPath}/aui/js/aui-all.js"></script>
+        <!--[if lt IE 9]><script src="${pageContext.request.contextPath}/aui/js/aui-ie.js"></script><![endif]-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/docs/css/aui-flatpack-extras.css" media="all">
+        <script src="${pageContext.request.contextPath}/docs/js/aui-flatpack-extras.js"></script>
+        <script src="${pageContext.request.contextPath}/docs/js/aui-flatpack-demos.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/docs/highlightjs/ADG.css" media="all">
+        <script src="${pageContext.request.contextPath}/docs/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
   <s:layout-component name="header"/>
 </head>
-<body>
-   <h1><f:message key="${titlekey}"/></h1>
-   <div id="navigation">
-     <ul>
-       <li><s:link href="/index.jsp"><f:message key="navigation.index"/></s:link></li>
-       <li><s:link href="/praha.jsp"><f:message key="navigation.praha"/></s:link></li>
-       <li><s:link href="/podoli.jsp"><f:message key="navigation.podoli"/></s:link></li>
-       <li><s:link href="/pharmacy.jsp"><f:message key="navigation.pharmacy"/></s:link></li>
-     </ul>
-   </div>
-   <div id="content">
-       <s:messages/>
-       <s:layout-component name="body"/>
-    </div>
+<body class="aui-layout aui-theme-default aui-page-focused aui-page-focused-medium">
+   <header id="header" role="banner">
+                <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+                    <div class="aui-header-inner">
+                        <div class="aui-header-primary">		
+                            <ul class="aui-nav">
+                                <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="index.books.link"/></s:link></li>
+                            </ul>
+                        </div>  
+                        <div class="aui-header-secondary">
+                            <ul class="aui-nav">
+                                <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="index.books.link"/></s:link></li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div><!-- .aui-header-inner-->
+                </nav><!-- .aui-header -->
+            </header><!-- #header -->
+   <section id="content" role="main">
+        <s:messages/>
+        <s:layout-component name="body"/>
+    </section>
+    <footer id="footer" role="contentinfo">
+            <section class="footer-body">
+                <ul id="aui-footer-list">
+                    <li>Copyright &copy; 2009-2013 Atlassian</li>
+                    <li><a href="https://developer.atlassian.com/display/AUI/License">Apache License v2.0</a></li>
+                    <li><a href="https://developer.atlassian.com/display/AUI/AUI+Release+Notes">Release Notes</a></li>
+                </ul>
+                <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+            </section>
+</footer><!-- #footer -->
 </body>
 </html>
 </s:layout-definition>

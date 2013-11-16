@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.web;
 
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
@@ -20,15 +16,18 @@ import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
+import net.sourceforge.stripes.validation.ValidationErrorHandler;
+import net.sourceforge.stripes.validation.ValidationErrors;
 
 /**
  *
- * @author yrael
+ * @author Jakub Papcun (359 474)
  */
 @UrlBinding("/people/{$event}/")
-public class PeopleActionBean implements ActionBean{
+public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     private static final String LIST = "/people/list.jsp";
     private static final String EDIT = "/people/edit.jsp";
+    private static final String REGISTER = "/people/create.jsp";
     
     private ActionBeanContext actionBeanContext;
     private List<PersonDTO> people;
@@ -37,11 +36,14 @@ public class PeopleActionBean implements ActionBean{
     @SpringBean
     protected PersonServices personServices;
     
-//    @ValidateNestedProperties(value = {
-//        @Validate(on = {"save", "add"}, field = "name", required = true),
-//        @Validate(on = {"save", "add"}, field = "password", required = true),
-//        @Validate(on = {"save", "add"}, field = "admin", required = true)
-//    })
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"delete"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "firstName", required = true),
+        @Validate(on = {"save", "add"}, field = "lastName", required = true),
+        @Validate(on = {"save", "add"}, field = "address", required = true),
+        @Validate(on = {"save", "add"}, field = "phoneNumber", required = true),
+        @Validate(on = {"save", "add"}, field = "password", required = true)
+    })
     private PersonDTO person;
 
     public PersonDTO getPerson() {
@@ -58,6 +60,10 @@ public class PeopleActionBean implements ActionBean{
         return new ForwardResolution("/people/list.jsp");
     }
     
+    public Resolution register() {
+        return new ForwardResolution("/people/register.jsp");
+    }
+    
     public Resolution edit(){
         return new ForwardResolution(EDIT);
     }
@@ -66,12 +72,12 @@ public class PeopleActionBean implements ActionBean{
     public Resolution add(){
         try{
           personServices.insertPerson(person);        
-          getContext().getMessages().add(new SimpleMessage("User added"));                                                                      
+          getContext().getMessages().add(new SimpleMessage("You have been registered"));                                                                      
         }
         catch(Exception ex){
            getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
         }            
-        return new RedirectResolution(this.getClass(), "list");
+        return new RedirectResolution(this.getClass(), "register");
     }
     
     public Resolution delete(){
@@ -110,6 +116,12 @@ public class PeopleActionBean implements ActionBean{
     public Resolution save() {
         personServices.updatePerson(person);
         return new RedirectResolution(this.getClass(), "list");
+    }
+
+    @Override
+    public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
+        people = personServices.getAllPersons();
+        return null;
     }
     
 }
