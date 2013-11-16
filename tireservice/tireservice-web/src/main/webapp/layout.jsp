@@ -13,7 +13,6 @@
         <!--[if IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath}/aui/css/aui-ie9.css" media="all"><![endif]-->
         <script src="${pageContext.request.contextPath}/aui/js/aui-all.js"></script>
         <!--[if lt IE 9]><script src="${pageContext.request.contextPath}/aui/js/aui-ie.js"></script><![endif]-->
-        <!--<script>hljs.initHighlightingOnLoad();</script>-->
   <s:layout-component name="header"/>
 </head>
 <body class="aui-layout aui-theme-default">
@@ -37,14 +36,13 @@
         <s:messages/>
         <s:layout-component name="body"/>
     </section>
-    <footer id="footer" role="contentinfo">
-        <section class="footer-body">
+    <footer id="footer" role="contentinfo" style="background">
+        <section class="footer-body" style="background: none;">
             <ul id="aui-footer-list">
-                <li>Copyright &copy; 2009-2013 Atlassian</li>
+                <li>AUI Design Library by 2009-2013 Atlassian</li>
                 <li><a href="https://developer.atlassian.com/display/AUI/License">Apache License v2.0</a></li>
                 <li><a href="https://developer.atlassian.com/display/AUI/AUI+Release+Notes">Release Notes</a></li>
             </ul>
-            <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
         </section>
     </footer>
 </body>

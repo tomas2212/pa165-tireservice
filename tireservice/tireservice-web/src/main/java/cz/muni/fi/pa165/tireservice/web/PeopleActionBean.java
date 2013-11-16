@@ -57,11 +57,11 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     @DefaultHandler
     public Resolution list() {
         people = getPeople();
-        return new ForwardResolution("/people/list.jsp");
+        return new ForwardResolution(LIST);
     }
     
     public Resolution register() {
-        return new ForwardResolution("/people/register.jsp");
+        return new ForwardResolution(REGISTER);
     }
     
     public Resolution edit(){
