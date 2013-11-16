@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Fri Nov 15 19:34:40 CET 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0142-5d0b-247b-000007659a78 
-on database directory memory:M:\Documents\googleCode\trunk\tireservice\tireservice-impl\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@4187a8e0 
-Loaded from file:/C:/Users/yrael/.m2/repository/org/apache/derby/derby/10.9.1.0/derby-10.9.1.0.jar
+Sat Nov 16 16:30:57 CET 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0142-6189-4dc8-000005704e80 
+on database directory memory:C:\Users\stefa_000\Desktop\Java\trunk\tireservice\tireservice-impl\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@20d75cf7 
+Loaded from file:/C:/Users/stefa_000/.m2/repository/org/apache/derby/derby/10.9.1.0/derby-10.9.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_40-b43
-user.dir=M:\Documents\googleCode\trunk\tireservice\tireservice-impl
+user.dir=C:\Users\stefa_000\Desktop\Java\trunk\tireservice\tireservice-impl
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

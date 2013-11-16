@@ -14,7 +14,17 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <bean name="personServices" class="cz.muni.fi.pa165.tireservice.services.PersonServicesImpl" >
     </bean>
-
-
+    
+    <bean name="tireServices" class="cz.muni.fi.pa165.tireservice.services.TireServicesImpl" >
+    </bean>
+    
+    <bean name="tireTypeServices" class="cz.muni.fi.pa165.tireservice.services.ServiceTireTypeImpl" >
+    </bean>
+    
+    <bean name="serviceServices" class="cz.muni.fi.pa165.tireservice.services.ServiceServicesImpl" >
+    </bean>
+    
+    <bean name="orderServices" class="cz.muni.fi.pa165.tireservice.services.OrderServicesImpl" >
+    </bean>
 
 </beans>
