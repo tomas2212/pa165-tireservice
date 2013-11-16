@@ -78,8 +78,8 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
 
     @DefaultHandler
     public Resolution list() {
-        tireType = getTireType();
-        return new ForwardResolution("/tiretype/list.jsp");
+        tireType = getTireTypes();
+        return new ForwardResolution(LIST);
     }
     
     public Resolution edit(){
