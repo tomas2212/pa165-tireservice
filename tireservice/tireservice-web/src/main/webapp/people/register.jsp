@@ -18,8 +18,8 @@
                     <s:submit name="add">Registrovat</s:submit>
                 </fieldset>
             </s:form>
-            </section><!-- .aui-page-panel-content -->
-        </div><!-- .aui-page-panel-inner -->
+            </section>
+        </div>
         </div>
     </s:layout-component>
 </s:layout-render>
