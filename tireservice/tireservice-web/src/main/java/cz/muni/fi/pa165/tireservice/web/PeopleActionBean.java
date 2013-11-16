@@ -27,7 +27,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     private static final String LIST = "/people/list.jsp";
     private static final String EDIT = "/people/edit.jsp";
-    private static final String REGISTER = "/people/create.jsp";
+    private static final String REGISTER = "/people/register.jsp";
     
     private ActionBeanContext actionBeanContext;
     private List<PersonDTO> people;
