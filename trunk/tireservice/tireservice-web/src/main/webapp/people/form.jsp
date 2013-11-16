@@ -26,4 +26,5 @@
         <td><s:text id="b2" name="person.password"/></td>
     </tr>
     <s:hidden id="b2" name="person.active" value="true"/>
+    <s:hidden id="b2" name="person.id" />
 </table>
