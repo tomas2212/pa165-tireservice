@@ -21,8 +21,8 @@
                         <tr>
                             <th id="service-id">#</th>
                             <th id="service-name">Name</th>
-                            <th id="service-description">Descriprtion</th>
-                            <th id="service-active">Is active?</th>
+                            <th id="service-description">Description</th>
+                            <th id="service-active">Activity status</th>
                             <th id="service-price">Price</th>
                             <th id="service-action" class="aui-table-column-unsortable"></th>
                         </tr>
@@ -33,18 +33,18 @@
                                 <td><c:out value="${service.id}"/></td>
                                 <td><c:out value="${service.name}"/></td>
                                 <td><c:out value="${service.description}"/></td>
-                                <td><c:out value="${service.active}"/></td>
                                 <td>    
                                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" class="aui">
-                                        <s:checkbox id="b2" name="service.isActive" checked="${service.isActive}" disabled="disabled"/>
+                                        <s:checkbox id="b2" name="service.active" checked="${service.active}" disabled="disabled"/>
                                     </s:form>
                                 </td>
+                                <td><c:out value="${service.price}"/></td>
                                 <td class="adg-actions">
                                     <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                     <div id="dropdown-button-service${service.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                         <ul class="aui-list-truncate">
-                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.SectionActionBean" event="edit"><s:param name="service.id" value="${service.id}"/>Edit</s:link>
-                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.SectionActionBean" event="delete"><s:param name="service.id" value="${service.id}"/>Delete</s:link>
+                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/>Edit</s:link>
+                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="delete"><s:param name="service.id" value="${service.id}"/>Delete</s:link>
                                         </ul>
                                     </div>
                                 </td>
