@@ -41,6 +41,13 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
     @SpringBean
     protected ServiceServices serviceServices;
     
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"delete"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "name", required = true, maxlength=20),
+        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength=100),
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=0)
+    })
+    
     public ServiceDTO getService() {
         return serviceDTO;
     }
