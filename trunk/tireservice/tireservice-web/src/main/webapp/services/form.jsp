@@ -1,17 +1,16 @@
-<%-- 
-    Document   : form
-    Created on : Nov 16, 2013, 7:27:46 PM
-    Author     : Martin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<s:errors/>
+<table>
+    <tr>
+        <th><s:label for="s1" name="name"/></th>
+        <td><s:text id="s1" name="service.name"/></td>
+    
+        <th><s:label for="s2" name="description"/></th>
+        <td><s:text id="s2" name="service.description"/></td>
+      
+        <th><s:label for="s3" name="price"/></th>
+        <td><s:text id="s3" name="service.price"/></td>
+    </tr>
+    <s:hidden id="tt7" name="service.id"/>
+    <s:hidden id="tt8" name="service.active" value="true"/>
+</table>
