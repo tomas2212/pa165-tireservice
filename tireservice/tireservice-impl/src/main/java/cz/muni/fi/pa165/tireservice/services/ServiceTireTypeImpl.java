@@ -53,7 +53,7 @@ public class ServiceTireTypeImpl implements ServiceTireType {
     @Transactional
     public void removeTireType(TireTypeDTO tireTypeDTO) {
         TireType tireType = TireTypeUtils.tireTypeDTOToEntity(tireTypeDTO);
-        tireTypeDAO.insertTireType(tireType);
+        tireTypeDAO.removeTireType(tireType);
     }
 
     @Transactional

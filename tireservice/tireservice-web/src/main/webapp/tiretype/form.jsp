@@ -20,5 +20,6 @@
         <th><s:label for="tt6" name="price"/></th>
         <td><s:text id="tt6" name="tireTypeDTO.price"/></td>
     </tr>
-    <s:hidden id="tt7" name="tiretypeDTO.active" value="true"/>
+    <s:hidden id="tt7" name="tireTypeDTO.id"/>
+    <s:hidden id="tt8" name="tireTypeDTO.active" value="true"/>
 </table>
