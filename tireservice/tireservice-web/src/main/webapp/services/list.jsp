@@ -16,23 +16,7 @@
             
          <table class="basic">
           
-            <c:forEach items="${actionBean.service}" var="service">
-                <tr>
-                    <td><c:out value="${service.id}"/></td>
-                    <td><c:out value="${servie.name}"/></td>
-                    <td><c:out value="${service.description}"/></td>
-                    <td><c:out value="${service.price}"/></td>
-                    <td>
-                     <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/>Edit</s:link>
-                    </td>
-                    <td>
-                        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean">
-                            <s:hidden name="service.id" value="${service.id}"/>
-                            <s:submit name="delete"><f:message key="book.list.delete"/></s:submit>
-                        </s:form>
-                    </td>
-                </tr>
-            </c:forEach>
+            
         </table>
          <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean">
             <fieldset>
