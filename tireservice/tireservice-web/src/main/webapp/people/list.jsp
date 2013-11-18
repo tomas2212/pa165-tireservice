@@ -20,6 +20,7 @@
                     <thead>
                         <tr>
                             <th id="person-id">#</th>
+                            <th id="person-email">Email</th>
                             <th id="person-firstname">First Name</th>
                             <th id="person-lastname">Last Name</th>
                             <th id="person-address">Address</th>
@@ -32,6 +33,7 @@
                         <c:forEach items="${actionBean.people}" var="person">
                             <tr>
                                 <td><c:out value="${person.id}"/></td>
+                                <td><c:out value="${person.email}"/></td>
                                 <td><c:out value="${person.firstName}"/></td>
                                 <td><c:out value="${person.lastName}"/></td>
                                 <td><c:out value="${person.address}"/></td>

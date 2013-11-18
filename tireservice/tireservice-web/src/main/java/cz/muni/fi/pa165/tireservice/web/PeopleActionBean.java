@@ -38,6 +38,7 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     
     @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "email", required = true),
         @Validate(on = {"save", "add"}, field = "firstName", required = true),
         @Validate(on = {"save", "add"}, field = "lastName", required = true),
         @Validate(on = {"save", "add"}, field = "address", required = true),
