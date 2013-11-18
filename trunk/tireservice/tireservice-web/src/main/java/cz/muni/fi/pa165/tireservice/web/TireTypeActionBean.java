@@ -104,7 +104,7 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
        public Resolution delete(){
         try{
             tireTypeServices.removeTireType(tireTypeDTO);
-            getContext().getMessages().add(new SimpleMessage("Tire Type Removed"));
+            getContext().getMessages().add(new SimpleMessage("Tire Type disabled"));
         }catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
         }
