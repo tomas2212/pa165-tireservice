@@ -27,7 +27,7 @@
                                 <th id="tiretype-tirerimsize">Tire Rim Size</th>
                                 <th id="tiretype-amountonstore">Amount on store</th>
                                 <th id="tiretype-price">Price</th>
-                                <th id="service-active">Activity status</th>
+                                <!--     <th id="service-active">Activity status</th> -->
                                 <th id="tiretype-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
@@ -59,24 +59,38 @@
                                             </div>
                                         </td>
                                     </tr>
+
+
                             </c:forEach>
+
+
                         </tbody>
+
+
                     </table>
 
                 </section><!-- .aui-page-panel-content -->
 
             </div><!-- .aui-page-panel-inner -->
+
+
         </div>
 
-        <div class="aui-page-header">
-            <div class="aui-page-header-inner">
-                <h1><f:message key="header.tiretype.createnew"/></h1>
-            </div>
-        </div>
-
-        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean">
-            <%@include file="form.jsp"%>
-            <s:submit name="add">Submit</s:submit>
-        </s:form>    
-    </s:layout-component>
+        <table>
+            <td>
+                <div class="aui-page-header">
+                    <div class="aui-page-header-inner">
+                        <h4><f:message key="header.tiretype.createnew"/></h4>
+                    </div>
+                </div> 
+            </td>
+            <td>
+                <s:form beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean">
+                    <%@include file="form.jsp"%> </td>
+                <td>
+                    <s:submit name="add">Submit</s:submit> </td>
+                </s:form>    
+        </td>    
+    </table>
+</s:layout-component>
 </s:layout-render>
