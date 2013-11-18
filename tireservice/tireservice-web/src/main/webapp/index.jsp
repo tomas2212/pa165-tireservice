@@ -5,10 +5,7 @@
 <s:layout-render name="/layout.jsp" titlekey="index.title">
     <s:layout-component name="body">
 
-       <ul>
-           <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="index.books.link"/></s:link></li>
-           
-           <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="list"><f:message key="index.books.link"/></s:link></li>
+       <ul>    
        </ul>
 
     </s:layout-component>
