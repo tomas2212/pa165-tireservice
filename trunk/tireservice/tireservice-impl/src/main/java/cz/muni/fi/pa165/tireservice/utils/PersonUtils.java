@@ -24,6 +24,7 @@ public class PersonUtils {
         Person person = new Person();
         
         person.setId(personDTO.getId());
+        person.setEmail(personDTO.getEmail());
         person.setFirstName(personDTO.getFirstName());
         person.setLastName(personDTO.getLastName());
         person.setAddress(personDTO.getAddress());
@@ -43,6 +44,7 @@ public class PersonUtils {
         PersonDTO personDTO = new PersonDTO();
         
         personDTO.setId(person.getId());
+        personDTO.setEmail(person.getEmail());
         personDTO.setFirstName(person.getFirstName());
         personDTO.setLastName(person.getLastName());
         personDTO.setAddress(person.getAddress());

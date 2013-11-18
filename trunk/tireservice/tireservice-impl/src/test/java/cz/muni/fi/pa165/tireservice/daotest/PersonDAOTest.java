@@ -20,6 +20,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     @Test
     public void testGetAllPersons() {
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("Black");
         person1.setAddress("Elysian Fields, New York, NY");
@@ -33,6 +34,7 @@ public class PersonDAOTest extends AbstractDAOTest {
 
 
         Person person2 = new Person();
+        person2.setEmail("william.parrish@yesman.com");
         person2.setFirstName("William");
         person2.setLastName("Parrish");
         person2.setAddress("Elysian Fields, New York, NY");
@@ -46,6 +48,7 @@ public class PersonDAOTest extends AbstractDAOTest {
 
 
         Person person3 = new Person();
+        person3.setEmail("eddie.parrish@yesman.com");
         person3.setFirstName("Eddie");
         person3.setLastName("Parrish");
         person3.setAddress("Elysian Fields, San Francisco, CA");
@@ -64,6 +67,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     public void testInsertPerson() {
 
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("Black");
         person1.setAddress("Elysian Fields, New York City, NY");
@@ -81,6 +85,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     @Test
     public void testUpdatePerson() {
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("Black");
         person1.setAddress("Elysian Fields, New York City, NY");
@@ -101,6 +106,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     @Test
     public void testGetPersonByID() {
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("White");
         person1.setAddress("Elysian Fields, New York City, NY");
@@ -119,6 +125,7 @@ public class PersonDAOTest extends AbstractDAOTest {
     @Test
     public void testRemovePerson() {
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("White");
         person1.setAddress("Elysian Fields, New York City, NY");

@@ -2,6 +2,10 @@
 <s:errors/>
 <table>
     <tr>
+        <th><s:label for="b1" name="email"/></th>
+        <td><s:text id="b1" name="person.email"/></td>
+    </tr>
+    <tr>
         <th><s:label for="b1" name="first.name"/></th>
         <td><s:text id="b1" name="person.firstName"/></td>
     </tr>
@@ -22,7 +26,7 @@
         <td><s:checkbox id="b2" name="person.isServiceman"/></td>
     </tr>
     <tr>
-        <th><s:label for="b2" name="last.password"/></th>
+        <th><s:label for="b2" name="password"/></th>
         <td><s:text id="b2" name="person.password"/></td>
     </tr>
     <s:hidden id="b2" name="person.active" value="true"/>

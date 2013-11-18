@@ -79,6 +79,7 @@ public class OrderDAOTest extends AbstractDAOTest {
     @Test
     public void testGetAllOrders() {
         Person person1 = new Person();
+        person1.setEmail("joe.black@yesman.com");
         person1.setFirstName("Joe");
         person1.setLastName("Black");
         person1.setAddress("Elysian Fields, New York, NY");
