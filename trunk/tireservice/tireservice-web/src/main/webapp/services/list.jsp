@@ -40,11 +40,11 @@
                                 <td><c:out value="${service.id}"/></td>
                                 <td><c:out value="${service.name}"/></td>
                                 <td><c:out value="${service.description}"/></td>
-                                <td>    
+                              <%--  <td>    
                                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" class="aui">
                                         <s:checkbox id="b2" name="service.active" checked="${service.active}" disabled="disabled"/>
-                                    </s:form> 
-                                </td>
+                                    </s:form>  
+                                </td> --%>
                                 <td><c:out value="${service.price}"/></td>
                                 <td class="adg-actions">
                                     <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
