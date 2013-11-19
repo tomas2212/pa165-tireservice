@@ -10,26 +10,15 @@
             <div class="aui-page-header-inner">
                 <h1><f:message key="header.services"/></h1>
             </div>
-        </div>
-        
-            
-            
-         <table class="basic">
-          
-            
+        </div>           
+         <table class="basic">    
         </table>
          <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean">
             <fieldset>
                 <%@include file="form.jsp"%>
                 <s:submit name="add">Create new service</s:submit>
             </fieldset>
-        </s:form>  
-            
-            
-            
-            
-            
-            
+        </s:form>      
         <div class="aui-page-panel">
             <div class="aui-page-panel-inner">
                 <section class="aui-page-panel-content">
@@ -40,7 +29,7 @@
                             <th id="service-id">#</th>
                             <th id="service-name">Name</th>
                             <th id="service-description">Description</th>
-                            <th id="service-active">Activity status</th>
+                        <%--<th id="service-active">Activity status</th> --%>
                             <th id="service-price">Price</th>
                             <th id="service-action" class="aui-table-column-unsortable"></th>
                         </tr>
@@ -54,7 +43,7 @@
                                 <td>    
                                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" class="aui">
                                         <s:checkbox id="b2" name="service.active" checked="${service.active}" disabled="disabled"/>
-                                    </s:form>
+                                    </s:form> 
                                 </td>
                                 <td><c:out value="${service.price}"/></td>
                                 <td class="adg-actions">
