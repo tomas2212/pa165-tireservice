@@ -20,12 +20,12 @@
                     <thead>
                         <tr>
                             <th id="person-id">#</th>
-                            <th id="person-email">Email</th>
-                            <th id="person-firstname">First Name</th>
-                            <th id="person-lastname">Last Name</th>
-                            <th id="person-address">Address</th>
-                            <th id="person-phonenumber">Phone Number</th>
-                            <th id="person-isadmin">Is Admin</th>
+                            <th id="person-email"><f:message key="field.email"/></th>
+                            <th id="person-firstname"><f:message key="field.first.name"/></th>
+                            <th id="person-lastname"><f:message key="field.last.name"/></th>
+                            <th id="person-address"><f:message key="field.address"/></th>
+                            <th id="person-phonenumber"><f:message key="field.phone.number"/></th>
+                            <th id="person-isadmin"><f:message key="field.is.admin"/></th>
                             <th id="person-action" class="aui-table-column-unsortable"></th>
                         </tr>
                     </thead>
@@ -47,8 +47,8 @@
                                     <button aria-owns="dropdown-button-person${person.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                     <div id="dropdown-button-person${person.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                         <ul class="aui-list-truncate">
-                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="edit"><s:param name="person.id" value="${person.id}"/>Edit</s:link>
-                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="delete"><s:param name="person.id" value="${person.id}"/>Delete</s:link>
+                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="edit"><s:param name="person.id" value="${person.id}"/><f:message key="action.edit"/></s:link>
+                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="delete"><s:param name="person.id" value="${person.id}"/><f:message key="action.delete"/></s:link>
                                         </ul>
                                     </div>
                                 </td>
