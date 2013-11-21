@@ -33,7 +33,6 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 @UrlBinding("/service/{$event}/")
 public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
     private static final String LIST = "/services/list.jsp";
-    private static final String EDIT = "/services/edit.jsp";
     
     private ActionBeanContext actionBeanContext;
     private List<ServiceDTO> services;
@@ -65,7 +64,7 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     public Resolution edit() {
-        return new ForwardResolution(EDIT);
+        return new ForwardResolution(LIST);
     }
     
     public Resolution add() {

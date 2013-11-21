@@ -62,7 +62,7 @@
                                             <button aria-owns="dropdown-button-tiretype${tireTypeDTO.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                             <div id="dropdown-button-tiretype${tireTypeDTO.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                                 <ul class="aui-list-truncate">
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="list"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/>Edit</s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="edit"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/>Edit</s:link>
                                                     <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="delete"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/>Delete</s:link>
                                                     </ul>
                                                 </div>

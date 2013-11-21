@@ -34,7 +34,6 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
     
     private static final String LIST = "/tiretype/list.jsp";
-    private static final String EDIT = "/tiretype/edit.jsp";
     
     private ActionBeanContext actionBeanContext;
     private List<TireTypeDTO> tireType;
@@ -84,7 +83,7 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     public Resolution edit(){
-        return new ForwardResolution(EDIT);
+        return new ForwardResolution(LIST);
     }
     
     
