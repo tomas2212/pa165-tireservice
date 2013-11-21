@@ -18,6 +18,7 @@ import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -48,7 +49,7 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
         @Validate(on = {"save", "add"}, field = "description", required = true, maxlength=100),
         @Validate(on = {"save", "add"}, field = "tireRimSize", required = true, minvalue=1),
         @Validate(on = {"save", "add"}, field = "amountOnStore", required = true,minvalue=0),
-        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=0)
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=0, converter = BigDecimalTypeConverter.class)
     })
     private TireTypeDTO tireTypeDTO;
     

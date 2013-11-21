@@ -14,6 +14,7 @@ import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.EmailTypeConverter;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -32,20 +33,22 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     private ActionBeanContext actionBeanContext;
     private List<PersonDTO> people;
     
-    
     @SpringBean
     protected PersonServices personServices;
     
     @ValidateNestedProperties(value = {
-        @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "email", required = true),
+        @Validate(on = {"delete, edit"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "email", required = true, converter = EmailTypeConverter.class),
         @Validate(on = {"save", "add"}, field = "firstName", required = true),
         @Validate(on = {"save", "add"}, field = "lastName", required = true),
         @Validate(on = {"save", "add"}, field = "address", required = true),
         @Validate(on = {"save", "add"}, field = "phoneNumber", required = true),
-        @Validate(on = {"save", "add"}, field = "password", required = true)
+        @Validate(on = {"save", "add"}, field = "password", required = true, minlength = 6)
     })
     private PersonDTO person;
+    
+    @Validate(on = {"add"}, required = true, expression = "confirmPassword eq person.password")
+    private String confirmPassword;
 
     public PersonDTO getPerson() {
         return person;
@@ -104,7 +107,14 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     public ActionBeanContext getContext() {
         return this.actionBeanContext;
     }
-    
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
     
 
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save", "delete"})

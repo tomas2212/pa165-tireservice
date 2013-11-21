@@ -27,7 +27,11 @@
     </tr>
     <tr>
         <th><s:label for="b2" name="password"/></th>
-        <td><s:text id="b2" name="person.password"/></td>
+        <td><s:password id="b2" name="person.password"/></td>
+    </tr>
+    <tr>
+        <th><s:label for="b2" name="confirm.password" /></th>
+        <td><s:password id="b2" name="confirmPassword"/></td>
     </tr>
     <s:hidden id="b2" name="person.active" value="true"/>
     <s:hidden id="b2" name="person.id" />
