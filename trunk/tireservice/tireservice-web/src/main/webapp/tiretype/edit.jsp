@@ -19,6 +19,7 @@
                 <s:submit name="save"><f:message key="header.tiretype.save"/></s:submit>
             </fieldset>
         </s:form>
+            
 
     </s:layout-component>
 </s:layout-render>
