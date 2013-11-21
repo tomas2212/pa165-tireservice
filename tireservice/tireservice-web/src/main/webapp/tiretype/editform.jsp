@@ -7,9 +7,9 @@
     <td><s:text id="tt3" name="tireTypeDTO.description"/></td>  
     <td><s:text id="tt4" name="tireTypeDTO.tireRimSize"/></td>      
     <td><s:text id="tt5" name="tireTypeDTO.amountOnStore"/></td> 
-    <td><s:text id="tt6" name="tireTypeDTO.price"/></td>
+    <td><s:text id="tt6" name="tireTypeDTO.price"/></td>    
     <td>
-        <s:submit name="add">Submit</s:submit>
+        <s:submit name="save">Save</s:submit>
         </td>
     </tr>
 <s:hidden id="tt7" name="tireTypeDTO.id"/>
