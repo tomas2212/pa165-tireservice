@@ -6,11 +6,6 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" var="actionBean"/>
 
-         <div class="aui-page-header">
-            <div class="aui-page-header-inner">
-                <h1><f:message key="header.tiretype.edit"/></h1>
-            </div>
-        </div>
         
         <s:form beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean">
             <s:hidden name="tireType.id"/>

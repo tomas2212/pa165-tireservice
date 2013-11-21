@@ -35,7 +35,7 @@
                         <tbody>
 
                             <c:forEach items="${actionBean.tireType}" var="tireTypeDTO">
-                                
+
                                 <c:choose>
                                     <c:when test="${actionBean.tireTypeDTO.id == tireTypeDTO.id}"> 
 
@@ -43,9 +43,9 @@
                                             <s:hidden name="tireType.id"/>
                                         <fieldset>
                                             <%@include file="editform.jsp"%>                                            
-                                            </fieldset>
+                                        </fieldset>
                                     </s:form>
-                                    
+
                                 </c:when>
                                 <c:otherwise>
 
