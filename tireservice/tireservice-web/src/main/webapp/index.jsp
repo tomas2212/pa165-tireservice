@@ -4,9 +4,8 @@
 
 <s:layout-render name="/layout.jsp" titlekey="index.title">
     <s:layout-component name="body">
-
-       <ul>    
-       </ul>
+        
+        <h1><f:message key="welcome"/></h1>
 
     </s:layout-component>
 </s:layout-render>
