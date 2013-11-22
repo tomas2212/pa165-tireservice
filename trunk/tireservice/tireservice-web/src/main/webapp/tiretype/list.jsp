@@ -21,7 +21,7 @@
                             <tr>
                                 <th id="tiretype-id">#</th>
                                 <th id="tiretype-manufacturer"><f:message key="field.manufacturer"/></th>
-                                <th id="tiretype-type">Type<f:message key="field.type"/></th>
+                                <th id="tiretype-type"><f:message key="field.type"/></th>
                                 <th id="tiretype-description"><f:message key="field.description"/></th>
                                 <th id="tiretype-tirerimsize"><f:message key="field.tireRimSize"/></th>
                                 <th id="tiretype-amountonstore"><f:message key="field.amount"/></th>
