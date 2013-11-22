@@ -16,7 +16,6 @@
         <div class="aui-page-panel">
             <div class="aui-page-panel-inner">
                 <section class="aui-page-panel-content">
-
                     <table class="aui aui-table-interactive aui-table-sortable tablesorter tablesorter-default">
                         <thead>
                             <tr>
@@ -30,25 +29,18 @@
                                 <th id="tiretype-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
-
-
                         <tbody>
-
                             <c:forEach items="${actionBean.tireType}" var="tireTypeDTO">
-
                                 <c:choose>
                                     <c:when test="${actionBean.tireTypeDTO.id == tireTypeDTO.id}"> 
-
                                         <s:form beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean">
                                             <s:hidden name="tireType.id"/>
                                         <fieldset>
                                             <%@include file="editform.jsp"%>                                            
                                         </fieldset>
                                     </s:form>
-
                                 </c:when>
                                 <c:otherwise>
-
                                     <tr>
                                         <td><c:out value="${tireTypeDTO.id}"/></td>
                                         <td><c:out value="${tireTypeDTO.manufacturer}"/></td>
@@ -57,7 +49,6 @@
                                         <td><c:out value="${tireTypeDTO.tireRimSize}"/></td>
                                         <td><c:out value="${tireTypeDTO.amountOnStore}"/></td>
                                         <td><c:out value="${tireTypeDTO.price}"/></td>
-
                                         <td class="adg-actions">
                                             <button aria-owns="dropdown-button-tiretype${tireTypeDTO.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                             <div id="dropdown-button-tiretype${tireTypeDTO.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
@@ -68,34 +59,18 @@
                                                 </div>
                                             </td>
                                         </tr>
-
                                 </c:otherwise>
                             </c:choose>
-
-
                         </c:forEach>
-
-
-
-
                         <c:if test="${actionBean.tireTypeDTO.id == tireTypeDTO.id}" >
-
                             <s:form beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean">
                                 <%@include file="form.jsp"%>
                             </s:form> 
-
                         </c:if>
-
                         </tbody>
-
-
                     </table>
-
                 </section><!-- .aui-page-panel-content -->
-
             </div><!-- .aui-page-panel-inner -->
-
-
         </div>
 
 
