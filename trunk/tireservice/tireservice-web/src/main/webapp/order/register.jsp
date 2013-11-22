@@ -16,7 +16,7 @@
             <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
             
-       <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
+                <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="register">
                 <fieldset>
                  <%@include file="form.jsp"%>
                  <s:submit name="add">Register</s:submit>   
