@@ -10,7 +10,7 @@
             <s:hidden name="service.id"/>
             <fieldset><legend><f:message key="header.service.edit"/></legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="header.service.save"/></s:submit>
+                <s:submit name="save"><f:message key="action.save"/></s:submit>
             </fieldset>
         </s:form>
 
