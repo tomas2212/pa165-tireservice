@@ -18,7 +18,7 @@
             
             <s:form beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" class="aui">
                 <fieldset>
-                    <%@include file="edit.jsp"%>
+                    <%@include file="form.jsp"%>
                     <s:submit name="save"><f:message key="action.save"/></s:submit>
                 </fieldset>
             </s:form>
