@@ -32,6 +32,7 @@ import net.sourceforge.stripes.action.After;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.SimpleMessage;
@@ -205,14 +206,14 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         SetOrderParams();
         
         if(tireAmount == 0){
-            getContext().getMessages().add(new SimpleError("You can not order zero tires.")); 
+            getContext().getMessages().add(new LocalizableError("tireAmount.errorMessage")); 
             return ReturnCorrectForm();
         }
         
         tire.setAmountOnStore(tireAmount);
         
         if(!enoughTiresOnStore(tire)){
-            getContext().getMessages().add(new SimpleError("You can not order more of theese tires, because we do not have them on store.")); 
+            getContext().getMessages().add(new LocalizableError("order.noOtherTires")); 
             return ReturnCorrectForm();
         }
         
@@ -270,7 +271,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
           order.setDate(date);
           orderServices.createOrder(order);
           getContext().getRequest().getSession().removeAttribute("order");
-          getContext().getMessages().add(new SimpleMessage("The order was inserted."));                                                                      
+          getContext().getMessages().add(new LocalizableMessage("order.inserted"));                                                                      
         }
         catch(Exception ex){
            getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
@@ -282,7 +283,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         try{
             orderServices.removeOrder(order);
             getContext().getRequest().removeAttribute("order");
-            getContext().getMessages().add(new SimpleMessage("Order was shipped"));
+            getContext().getMessages().add(new LocalizableMessage("order.removed"));
         }catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
         }
