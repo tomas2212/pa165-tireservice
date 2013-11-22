@@ -77,7 +77,7 @@ public class OrderUtils {
             List<Tire> listTires = new ArrayList<Tire>();
             for (TireDTO tireDTO : listTiresDTO) {
                 Tire tire = TireUtils.tireDTOToEntity(tireDTO);
-                listTiresDTO.add(tireDTO);
+                listTires.add(tire);
             }
             order.setTires(listTires);
         }
