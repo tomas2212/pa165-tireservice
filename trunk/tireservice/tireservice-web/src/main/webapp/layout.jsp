@@ -24,6 +24,7 @@
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="menu.person.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="list"><f:message key="menu.tiretype.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="list"><f:message key="menu.service.list"/></s:link></li>
+                        <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="list"><f:message key="menu.order.list"/></s:link></li>
                     </ul>
                 </div>  
                 <div class="aui-header-secondary">
