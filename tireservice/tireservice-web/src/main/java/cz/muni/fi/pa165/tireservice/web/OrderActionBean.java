@@ -332,7 +332,8 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
 
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
-        //people = personServices.getAllPersons();
+        people = personServices.getAllPersons();
+        orders = orderServices.getAllEnabledOrders();
         return null;
     }
 
