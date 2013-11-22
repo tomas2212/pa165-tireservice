@@ -6,10 +6,12 @@ package cz.muni.fi.pa165.tireservice.web;
 
 import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
+import cz.muni.fi.pa165.tireservice.dto.ServiceDTO;
 import cz.muni.fi.pa165.tireservice.dto.TireDTO;
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.services.OrderServices;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
+import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -48,9 +50,17 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     private static final String EDIT = "/order/edit.jsp";
     private static final String REGISTER = "/order/register.jsp";
     
-    private OrderDTO order;
-    
+    private OrderDTO order  = new OrderDTO();
     private int personId;
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+    
     private SessionActionBeanContext actionBeanContext;
     private List<OrderDTO> orders;
     private List<PersonDTO> people;
@@ -63,6 +73,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     @SpringBean
     protected ServiceTireType tireTypeServices;
+    
+    @SpringBean
+    protected ServiceServices serviceServices;
     
   /*  @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required = true),
@@ -92,14 +105,12 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
   
     public Resolution register() {
         getAllTireTypes();
-        if(getContext().getOrder() == null)
-        {
-            order = new OrderDTO();
-            order.setTires(new ArrayList<TireDTO>());
-            getContext().setOrder(order);
-        }else{
-            order = getContext().getOrder();
-        }
+        order = new OrderDTO();
+        order.setTires(new ArrayList<TireDTO>());
+        order.setServices(new ArrayList<ServiceDTO>());
+        order.setActive(true);
+        getContext().setOrder(order);
+        
         return new ForwardResolution(REGISTER);
     }
     
@@ -118,11 +129,24 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         this.allTireTypes = allTireTypes;
     }
     
+    private List<ServiceDTO> allServices = new ArrayList<ServiceDTO>();
+
+    public List<ServiceDTO> getAllServices() {
+        allServices= serviceServices.getAllEnabledServices();
+        return allServices;
+    }
+
+    public void setAllServices(List<ServiceDTO> allServices) {
+        this.allServices = allServices;
+    }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"addTire"})
+    
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"addTire", "removeTire", "addService", "removeService", "add"})
     public void loadOrderFromSession() {
+        OrderDTO submitedOrder = order;
         order = getContext().getOrder();
-       //SessionStoreInterceptor.getAttribute(session, key);
+        order.setCarType(submitedOrder.getCarType());
+        order.setDate(submitedOrder.getDate());
     }
     
     public Resolution addTire(){
@@ -135,7 +159,44 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return new RedirectResolution(REGISTER);
     }
     
-    @After(on = "addTire")
+    
+    public Resolution removeTire(){
+        String ids = getContext().getRequest().getParameter("tireType.id");
+        List<TireDTO> list = order.getTires();
+        for(TireDTO t : list){
+            if(t.getTireType().getId() == Long.parseLong(ids)){
+                list.remove(t);
+                break;
+            }
+        }
+        order.setTires((list));
+        
+        return new RedirectResolution(REGISTER);
+    }
+    
+    public Resolution addService(){
+        String ids = getContext().getRequest().getParameter("service.id");
+        
+        order.getServices().add(serviceServices.getServiceById(Long.parseLong(ids)));
+        
+        return new RedirectResolution(REGISTER);
+    }
+    
+    public Resolution removeService(){
+        String ids = getContext().getRequest().getParameter("service.id");
+        List<ServiceDTO> list = order.getServices();
+        for(ServiceDTO s : list){
+            if(s.getId() == Long.parseLong(ids)){
+                list.remove(s);
+                break;
+            }
+        }
+        order.setServices((list));
+        
+        return new RedirectResolution(REGISTER);
+    }
+    
+    @After(on = {"addTire", "removeTire", "addService", "removeService"})
     public void setOrderToSession() {
         getContext().setOrder(order);
     }
@@ -170,6 +231,10 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         people = personServices.getAllPersons();
         return people;
     }
+    
+    public void setPeople(List<PersonDTO> people){
+        this.people = people;
+    }
 
     @Override
     public void setContext(ActionBeanContext abc) {
@@ -181,12 +246,11 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return this.actionBeanContext;
     }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save", "delete"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "delete"})
     public void loadOrderFromDatabase() {
         String ids = getContext().getRequest().getParameter("order.id");
         if (ids == null) return;
-        order = (OrderDTO)actionBeanContext.getRequest().getSession().getAttribute("order");
-        //order = orderServices.getOrderById(Long.parseLong(ids));
+        order = orderServices.getOrderById(Long.parseLong(ids));
     }
 
     public Resolution save() {
