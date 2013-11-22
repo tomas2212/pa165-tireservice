@@ -8,6 +8,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.SimpleMessage;
@@ -76,7 +77,7 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution add(){
         try{
           personServices.insertPerson(person);        
-          getContext().getMessages().add(new SimpleMessage("You have been registered"));                                                                      
+          getContext().getMessages().add(new LocalizableMessage("user.registered"));                                                                      
         }
         catch(Exception ex){
            getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
@@ -87,7 +88,7 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution delete(){
         try{
             personServices.removePerson(person);
-            getContext().getMessages().add(new SimpleMessage("User Removed"));
+            getContext().getMessages().add(new LocalizableMessage("user.removed"));
         }catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
         }
