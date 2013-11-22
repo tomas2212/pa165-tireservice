@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th id="service-id">#</th>
-                                <th id="service-name">Name<f:message key="field.servicename"/></th>
+                                <th id="service-name"><f:message key="field.name"/></th>
                                 <th id="service-description"><f:message key="field.description"/></th>
                                     <%--<th id="service-active">Activity status</th> --%>
                                 <th id="service-price"><f:message key="field.price"/></th>
