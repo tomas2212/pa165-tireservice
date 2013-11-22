@@ -82,7 +82,7 @@ public class OrderDTO {
         }
         if (tires != null) {
             for (TireDTO t : tires) {
-                price = price.add(t.getTireType().getPrice());
+                price = price.add(t.getTireType().getPrice().multiply(new BigDecimal(t.getAmountOnStore())));
             }
         }
 

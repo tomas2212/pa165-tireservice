@@ -15,11 +15,16 @@ import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Handle;
 import javax.interceptor.Interceptor;
 import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -33,10 +38,13 @@ import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.LocalizableError;
+import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -50,15 +58,49 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     private static final String EDIT = "/order/edit.jsp";
     private static final String REGISTER = "/order/register.jsp";
     
-    private OrderDTO order  = new OrderDTO();
-    private int personId;
+    private OrderDTO order;
+    
+    @Validate(on = {"save", "add"}, required = true)
+    private Long personId;
 
-    public int getPersonId() {
+    public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
+    }
+    
+    @Validate(on = {"save", "add"}, required = true)
+    private String carType;
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+    
+    @Validate(on = {"save", "add"}, required = true)
+    private Date date;
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+    
+    private int tireAmount;
+
+    public int getTireAmount() {
+        return tireAmount;
+    }
+
+    public void setTireAmount(int tireAmount) {
+        this.tireAmount = tireAmount;
     }
     
     private SessionActionBeanContext actionBeanContext;
@@ -77,17 +119,6 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     @SpringBean
     protected ServiceServices serviceServices;
     
-  /*  @ValidateNestedProperties(value = {
-        @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "email", required = true),
-        @Validate(on = {"save", "add"}, field = "firstName", required = true),
-        @Validate(on = {"save", "add"}, field = "lastName", required = true),
-        @Validate(on = {"save", "add"}, field = "address", required = true),
-        @Validate(on = {"save", "add"}, field = "phoneNumber", required = true),
-        
-    })*/
-    
-    
     public OrderDTO getOrder() {
         return order;
     }
@@ -105,6 +136,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
   
     public Resolution register() {
         getAllTireTypes();
+        getAllServices();
+        getPeople();
+        
         order = new OrderDTO();
         order.setTires(new ArrayList<TireDTO>());
         order.setServices(new ArrayList<ServiceDTO>());
@@ -141,12 +175,24 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"addTire", "removeTire", "addService", "removeService", "add"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"addTire", "removeTire", "addService", "removeService", "add", "save"})
     public void loadOrderFromSession() {
-        OrderDTO submitedOrder = order;
         order = getContext().getOrder();
-        order.setCarType(submitedOrder.getCarType());
-        order.setDate(submitedOrder.getDate());
+    }
+   
+    private boolean enoughTiresOnStore(TireDTO tire){
+        int numberOfOrderedTires = 0;
+        for(TireDTO t :order.getTires()){
+            if(t.getTireType() == tire.getTireType()){
+                numberOfOrderedTires += t.getAmountOnStore();
+            }   
+        }
+        
+        if(tire.getAmountOnStore() + numberOfOrderedTires > tire.getTireType().getAmountOnStore()){
+            return false;
+        }
+        
+        return true;
     }
     
     public Resolution addTire(){
@@ -154,9 +200,23 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         TireDTO tire = new TireDTO();
         tire.setTireType(tireTypeServices.getTireTypeById(Long.parseLong(ids)));
         
+        if(tireAmount == 0){
+            getContext().getMessages().add(new SimpleError("You can not order zero tires.")); 
+            return ReturnCorrectForm();
+        }
+        
+        tire.setAmountOnStore(tireAmount);
+        
+        SetOrderParams();
+        
+        if(!enoughTiresOnStore(tire)){
+            getContext().getMessages().add(new SimpleError("You can not order more of theese tires, because we do not have them on store.")); 
+            return ReturnCorrectForm();
+        }
+        
         order.getTires().add(tire);
         
-        return new RedirectResolution(REGISTER);
+        return ReturnCorrectForm();
     }
     
     
@@ -170,16 +230,16 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             }
         }
         order.setTires((list));
-        
-        return new RedirectResolution(REGISTER);
+        SetOrderParams();
+        return ReturnCorrectForm();
     }
     
     public Resolution addService(){
         String ids = getContext().getRequest().getParameter("service.id");
         
         order.getServices().add(serviceServices.getServiceById(Long.parseLong(ids)));
-        
-        return new RedirectResolution(REGISTER);
+        SetOrderParams();
+        return ReturnCorrectForm();
     }
     
     public Resolution removeService(){
@@ -192,8 +252,8 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             }
         }
         order.setServices((list));
-        
-        return new RedirectResolution(REGISTER);
+        SetOrderParams();
+        return ReturnCorrectForm();
     }
     
     @After(on = {"addTire", "removeTire", "addService", "removeService"})
@@ -204,7 +264,10 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     public Resolution add(){
         try{
-          orderServices.createOrder(order);        
+          order.setCarType(carType);
+          order.setDate(date);
+          orderServices.createOrder(order);
+          getContext().getRequest().getSession().removeAttribute("order");
           getContext().getMessages().add(new SimpleMessage("The order was inserted."));                                                                      
         }
         catch(Exception ex){
@@ -216,6 +279,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution delete(){
         try{
             orderServices.removeOrder(order);
+            getContext().getRequest().removeAttribute("order");
             getContext().getMessages().add(new SimpleMessage("Order was shipped"));
         }catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
@@ -224,7 +288,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     public List<OrderDTO> getOrders(){
-        return orderServices.getAllOrders();
+        return orderServices.getAllEnabledOrders();
     }
     
     public List<PersonDTO> getPeople(){
@@ -251,10 +315,15 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         String ids = getContext().getRequest().getParameter("order.id");
         if (ids == null) return;
         order = orderServices.getOrderById(Long.parseLong(ids));
+        getContext().setOrder(order);
     }
 
     public Resolution save() {
+        order.setCarType(carType);
+        order.setDate(date);
         orderServices.updateOrder(order);
+        
+        getContext().getRequest().removeAttribute("order");
         return new RedirectResolution((Class<? extends ActionBean>) this.getClass(), "list");
     }
 
@@ -262,5 +331,31 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         //people = personServices.getAllPersons();
         return null;
+    }
+
+    private void SetOrderParams() {
+        order.setCarType(carType);
+        order.setDate(date);
+        if(personId != null && personId > 0){
+            order.setPerson(personServices.getPersonById(personId));
+        }
+    }
+
+    private Resolution ReturnCorrectForm() {
+        String formType = getContext().getRequest().getParameter("formType");
+        if("edit".equals(formType))
+        {
+            return new RedirectResolution(EDIT);
+        }
+        return new RedirectResolution(REGISTER);
+    }
+    
+    public String convertDateToString(){
+        if(order.getDate() == null){
+            return "";
+        }else{
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            return df.format(order.getDate());
+        }
     }
 }

@@ -22,6 +22,7 @@
         <param-value>StripesResources</param-value>
     </context-param>
 
+
     <!-- Stripes -->
     <filter>
         <description>Stripes main conf</description>
@@ -32,6 +33,10 @@
             <description>where Stripes searches for ActionBeans</description>
             <param-name>ActionResolver.Packages</param-name>
             <param-value>cz.muni.fi.pa165.tireservice.web</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ActionBeanContext.Class</param-name>
+            <param-value>cz.muni.fi.pa165.tireservice.web.SessionActionBeanContext</param-value>
         </init-param>
         <init-param>
             <description>locales and encodings in the app</description>
@@ -49,6 +54,8 @@
         <url-pattern>*.jsp</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+
+
 
     <filter>
         <display-name>Stripes Dynamic Mapping Filter</display-name>

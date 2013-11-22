@@ -43,15 +43,15 @@ public class ServicesUtils {
         serviceDTO.setDescription(service.getDescription());
         serviceDTO.setName(service.getName());
 
-        List<Order> listOrders = service.getOrders();
-        if (listOrders != null && !listOrders.isEmpty()) {
-            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
-            for (Order order : listOrders) {
-                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
-                listOrdersDTO.add(orderDTO);
-            }
-            serviceDTO.setOrders(listOrdersDTO);
-        }
+//        List<Order> listOrders = service.getOrders();
+//        if (listOrders != null && !listOrders.isEmpty()) {
+//            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
+//            for (Order order : listOrders) {
+//                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
+//                listOrdersDTO.add(orderDTO);
+//            }
+//            serviceDTO.setOrders(listOrdersDTO);
+//        }
 
         return serviceDTO;
 

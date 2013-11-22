@@ -25,8 +25,8 @@ public class Tire implements Serializable {
     @ManyToOne
     private TireType tireType;
     
-    @ManyToOne
-    private Order order;
+//    @ManyToOne
+//    private Order order;
     
     private int amountOnStore;
 
@@ -46,13 +46,13 @@ public class Tire implements Serializable {
         this.tireType = tireType;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+//    public Order getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
 
     public int getAmountOnStore() {
         return amountOnStore;
@@ -67,7 +67,7 @@ public class Tire implements Serializable {
         int hash = 3;
         hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 37 * hash + (this.tireType != null ? this.tireType.hashCode() : 0);
-        hash = 37 * hash + (this.order != null ? this.order.hashCode() : 0);
+//        hash = 37 * hash + (this.order != null ? this.order.hashCode() : 0);
         hash = 37 * hash + this.amountOnStore;
         return hash;
     }
@@ -87,17 +87,17 @@ public class Tire implements Serializable {
         if (this.tireType != other.tireType && (this.tireType == null || !this.tireType.equals(other.tireType))) {
             return false;
         }
-        if (this.order != other.order && (this.order == null || !this.order.equals(other.order))) {
-            return false;
-        }
+//        if (this.order != other.order && (this.order == null || !this.order.equals(other.order))) {
+//            return false;
+//        }
         if (this.amountOnStore != other.amountOnStore) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Tire{" + "id=" + id + ", tireType=" + tireType + ", order=" + order + ", amountOnStore=" + amountOnStore + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Tire{" + "id=" + id + ", tireType=" + tireType + ", order=" + order + ", amountOnStore=" + amountOnStore + '}';
+//    }
 }

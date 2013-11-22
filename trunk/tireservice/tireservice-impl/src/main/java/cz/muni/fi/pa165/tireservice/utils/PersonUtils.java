@@ -54,15 +54,15 @@ public class PersonUtils {
         personDTO.setIsServiceman(person.isIsServiceman());
         
         
-        List<Order> listOrders = person.getOrders();
-        if(listOrders != null && !listOrders.isEmpty()){
-            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
-            for(Order order : listOrders){
-                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
-                listOrdersDTO.add(orderDTO);
-            }
-            personDTO.setOrders(listOrdersDTO);
-        }       
+//        List<Order> listOrders = person.getOrders();
+//        if(listOrders != null && !listOrders.isEmpty()){
+//            List<OrderDTO> listOrdersDTO = new ArrayList<OrderDTO>();
+//            for(Order order : listOrders){
+//                OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
+//                listOrdersDTO.add(orderDTO);
+//            }
+//            personDTO.setOrders(listOrdersDTO);
+//        }       
         return personDTO;
     }
 }
