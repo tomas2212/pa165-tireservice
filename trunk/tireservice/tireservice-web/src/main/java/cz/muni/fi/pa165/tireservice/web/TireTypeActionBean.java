@@ -12,6 +12,7 @@ import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.SimpleMessage;
@@ -19,6 +20,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -92,7 +94,7 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
       try{
           
           tireTypeServices.createTireType(tireTypeDTO);        
-         getContext().getMessages().add(new SimpleMessage("Tire Type added successfully"));                                                                      
+         getContext().getMessages().add(new LocalizableMessage("tireType.created"));                                                                      
         }
         catch(Exception ex){
            getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
@@ -104,7 +106,7 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
        public Resolution delete(){
         try{
             tireTypeServices.removeTireType(tireTypeDTO);
-            getContext().getMessages().add(new SimpleMessage("Tire Type was removed"));
+            getContext().getMessages().add(new LocalizableMessage("tireType.removed"));
         }catch(Exception ex){
             getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
         }
