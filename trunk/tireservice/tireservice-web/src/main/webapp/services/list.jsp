@@ -20,10 +20,10 @@
                         <thead>
                             <tr>
                                 <th id="service-id">#</th>
-                                <th id="service-name">Name</th>
-                                <th id="service-description">Description</th>
+                                <th id="service-name">Name<f:message key="field.servicename"/></th>
+                                <th id="service-description"><f:message key="field.description"/></th>
                                     <%--<th id="service-active">Activity status</th> --%>
-                                <th id="service-price">Price</th>
+                                <th id="service-price"><f:message key="field.price"/></th>
                                 <th id="service-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
@@ -53,8 +53,8 @@
                                             <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                             <div id="dropdown-button-service${service.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                                 <ul class="aui-list-truncate">
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/>Edit</s:link>
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="delete"><s:param name="service.id" value="${service.id}"/>Delete</s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/><f:message key="action.edit"/></s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="delete"><s:param name="service.id" value="${service.id}"/><f:message key="action.delete"/></s:link>
                                                     </ul>
                                                 </div>
                                             </td>

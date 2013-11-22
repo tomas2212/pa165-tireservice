@@ -11,7 +11,7 @@
             <s:hidden name="tireType.id"/>
             <fieldset>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="header.tiretype.save"/></s:submit>
+                <s:submit name="save"><f:message key="action.save"/></s:submit>
             </fieldset>
         </s:form>
             

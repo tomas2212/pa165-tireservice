@@ -20,12 +20,12 @@
                         <thead>
                             <tr>
                                 <th id="tiretype-id">#</th>
-                                <th id="tiretype-manufacturer">Manufacturer</th>
-                                <th id="tiretype-type">Type</th>
-                                <th id="tiretype-description">Description</th>
-                                <th id="tiretype-tirerimsize">Tire Rim Size</th>
-                                <th id="tiretype-amountonstore">Amount on store</th>
-                                <th id="tiretype-price">Price</th>
+                                <th id="tiretype-manufacturer"><f:message key="field.manufacturer"/></th>
+                                <th id="tiretype-type">Type<f:message key="field.type"/></th>
+                                <th id="tiretype-description"><f:message key="field.description"/></th>
+                                <th id="tiretype-tirerimsize"><f:message key="field.tireRimSize"/></th>
+                                <th id="tiretype-amountonstore"><f:message key="field.amount"/></th>
+                                <th id="tiretype-price"><f:message key="field.price"/></th>
                                 <th id="tiretype-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
@@ -53,8 +53,8 @@
                                             <button aria-owns="dropdown-button-tiretype${tireTypeDTO.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                             <div id="dropdown-button-tiretype${tireTypeDTO.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                                 <ul class="aui-list-truncate">
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="edit"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/>Edit</s:link>
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="delete"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/>Delete</s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="edit"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/><f:message key="action.edit"/></s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="delete"><s:param name="tireTypeDTO.id" value="${tireTypeDTO.id}"/><f:message key="action.delete"/></s:link>
                                                     </ul>
                                                 </div>
                                             </td>

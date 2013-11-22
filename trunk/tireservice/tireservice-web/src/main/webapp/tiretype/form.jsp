@@ -8,7 +8,7 @@
     <td><s:text id="tt4" name="tireTypeDTO.tireRimSize"/></td>      
     <td><s:text id="tt5" name="tireTypeDTO.amountOnStore"/></td> 
     <td><s:text id="tt6" name="tireTypeDTO.price"/></td>
-    <td><s:submit name="add">Submit</s:submit></td>
+    <td><s:submit name="add"><f:message key="action.submit"/></s:submit></td>
     </tr>
 <s:hidden id="tt7" name="tireTypeDTO.id"/>
 <s:hidden id="tt8" name="tireTypeDTO.active" value="true"/>
