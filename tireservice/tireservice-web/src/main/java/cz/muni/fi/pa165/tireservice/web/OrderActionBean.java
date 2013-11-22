@@ -183,12 +183,15 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     private boolean enoughTiresOnStore(TireDTO tire){
         int numberOfOrderedTires = 0;
         for(TireDTO t :order.getTires()){
-            if(t.getTireType() == tire.getTireType()){
-                numberOfOrderedTires += t.getAmountOnStore();
+            if(t.getTireType().equals(tire.getTireType())){
+                numberOfOrderedTires = numberOfOrderedTires + t.getAmountOnStore();
             }   
         }
         
-        if(tire.getAmountOnStore() + numberOfOrderedTires > tire.getTireType().getAmountOnStore()){
+        int orderedAndToBeOrderedTires = tire.getAmountOnStore() + numberOfOrderedTires;
+        int tiresOnStore = tire.getTireType().getAmountOnStore();
+        
+        if(orderedAndToBeOrderedTires > tiresOnStore){
             return false;
         }
         
@@ -199,6 +202,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         String ids = getContext().getRequest().getParameter("tireType.id");
         TireDTO tire = new TireDTO();
         tire.setTireType(tireTypeServices.getTireTypeById(Long.parseLong(ids)));
+        SetOrderParams();
         
         if(tireAmount == 0){
             getContext().getMessages().add(new SimpleError("You can not order zero tires.")); 
@@ -206,8 +210,6 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         }
         
         tire.setAmountOnStore(tireAmount);
-        
-        SetOrderParams();
         
         if(!enoughTiresOnStore(tire)){
             getContext().getMessages().add(new SimpleError("You can not order more of theese tires, because we do not have them on store.")); 
