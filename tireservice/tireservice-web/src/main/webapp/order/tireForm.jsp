@@ -1,5 +1,4 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
-<s:errors/>
   <p>Tires already in order</p>
             <table>
             <c:forEach items="${order.tires}" var="tire">
@@ -19,7 +18,10 @@
                                             <th>Manufacturer</th>
                                             <td><c:out value="${tireType.manufacturer}"/></td>
                                             <th>Price</th>
-                                            <td><c:out value="${tireType.price}"/>
+                                            <td><c:out value="${tireType.price}"/></td>
+                                            <td><s:text name="tireAmount"/></td>
+
+                                            <td>
                                             <s:submit name="addTire">
                                                 <s:param name="tireType.id" value="${tireType.id}"/>Add</s:submit>
                                             </td>

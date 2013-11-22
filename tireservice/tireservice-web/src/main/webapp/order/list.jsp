@@ -3,61 +3,58 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="header.order">
+<s:layout-render name="/layout.jsp" titlekey="header.orders">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" var="actionBean"/>
         <div class="aui-page-header">
             <div class="aui-page-header-inner">
-                <h1><f:message key="header.order"/></h1>
+                <h1><f:message key="header.orders"/></h1>
             </div>
         </div>
-        
-        <div class="aui-page-panel">
+       
+        <s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="register">Create new order</s:link>
+            
+        <div class="aui-page-panel margin-fix">
             <div class="aui-page-panel-inner">
-                <section class="aui-page-panel-content">
-                    <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="register">fgdcxgfgsdfgsdgsdfgdsffgf</s:link></li>
-                    <table class="aui aui-table-interactive aui-table-sortable tablesorter tablesorter-default">
+            <section class="aui-page-panel-content">
+            
+                <table class="aui">
                     <thead>
                         <tr>
                             <th id="order-id">#</th>
-                            <th id="person-firstname">First Name</th>
-                            <th id="person-lastname">Last Name</th>
-                            <th id="order-cartype">Car Type</th>
-                            <th id="order-date">Date</th>
-                            <th id="order-isactive">Is Active</th>
-                            <th id="order-services">Services</th>
-                            <th id="order-tires">Tires</th>
-                            <th id="order-action" class="aui-table-column-unsortable"></th>
+                            <th id="order-customer"><f:message key="field.customer"/></th>
+                            <th id="order-cartype"><f:message key="field.cartype"/></th>
+                            <th id="order-date"><f:message key="field.date"/></th>
+                            <th id="order-tires"><f:message key="field.tires"/></th>
+                            <th id="order-services"><f:message key="field.services"/></th>
+                            <th id="order-price"><f:message key="field.price"/></th>
+                            <th id="order-action"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${actionBean.orders}" var="order">
                             <tr>
-                                <td><c:out value="${order.id}"/></td>
-                                <td><c:out value="${order.person.firstName}"/></td>
-                                <td><c:out value="${order.person.lastName}"/></td>
+                                <td><c:out value="${order.person.id}"/></td>
+                                <td><c:out value="${order.person.firstName} ${order.person.lastName}"/></td>
                                 <td><c:out value="${order.carType}"/></td>
                                 <td><c:out value="${order.date}"/></td>
-                                <td><c:out value="${order.isActive}"/></td>
-                                <td><tbody>
-                                    <c:forEach items="${order.services}" var="service">
-                                        <tr>
-                                            <td><c:out value="${service.name}"/></td>
-                                            <td><c:out value="${service.price}"/></td>
-                                        </tr>
+                                <td><ul>
+                                <c:forEach items="${order.tires}" var="tire">
+                                            <li><c:out value="${tire.tireType.manufacturer} ${tire.amountOnStore}(amount)"/></li>
                                     </c:forEach>
-                                </tbody></td>
-                                <td><tbody>
-                                    <c:forEach items="${order.tires}" var="tire">
-                                        <tr>
-                                            <td><c:out value="${tire.tireType.manufacturer}"/></td>
-                                            <td><c:out value="${tire.tireType.price}"/></td>
-                                        </tr>
-                                    </c:forEach>    
-                                </tbody></td>
+                                </ul></td>
+                                <td><ul>
+                                <c:forEach items="${order.services}" var="tire">
+                                            <li><c:out value="${service.name} ${service.price}(price)"/></li>
+                                    </c:forEach>
+                                </ul>
+                                </td>
+                                <td><c:out value="${order.orderPrice}"/>
+                                    
+                                </td>
                                 <td class="adg-actions">
-                                    <button aria-owns="dropdown-button-person${order.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
-                                    <div id="dropdown-button-person${person.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
+                                    <button aria-owns="dropdown-button-order${order.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
+                                    <div id="dropdown-button-order${order.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                         <ul class="aui-list-truncate">
                                             <s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="edit"><s:param name="order.id" value="${order.id}"/>Edit</s:link>
                                             <s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="delete"><s:param name="order.id" value="${order.id}"/>Delete</s:link>

@@ -5,8 +5,8 @@
                                             <th>Service Name</th>
                                             <td><c:out value="${service.name}"/></td>
                                             <th>Service Price</th>
-                                            <td><c:out value="${service.price}"/><s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="removeService">
-                                                <s:param name="service.id" value="${service.id}"/>Remove</s:link></td>
+                                            <td><c:out value="${service.price}"/><s:submit name="removeService">
+                                                <s:param name="service.id" value="${service.id}"/>Remove</s:submit></td>
                                         </tr>
             </c:forEach>
             </table>
@@ -18,8 +18,8 @@
                                             <td><c:out value="${service.name}"/></td>
                                             <th>Service Price</th>
                                             <td><c:out value="${service.price}"/>
-                                            <s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="addService">
-                                                <s:param name="service.id" value="${service.id}"/>Add</s:link>
+                                            <s:submit name="addService">
+                                                <s:param name="service.id" value="${service.id}"/>Add</s:submit>
                                             </td>
                                         </tr>
             </c:forEach>
