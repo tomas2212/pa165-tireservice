@@ -1,5 +1,5 @@
 <p>
-<strong><s:label for="o1"><f:message key="services.to.select"/></s:label></strong>
+<strong><s:label for="o5"><f:message key="services.to.select"/></s:label></strong>
 <table>
     <thead>
         <td><f:message key="field.servicename"/></td>
@@ -12,13 +12,13 @@
                     <td><c:out value="${service.name}"/></td>
                     <td><c:out value="${service.price}"/>
                     <td><s:submit name="addService">
-                        <s:param name="service.id" value="${service.id}"/>Add</s:submit>
+                        <s:param name="service.id" value="${service.id}"/><f:message key="action.add" /></s:submit>
                     </td>
                 </tr>
             </c:forEach>
     </tbody>
                      </table></p>
-<p><strong><s:label for="o1"><f:message key="selected.services"/></s:label></strong>
+<p><strong><s:label for="o6"><f:message key="selected.services"/></s:label></strong>
 <table class="aui">
     <thead>
         <td><f:message key="field.servicename"/></td>
@@ -30,7 +30,7 @@
             <tr>
                 <td><c:out value="${service.name}"/></td>
                 <td><c:out value="${service.price}"/></td>
-                <td><s:submit name="removeService"><s:param name="service.id" value="${service.id}"/>Remove</s:submit></td>
+                <td><s:submit name="removeService"><s:param name="service.id" value="${service.id}"/><f:message key="action.remove" /></s:submit></td>
             </tr>
         </c:forEach>
     </tbody>

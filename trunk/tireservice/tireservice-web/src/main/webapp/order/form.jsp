@@ -4,7 +4,7 @@
       
 <table>
     <tr>
-        <th><s:label for="o1" name="field.customer"/></th>
+        <th><s:label for="o1"><f:message key="field.customer" /></s:label></th>
         <td>
             <select name="personId" class="select">
                 <c:forEach items="${actionBean.people}" var="person">
@@ -21,11 +21,11 @@
         </td>
     </tr>
     <tr>
-        <th><s:label for="o2" name="car.type"/></th>
+        <th><s:label for="o2"><f:message key="field.cartype" /></s:label></th>
         <td><s:text id="o2" name="carType" value="${actionBean.order.carType}"/></td>
     </tr>
     <tr>
-        <th><s:label for="o3" name="date"/></th>
+        <th><s:label for="o3"><f:message key="field.date" /></s:label></th>
         <td><input class="aui-date-picker" id="demo-range-always" type="date" name="date" value="${actionBean.convertDateToString()}"/>
         <script>
             AJS.$(document).ready(function() {

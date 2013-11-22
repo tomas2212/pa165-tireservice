@@ -11,8 +11,6 @@
                 <h1><f:message key="header.orders"/></h1>
             </div>
         </div>
-       
-        <s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="register">Create new order</s:link>
             
         <div class="aui-page-panel margin-fix">
             <div class="aui-page-panel-inner">
