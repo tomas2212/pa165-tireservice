@@ -11,4 +11,3 @@
     <td><s:submit name="save">Save</s:submit></td>
     </tr>
 <s:hidden id="tt7" name="tireTypeDTO.id"/>
-<%-- <s:hidden id="tt8" name="tireTypeDTO.active" value="true"/> --%>
