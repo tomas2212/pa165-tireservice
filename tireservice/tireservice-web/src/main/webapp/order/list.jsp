@@ -44,7 +44,7 @@
                                     </c:forEach>
                                 </ul></td>
                                 <td><ul>
-                                <c:forEach items="${order.services}" var="tire">
+                                <c:forEach items="${order.services}" var="service">
                                             <li><c:out value="${service.name} ${service.price}(price)"/></li>
                                     </c:forEach>
                                 </ul>

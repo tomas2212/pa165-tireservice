@@ -16,7 +16,7 @@
             <div class="aui-page-panel-inner">
                 <section class="aui-page-panel-content">
 
-                    <table class="aui aui-table-interactive aui-table-sortable tablesorter tablesorter-default">
+                    <table class="aui">
                     <thead>
                         <tr>
                             <th id="person-id">#</th>

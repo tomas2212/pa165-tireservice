@@ -1,9 +1,12 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <s:errors/>
   
-<p>Person</p>
-<c:if test="${not empty actionBean.people}">
-            <select name="personId" >
+      
+<table>
+    <tr>
+        <th><s:label for="o1" name="field.customer"/></th>
+        <td>
+            <select name="personId" class="select">
                 <c:forEach items="${actionBean.people}" var="person">
                     <c:choose> 
                         <c:when test="${person.id == actionBean.order.person.id}">
@@ -15,28 +18,31 @@
                     </c:choose>
                 </c:forEach>
             </select>
-   </c:if>        
-            <table>
-    <tr>
-        <th><s:label for="b1" name="car.type"/></th>
-        <td><s:text id="b1" name="carType" value="${actionBean.order.carType}"/></td>
+        </td>
     </tr>
     <tr>
-        <th><s:label for="b1" name="date"/></th>
+        <th><s:label for="o2" name="car.type"/></th>
+        <td><s:text id="o2" name="carType" value="${actionBean.order.carType}"/></td>
+    </tr>
+    <tr>
+        <th><s:label for="o3" name="date"/></th>
         <td><input class="aui-date-picker" id="demo-range-always" type="date" name="date" value="${actionBean.convertDateToString()}"/>
         <script>
             AJS.$(document).ready(function() {
-   AJS.$('#demo-range-always').datePicker({'overrideBrowserDefault': true});
-});
+                AJS.$('#demo-range-always').datePicker({'overrideBrowserDefault': true});
+             });
         </script>
         </td>
     </tr>
-    <s:hidden id="b3" name="order.id" />
-            
-            <%@include file="servicesForm.jsp"%>
-            <%@include file="tireForm.jsp"%>
-            
-
+    <s:hidden id="o4" name="order.id" />
 </table>
+<br />
+<br />
+<br />
+<%@include file="tireForm.jsp"%>
+<br />
+<br />
+<br />
+<%@include file="servicesForm.jsp"%>
             
             

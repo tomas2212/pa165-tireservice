@@ -19,7 +19,7 @@
                 <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="register">
                 <fieldset>
                  <%@include file="form.jsp"%>
-                 <s:submit name="add">Register</s:submit>   
+                 <s:submit name="add"><f:message key="action.create.order"/></s:submit>   
                 </fieldset>
             </s:form>
             </section>
