@@ -12,8 +12,30 @@
     <context-param>
         <description>config file for Spring</description>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-context.xml</param-value>
+        <param-value>
+            /WEB-INF/spring-context.xml
+            /WEB-INF/spring-context-rest.xml
+        </param-value>
     </context-param>
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+          <param-name>contextClass</param-name>
+          <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+          <param-name>contextConfigLocation</param-name>
+          <param-value>cz.muni.fi.pa165.tireservice.rest</param-value>
+        </init-param>
+      </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
 
     <!-- JSTL -->
     <context-param>

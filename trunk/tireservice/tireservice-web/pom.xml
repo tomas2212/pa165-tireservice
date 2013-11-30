@@ -16,7 +16,7 @@
         <taglibs.version>1.1.2</taglibs.version>
         <stripes.version>1.5.7</stripes.version>        
         <derby.version>10.9.1.0</derby.version>
-        <springframework.version>3.1.3.RELEASE</springframework.version>
+        <springframework.version>3.2.5.RELEASE</springframework.version>
         <slf4j.version>1.7.2</slf4j.version>        
         <cxf.version>2.7.0</cxf.version>        
         <tomcat-dbcp.version>7.0.27</tomcat-dbcp.version>        
@@ -55,7 +55,7 @@
         </dependency>
         
         <!-- Spring Security -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>${springframework.version}</version>
@@ -74,7 +74,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${springframework.version}</version>
-        </dependency>
+        </dependency>-->
         
         <!-- Database access -->
         <dependency>
@@ -87,31 +87,7 @@
             <artifactId>tomcat-dbcp</artifactId>
             <version>${tomcat-dbcp.version}</version>
             <scope>provided</scope>
-        </dependency>        
-        
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>              
-               
-        <!-- Soap (Web services) - Apache CXF -->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
+        </dependency>      
         
         <!-- Project modules -->
         <dependency>
@@ -138,11 +114,26 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${springframework.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
-        </dependency>               
+        </dependency>     
+        
+                  
+        <!--???-->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.12</version>
+        </dependency> 
+                   
     </dependencies>
 
     <build>
