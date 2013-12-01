@@ -53,7 +53,7 @@ public class TireTypeController {
         if (tireTypeDTO != null) {
             tireTypeServices.removeTireType(tireTypeDTO);
         } else {
-            throw new IllegalArgumentException("Service with this id was not found");
+            throw new IllegalArgumentException("Tire type with this id was not found");
         }
         return null;
     }
