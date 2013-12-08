@@ -10,5 +10,6 @@
     <module>tireservice-api</module>
     <module>tireservice-impl</module>
     <module>tireservice-web</module>
+    <module>tireservice-rest-client</module>
   </modules>
 </project>
