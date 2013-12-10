@@ -30,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @Component
-@UrlBinding("/service/{$event}/")
+@UrlBinding("/services/{$event}/")
 public class ServicesClientActionBean implements ActionBean {
     
     @SpringBean
@@ -51,12 +51,12 @@ public class ServicesClientActionBean implements ActionBean {
     @DefaultHandler
     public Resolution list() {
         logger.info("listing");        
-        return new ForwardResolution("/service/list.jsp");
+        return new ForwardResolution("/services/list.jsp");
     }
 
     public Resolution edit() {
         logger.debug("edit() {}", service);
-        return new ForwardResolution("/service/edit.jsp");
+        return new ForwardResolution("/services/edit.jsp");
     }
 
     public Resolution save() {
@@ -82,7 +82,7 @@ public class ServicesClientActionBean implements ActionBean {
 
     public Resolution newService() {
         logger.info("newService()");
-        return new ForwardResolution("/service/create.jsp");
+        return new ForwardResolution("/services/create.jsp");
     }
 
     public Resolution create() {
