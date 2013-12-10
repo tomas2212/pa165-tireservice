@@ -85,17 +85,17 @@ public class TireTypeClientActionBean implements ActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public TireTypeDTO[] getAllTyres() {
-        logger.debug("getAllTyres()");
+    public TireTypeDTO[] getAllTipes() {
+        logger.debug("getAllTireTypes()");
         TireTypeDTO[] ess = rt.getForObject(getURL() + "/", TireTypeDTO[].class);
         return ess;
     }
 
-    public TireTypeDTO getTyre() {
+    public TireTypeDTO getTire() {
         return tireType;
     }
 
-    public void setTyre(TireTypeDTO tireType) {
+    public void setTire(TireTypeDTO tireType) {
         this.tireType = tireType;
     }
 

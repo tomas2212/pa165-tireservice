@@ -82,7 +82,7 @@ public class ServicesClientActionBean implements ActionBean {
 
     public Resolution newService() {
         logger.info("newService()");
-        return new ForwardResolution("/extraservice/create.jsp");
+        return new ForwardResolution("/service/create.jsp");
     }
 
     public Resolution create() {
