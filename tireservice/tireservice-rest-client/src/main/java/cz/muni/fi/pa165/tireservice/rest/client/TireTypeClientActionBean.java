@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.tireservice.rest.client;
 
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.rest.util.PropertyHelper;
+import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -114,15 +115,18 @@ public class TireTypeClientActionBean implements ActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    public TireTypeDTO[] getAllTipes() {
+    public Resolution getAllTypes() {
         logger.debug("getAllTireTypes()");
+        if(getAllTireTypes() == null){
+            setAllTireTypes(new ArrayList<TireTypeDTO>());
+        }
         TireTypeDTO[] ess = rt.getForObject(getURL() + "/", TireTypeDTO[].class);
         
         for(TireTypeDTO t : ess){
             allTireTypes.add(t);
         }
         
-        return ess;
+        return new ForwardResolution("TireType.jsp");
     }
 
     public TireTypeDTO getTire() {

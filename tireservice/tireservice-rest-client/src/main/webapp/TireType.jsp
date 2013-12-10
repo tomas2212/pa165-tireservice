@@ -7,7 +7,7 @@
 
 <div class="row-fluid">
 <div style="float: left; margin-bottom: 5px;">
-<s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="getAllTyres">gvhgvgh</s:link>
+<s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="getAllTypes">gvhgvgh</s:link>
 </div>
 
 <table class="table table-striped table-bordered">
