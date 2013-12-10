@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
  *
  * @author Martin
  */
+@Component
 public class PropertyHelper {
     
     @Value("${rest.tiretype}")

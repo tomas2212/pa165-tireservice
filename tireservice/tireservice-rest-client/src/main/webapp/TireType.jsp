@@ -14,7 +14,7 @@
 <tr>
 <th>IDcko</th>
 </tr>
-<c:forEach items="${actionBean.allTyres}" var="item">
+<c:forEach items="${actionBean.allTireTypes}" var="item">
 <tr>
 <td><c:out value="${item.id}"/></td>
 </tr>

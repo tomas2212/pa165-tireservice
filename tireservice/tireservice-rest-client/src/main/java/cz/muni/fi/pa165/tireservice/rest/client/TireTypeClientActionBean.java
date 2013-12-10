@@ -33,14 +33,14 @@ public class TireTypeClientActionBean implements ActionBean {
 
     private ActionBeanContext context;
 
-    private List<TireTypeDTO> allTyreTypes;
+    private List<TireTypeDTO> allTireTypes;
 
-    public List<TireTypeDTO> getAllTyreTypes() {
-        return allTyreTypes;
+    public List<TireTypeDTO> getAllTireTypes() {
+        return allTireTypes;
     }
 
-    public void setAllTyreTypes(List<TireTypeDTO> allTyreTypes) {
-        this.allTyreTypes = allTyreTypes;
+    public void setAllTireTypes(List<TireTypeDTO> allTireTypes) {
+        this.allTireTypes = allTireTypes;
     }
     
     @SpringBean
@@ -119,7 +119,7 @@ public class TireTypeClientActionBean implements ActionBean {
         TireTypeDTO[] ess = rt.getForObject(getURL() + "/", TireTypeDTO[].class);
         
         for(TireTypeDTO t : ess){
-            allTyreTypes.add(t);
+            allTireTypes.add(t);
         }
         
         return ess;
