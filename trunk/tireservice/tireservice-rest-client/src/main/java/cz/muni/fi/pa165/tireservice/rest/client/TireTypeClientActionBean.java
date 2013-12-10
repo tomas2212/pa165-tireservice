@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.tireservice.rest.client;
 
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.rest.util.PropertyHelper;
+import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.Before;
@@ -26,15 +27,43 @@ import org.springframework.web.client.RestTemplate;
 @UrlBinding("/tiretypes/{$event}/")
 public class TireTypeClientActionBean implements ActionBean {
 
+    public TireTypeClientActionBean(){ }
+    
     private static final Logger logger = LoggerFactory.getLogger(TireTypeClientActionBean.class);
 
     private ActionBeanContext context;
 
+    private List<TireTypeDTO> allTyreTypes;
+
+    public List<TireTypeDTO> getAllTyreTypes() {
+        return allTyreTypes;
+    }
+
+    public void setAllTyreTypes(List<TireTypeDTO> allTyreTypes) {
+        this.allTyreTypes = allTyreTypes;
+    }
+    
     @SpringBean
-    private RestTemplate rt;
+    public RestTemplate rt;
+
+    public RestTemplate getRt() {
+        return rt;
+    }
+
+    public void setRt(RestTemplate rt) {
+        this.rt = rt;
+    }
 
     @SpringBean
-    private PropertyHelper ph;
+    public PropertyHelper ph;
+
+    public PropertyHelper getPh() {
+        return ph;
+    }
+
+    public void setPh(PropertyHelper ph) {
+        this.ph = ph;
+    }
 
 //    @ValidateNestedProperties(value = {
 //        @Validate(on = {"create", "save"}, field = "name", required = true),
@@ -88,6 +117,11 @@ public class TireTypeClientActionBean implements ActionBean {
     public TireTypeDTO[] getAllTipes() {
         logger.debug("getAllTireTypes()");
         TireTypeDTO[] ess = rt.getForObject(getURL() + "/", TireTypeDTO[].class);
+        
+        for(TireTypeDTO t : ess){
+            allTyreTypes.add(t);
+        }
+        
         return ess;
     }
 
