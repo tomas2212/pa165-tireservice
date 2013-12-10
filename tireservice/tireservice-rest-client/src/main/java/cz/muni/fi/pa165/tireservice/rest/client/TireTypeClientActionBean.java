@@ -74,12 +74,12 @@ public class TireTypeClientActionBean implements ActionBean {
     @DefaultHandler
     public Resolution list() {
         logger.info("listing");
-        return new ForwardResolution("/tiretype/list.jsp");
+        return new ForwardResolution("/tiretypes/list.jsp");
     }
 
     public Resolution edit() {
         logger.debug("edit() {}", tireType);
-        return new ForwardResolution("/tiretype/edit.jsp");
+        return new ForwardResolution("/tiretypes/edit.jsp");
     }
 
     public Resolution save() {
@@ -105,7 +105,7 @@ public class TireTypeClientActionBean implements ActionBean {
 
     public Resolution newTireType() {
         logger.info("newTireType()");
-        return new ForwardResolution("/tiretype/create.jsp");
+        return new ForwardResolution("/tiretypes/create.jsp");
     }
 
     public Resolution create() {
