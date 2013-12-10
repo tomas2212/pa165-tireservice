@@ -35,13 +35,33 @@ public class ServicesClientActionBean implements ActionBean {
     
     @SpringBean
     private PropertyHelper ph;
+
+    public PropertyHelper getPh() {
+        return ph;
+    }
+
+    public void setPh(PropertyHelper ph) {
+        this.ph = ph;
+    }
+    
+    
     
     private final static Logger logger = LoggerFactory.getLogger(ServicesClientActionBean.class);
     
     private ActionBeanContext context;
     
     @SpringBean
-    private RestTemplate restTemplate;
+    private RestTemplate rt;
+
+    public RestTemplate getRt() {
+        return rt;
+    }
+
+    public void setRt(RestTemplate rt) {
+        this.rt = rt;
+    }
+    
+    
 //    @ValidateNestedProperties(value = {
 //        @Validate(on = {"create", "save"}, field = "name", required = true),
 //        @Validate(on = {"create", "save"}, field = "price", required = true, minvalue = 1)
@@ -61,7 +81,7 @@ public class ServicesClientActionBean implements ActionBean {
 
     public Resolution save() {
         logger.debug("save() {}", service);
-        restTemplate.put(getURL() + "/{id}", service, service.getId());
+        rt.put(getURL() + "/{id}", service, service.getId());
         System.out.println(service.toString());
         return new RedirectResolution(this.getClass(), "list.jsp");
     }
@@ -70,13 +90,13 @@ public class ServicesClientActionBean implements ActionBean {
     public void loadServiceFromDatabase() {
         String id = context.getRequest().getParameter("service.id");
         if (id != null) {
-            service = restTemplate.getForObject(getURL() + "/{id}", ServiceDTO.class, id);
+            service = rt.getForObject(getURL() + "/{id}", ServiceDTO.class, id);
         }
     }
 
     public Resolution delete() {
         logger.debug("delete({})", service);
-        restTemplate.delete(getURL() + "/{id}", service.getId());
+        rt.delete(getURL() + "/{id}", service.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -88,13 +108,13 @@ public class ServicesClientActionBean implements ActionBean {
     public Resolution create() {
         logger.debug("create() {}", service);
         System.out.println(service);
-        restTemplate.postForObject(getURL() + "/", service, ServiceDTO.class);
+        rt.postForObject(getURL() + "/", service, ServiceDTO.class);
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public ServiceDTO[] getAllServices() {
         logger.debug("getAllServices()");
-        ServiceDTO[] services = restTemplate.getForObject(getURL() + "/", ServiceDTO[].class);
+        ServiceDTO[] services = rt.getForObject(getURL() + "/", ServiceDTO[].class);
         return services;
     }
     
