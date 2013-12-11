@@ -16,6 +16,13 @@
         <param-value>/WEB-INF/restServiceContext.xml</param-value>
     </context-param>   
    
+     <!-- JSTL -->
+    <context-param>
+        <description>JSTL tags will use localized string from the same source as Stripes</description>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>StripesResources</param-value>
+    </context-param>
+   
     <!-- Stripes -->
     <filter>
         <description>hlavní místo konfigurace Stripes</description>
