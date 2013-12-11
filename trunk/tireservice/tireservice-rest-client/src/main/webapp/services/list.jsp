@@ -28,6 +28,20 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${actionBean.allServices}" var="service">
+
+                                <c:choose>
+                                    <c:when test="${actionBean.service.id == service.id}"> 
+
+                                        <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean">
+                                            <s:hidden name="service.id"/>
+                                        <fieldset>
+                                            <%@include file="editinlist.jsp"%>                                            
+                                        </fieldset>
+                                    </s:form>
+
+                                </c:when>
+                                <c:otherwise> 
+
                                     <tr>
                                         <td><c:out value="${service.id}"/></td>
                                         <td><c:out value="${service.name}"/></td>
@@ -38,20 +52,30 @@
                                             <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
                                             <div id="dropdown-button-service${service.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
                                                 <ul class="aui-list-truncate">
-                       
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean" event="edit"><s:param name="service.id" value="${service.id}"/><f:message key="action.edit"/></s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean" event="delete"><s:param name="service.id" value="${service.id}"/><f:message key="action.delete"/></s:link>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                           </c:otherwise>
+                            </c:choose>
+                   
+                                    </c:forEach>
+<%--
+                                    <c:if test="${actionBean.service.id == service.id}" >
 
-                        </c:forEach>
+                                        <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean">
+                                            <%@include file="form.jsp"%> 
+                                        </s:form> 
 
-                        </tbody>
-                    </table>
+                                    </c:if> --%>
+                                    </tbody>
+                                </table>
 
-                </section><!-- .aui-page-panel-content -->
+                            </section><!-- .aui-page-panel-content -->
 
-            </div><!-- .aui-page-panel-inner -->
-        </div>
-    </s:layout-component>
-</s:layout-render>
+                        </div><!-- .aui-page-panel-inner -->
+                    </div>
+                    </s:layout-component>
+                    </s:layout-render>
