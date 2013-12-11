@@ -1,16 +1,14 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <s:errors/>
 <tr>
-    <td/>
-    <td><s:text id="s1" name="service.name"/>   
-    <td><s:text id="s2" name="service.description"/>
-    <td><s:text id="s3" name="service.price"/> 
-    <s:submit name="add"><f:message key="action.create.service"/></s:submit>
-    
-    <td/>
-<tr/>
-<s:hidden id="s4" name="service.id"/>
-<s:hidden id="s5" name="service.active" value="true"/>
+    <td></td>
+    <td><s:text id="tt1" name="tireTypeDTO.manufacturer"/></td>    
+    <td><s:text id="tt2" name="tireTypeDTO.type"/></td>
+    <td><s:text id="tt3" name="tireTypeDTO.description"/></td>  
+    <td><s:text id="tt4" name="tireTypeDTO.tireRimSize"/></td>      
+    <td><s:text id="tt5" name="tireTypeDTO.amountOnStore"/></td> 
+    <td><s:text id="tt6" name="tireTypeDTO.price"/></td>
+    <td><s:submit name="create"><f:message key="action.create.tiretype"/></s:submit></td>
+    </tr>
+<s:hidden id="tt7" name="tireTypeDTO.id"/>
+<s:hidden id="tt8" name="tireTypeDTO.active" value="true"/>

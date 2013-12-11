@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" var="actionBean"/>
         <div class="aui-page-header">
             <div class="aui-page-header-inner">
-                <h1>TIRE TYPES</h1>
+                <h1><f:message key="header.tiretype"/></h1>
             </div>
         </div>           
 
@@ -42,6 +42,10 @@
                                         </tr>
                         </c:forEach>
 
+                            <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean">
+                                <%@include file="form.jsp"%>
+                            </s:form> 
+                        
                         </tbody>
                     </table>
 
