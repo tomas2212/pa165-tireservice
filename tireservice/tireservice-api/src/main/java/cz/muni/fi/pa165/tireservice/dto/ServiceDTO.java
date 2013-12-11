@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.dto;
 
 import java.math.BigDecimal;
@@ -9,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author yrael
+ * @author Jakub Papcun(359 474)
  */
 public class ServiceDTO {
     

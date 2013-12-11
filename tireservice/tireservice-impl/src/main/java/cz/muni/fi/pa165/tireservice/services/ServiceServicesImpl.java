@@ -60,7 +60,6 @@ public class ServiceServicesImpl implements ServiceServices {
         if (serviceDTO.getId() != null) {
             throw new IllegalArgumentException("New Service ID must be null");
         }
-        // TODO some validation maybe
         Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
         serviceDAO.insertService(service);
         serviceDTO.setId(service.getId());
@@ -74,7 +73,6 @@ public class ServiceServicesImpl implements ServiceServices {
         if (serviceDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Service for updating cannot be null");
         }
-        // validation of service?
         Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
         serviceDAO.updateService(service);
     }
@@ -87,7 +85,6 @@ public class ServiceServicesImpl implements ServiceServices {
         if (serviceDTO.getId() == null) {
             throw new IllegalArgumentException("ID of Service for removing cannot be null");
         }
-        // validation of service?
         Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
         serviceDAO.removeService(service);
     }
