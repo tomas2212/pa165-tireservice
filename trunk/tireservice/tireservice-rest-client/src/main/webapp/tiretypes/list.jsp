@@ -39,9 +39,7 @@
                                         <td><c:out value="${tireTypeDTO.tireRimSize}"/></td>
                                         <td><c:out value="${tireTypeDTO.amountOnStore}"/></td>
                                         <td><c:out value="${tireTypeDTO.price}"/></td>
-
                                         </tr>
-
                         </c:forEach>
 
                         </tbody>

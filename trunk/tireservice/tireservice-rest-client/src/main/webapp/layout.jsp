@@ -22,7 +22,7 @@
                     <div class="aui-header-inner">
                         <div class="aui-header-primary">		
                             <ul class="aui-nav">
-                                
+                                          <li><s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="getAllTypes">TIRETYPES></s:link></li>
                                 </ul>
                             </div>  
                             <div class="aui-header-secondary">
