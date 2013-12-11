@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${actionBean.allTireTypes}" var="tireTypeDTO">
+                            <c:forEach items="${actionBean.allTypes}" var="tireTypeDTO">
                                     <tr>
                                         <td><c:out value="${tireTypeDTO.id}"/></td>
                                         <td><c:out value="${tireTypeDTO.manufacturer}"/></td>
