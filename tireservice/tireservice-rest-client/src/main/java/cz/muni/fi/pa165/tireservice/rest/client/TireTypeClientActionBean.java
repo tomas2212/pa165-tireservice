@@ -126,7 +126,7 @@ public class TireTypeClientActionBean implements ActionBean {
             allTireTypes.add(t);
         }
         
-        return new ForwardResolution("/tiretypes/list/.jsp");
+        return new ForwardResolution("/tiretypes/list.jsp");
     }
 
     public TireTypeDTO getTire() {
