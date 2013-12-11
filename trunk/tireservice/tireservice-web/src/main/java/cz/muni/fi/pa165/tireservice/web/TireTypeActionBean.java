@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.web;
 
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
@@ -20,7 +16,6 @@ import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
-import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -29,7 +24,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 
 /**
  *
- * @author Atares
+ * @author Stefan Sakala
  */
 
 @UrlBinding("/tiretype/{$event}/")

@@ -1,11 +1,7 @@
 package cz.muni.fi.pa165.tireservice.utils;
 
-import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
 import cz.muni.fi.pa165.tireservice.dto.PersonDTO;
-import cz.muni.fi.pa165.tireservice.entities.Order;
 import cz.muni.fi.pa165.tireservice.entities.Person;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.tireservice.web;
 
 import cz.muni.fi.pa165.tireservice.dto.OrderDTO;
@@ -13,18 +9,11 @@ import cz.muni.fi.pa165.tireservice.services.OrderServices;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Handle;
-import javax.interceptor.Interceptor;
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.After;
