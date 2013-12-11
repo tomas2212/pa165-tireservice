@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean" var="actionBean"/>
         <div class="aui-page-header">
             <div class="aui-page-header-inner">
-                <h1>SERVICES</h1>
+                <h1><f:message key="header.services"/></h1>
             </div>
         </div>           
 
@@ -62,14 +62,14 @@
                             </c:choose>
                    
                                     </c:forEach>
-<%--
+
                                     <c:if test="${actionBean.service.id == service.id}" >
 
                                         <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean">
                                             <%@include file="form.jsp"%> 
                                         </s:form> 
 
-                                    </c:if> --%>
+                                    </c:if>
                                     </tbody>
                                 </table>
 

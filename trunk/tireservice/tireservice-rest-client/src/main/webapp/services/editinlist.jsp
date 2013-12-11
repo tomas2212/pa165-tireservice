@@ -12,4 +12,4 @@
     <td><s:submit name="save"><f:message key="action.save"/></s:submit> <td/>
 <tr/>
 <s:hidden id="s4" name="service.id"/>
-<%-- <s:hidden id="s5" name="service.active" value="true"/> --%>
+<s:hidden id="s5" name="service.active" value="true"/>
