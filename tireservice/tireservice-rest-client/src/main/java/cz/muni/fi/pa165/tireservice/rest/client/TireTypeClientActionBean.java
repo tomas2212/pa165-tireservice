@@ -135,9 +135,17 @@ public class TireTypeClientActionBean implements ActionBean {
         this.tireType = tireType;
     }
 
+    public void setTireType(TireTypeDTO tireType) {
+        this.tireType = tireType;
+    }
+
     @Override
     public void setContext(ActionBeanContext abc) {
         this.context = abc;
+    }
+
+    public TireTypeDTO getTireType() {
+        return tireType;
     }
 
     @Override
