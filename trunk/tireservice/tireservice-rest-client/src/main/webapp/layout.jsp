@@ -22,8 +22,8 @@
                     <div class="aui-header-inner">
                         <div class="aui-header-primary">		
                             <ul class="aui-nav">
-                                          <li><s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="list">TIRETYPES></s:link></li>
-                                           <li><s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean" event="list">Services></s:link></li>
+                                          <li><s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="list"><f:message key="menu.tiretype.list"/></s:link></li>
+                                           <li><s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.ServicesClientActionBean" event="list"><f:message key="menu.service.list"/></s:link></li>
                                 </ul>
                             </div>  
                             <div class="aui-header-secondary">

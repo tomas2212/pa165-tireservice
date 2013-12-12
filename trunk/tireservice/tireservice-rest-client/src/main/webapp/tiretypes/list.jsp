@@ -29,23 +29,48 @@
                                 <th id="tiretype-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <c:forEach items="${actionBean.allTypes}" var="tireTypeDTO">
-                                    <tr>
-                                        <td><c:out value="${tireTypeDTO.id}"/></td>
-                                        <td><c:out value="${tireTypeDTO.manufacturer}"/></td>
-                                        <td><c:out value="${tireTypeDTO.type}"/></td>
-                                        <td><c:out value="${tireTypeDTO.description}"/></td>
-                                        <td><c:out value="${tireTypeDTO.tireRimSize}"/></td>
-                                        <td><c:out value="${tireTypeDTO.amountOnStore}"/></td>
-                                        <td><c:out value="${tireTypeDTO.price}"/></td>
-                                        </tr>
-                        </c:forEach>
 
+                        <tbody>
+                            <c:forEach items="${actionBean.allTypes}" var="tireType">
+                                <c:choose>
+                                    <c:when test="${actionBean.tireType.id == tireType.id}"> 
+                                        <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean">
+                                            <s:hidden name="tireType.id"/>
+                                        <fieldset>
+                                            <%@include file="editform.jsp"%>                                            
+                                        </fieldset>
+                                    </s:form>
+                                </c:when>
+                                <c:otherwise>
+
+                                    <tr>
+                                        <td><c:out value="${tireType.id}"/></td>
+                                        <td><c:out value="${tireType.manufacturer}"/></td>
+                                        <td><c:out value="${tireType.type}"/></td>
+                                        <td><c:out value="${tireType.description}"/></td>
+                                        <td><c:out value="${tireType.tireRimSize}"/></td>
+                                        <td><c:out value="${tireType.amountOnStore}"/></td>
+                                        <td><c:out value="${tireType.price}"/></td>
+                                        <td class="adg-actions">
+                                            <button aria-owns="dropdown-button-tiretype${tireType.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
+                                            <div id="dropdown-button-tiretype${tireType.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
+                                                <ul class="aui-list-truncate">
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="edit"><s:param name="tireType.id" value="${tireType.id}"/><f:message key="action.edit"/></s:link>
+                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean" event="delete"><s:param name="tireType.id" value="${tireType.id}"/><f:message key="action.delete"/></s:link>
+                                                    </ul>
+                                                </div>
+                                            </td>
+
+
+                                        </tr>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:if test="${actionBean.tireType.id == tireType.id}" >
                             <s:form beanclass="cz.muni.fi.pa165.tireservice.rest.client.TireTypeClientActionBean">
                                 <%@include file="form.jsp"%>
                             </s:form> 
-                        
+                        </c:if>
                         </tbody>
                     </table>
 
