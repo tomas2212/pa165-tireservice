@@ -29,11 +29,10 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Martin
  */
-
 @Component
 @UrlBinding("/services/{$event}/")
 public class ServicesClientActionBean implements ActionBean {
-    
+
     @SpringBean
     private PropertyHelper ph;
 
@@ -44,8 +43,6 @@ public class ServicesClientActionBean implements ActionBean {
     public void setPh(PropertyHelper ph) {
         this.ph = ph;
     }
-    
-    
     
     private final static Logger logger = LoggerFactory.getLogger(ServicesClientActionBean.class);
     
@@ -61,19 +58,18 @@ public class ServicesClientActionBean implements ActionBean {
     public void setRt(RestTemplate rt) {
         this.rt = rt;
     }
-    
-    
     @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "name", required = true, maxlength=20),
-        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength=20),
-        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=1, converter = BigDecimalTypeConverter.class)
+        @Validate(on = {"save", "add"}, field = "name", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 1, converter = BigDecimalTypeConverter.class)
     })
+    
     private ServiceDTO service;
 
     @DefaultHandler
     public Resolution list() {
-        logger.info("listing");        
+        logger.info("listing");
         return new ForwardResolution("/services/list.jsp");
     }
 
@@ -120,8 +116,7 @@ public class ServicesClientActionBean implements ActionBean {
         ServiceDTO[] services = rt.getForObject(getURL() + "/", ServiceDTO[].class);
         return services;
     }
-    
-   
+
     public ServiceDTO getService() {
         return service;
     }
@@ -139,7 +134,7 @@ public class ServicesClientActionBean implements ActionBean {
     public ActionBeanContext getContext() {
         return context;
     }
-    
+
     private String getURL() {
         return ph.getServiceURL();
     }
