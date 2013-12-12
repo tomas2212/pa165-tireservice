@@ -18,4 +18,3 @@ public class CustomHttpState extends HttpState {
         super.setCredentials(AuthScope.ANY, credentials);
     }
 }
-

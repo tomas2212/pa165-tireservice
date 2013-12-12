@@ -20,7 +20,9 @@ import org.springframework.web.client.HttpServerErrorException;
  * @author Martin
  */
 public class RestClientExceptionHandler extends DefaultExceptionHandler{
-     final static org.slf4j.Logger logger = LoggerFactory.getLogger(RestClientExceptionHandler.class);
+     
+    final static org.slf4j.Logger logger = LoggerFactory.getLogger(RestClientExceptionHandler.class);
+    
     private String rootCause;
       
     public Resolution handleServletException(ServletException exc, HttpServletRequest request, HttpServletResponse response) {
@@ -38,7 +40,6 @@ public class RestClientExceptionHandler extends DefaultExceptionHandler{
     
     
     public Resolution handleGeneric(Exception exc, HttpServletRequest request, HttpServletResponse response) {
-        // general exception handling
         rootCause = getCause(exc).toString();
         logger.error("handleGeneric({})", exc, " ROOT CAUSE=", rootCause);                 
         return new ForwardResolution(ErrorHandlerActionBean.class, "error").addParameter("exception", exc).addParameter("rootCause", rootCause);

@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.tireservice.rest.client;
 
-
 import cz.muni.fi.pa165.tireservice.dto.TireTypeDTO;
 import cz.muni.fi.pa165.tireservice.rest.util.PropertyHelper;
 import java.util.ArrayList;
@@ -30,13 +29,12 @@ import org.springframework.web.client.RestTemplate;
 @UrlBinding("/tiretypes/{$event}/")
 public class TireTypeClientActionBean implements ActionBean {
 
-    public TireTypeClientActionBean(){ }
+    public TireTypeClientActionBean() { }
     
     private static final Logger logger = LoggerFactory.getLogger(TireTypeClientActionBean.class);
-
     private ActionBeanContext context;
-
     private List<TireTypeDTO> allTireTypes;
+    private TireTypeDTO tireType;
 
     public List<TireTypeDTO> getAllTireTypes() {
         return allTireTypes;
@@ -56,7 +54,7 @@ public class TireTypeClientActionBean implements ActionBean {
     public void setRt(RestTemplate rt) {
         this.rt = rt;
     }
-
+    
     @SpringBean
     public PropertyHelper ph;
 
@@ -67,17 +65,16 @@ public class TireTypeClientActionBean implements ActionBean {
     public void setPh(PropertyHelper ph) {
         this.ph = ph;
     }
-
+    
     @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "type", required = true, maxlength=20),
-        @Validate(on = {"save", "add"}, field = "manufacturer", required = true, maxlength=20),
-        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength=100),
-        @Validate(on = {"save", "add"}, field = "tireRimSize", required = true, minvalue=1),
-        @Validate(on = {"save", "add"}, field = "amountOnStore", required = true,minvalue=0),
-        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=0, converter = BigDecimalTypeConverter.class)
-    })    
-    private TireTypeDTO tireType;
+        @Validate(on = {"save", "add"}, field = "type", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "manufacturer", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 100),
+        @Validate(on = {"save", "add"}, field = "tireRimSize", required = true, minvalue = 1),
+        @Validate(on = {"save", "add"}, field = "amountOnStore", required = true, minvalue = 0),
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 0, converter = BigDecimalTypeConverter.class)
+    })
 
     @DefaultHandler
     public Resolution list() {
@@ -124,12 +121,12 @@ public class TireTypeClientActionBean implements ActionBean {
 
     public List<TireTypeDTO> getAllTypes() {
         logger.debug("getAllTireTypes()");
-        if(getAllTireTypes() == null){
+        if (getAllTireTypes() == null) {
             setAllTireTypes(new ArrayList<TireTypeDTO>());
         }
         TireTypeDTO[] ess = rt.getForObject(getURL() + "/", TireTypeDTO[].class);
         allTireTypes.addAll(Arrays.asList(ess));
-        
+
         return allTireTypes;
     }
 
@@ -158,7 +155,7 @@ public class TireTypeClientActionBean implements ActionBean {
     public ActionBeanContext getContext() {
         return context;
     }
-    
+
     private String getURL() {
         return ph.getTireTypeURL();
     }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cz.muni.fi.pa165.tireservice.rest.client;
 
 import net.sourceforge.stripes.action.ActionBean;
@@ -20,8 +19,8 @@ import org.slf4j.LoggerFactory;
  * @author Martin
  */
 @UrlBinding("/${event}")
-public class ErrorHandlerActionBean implements ActionBean{
-    
+public class ErrorHandlerActionBean implements ActionBean {
+
     private String exception;
     private ActionBeanContext context;
     private String rootCause;
