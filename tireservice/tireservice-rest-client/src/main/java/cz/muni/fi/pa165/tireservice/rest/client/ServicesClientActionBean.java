@@ -62,10 +62,10 @@ public class ServicesClientActionBean implements ActionBean {
     }
     
     
-//    @ValidateNestedProperties(value = {
-//        @Validate(on = {"create", "save"}, field = "name", required = true),
-//        @Validate(on = {"create", "save"}, field = "price", required = true, minvalue = 1)
-//    })
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"create", "save"}, field = "name", required = true),
+        @Validate(on = {"create", "save"}, field = "price", required = true, minvalue = 1)
+    })
     private ServiceDTO service;
 
     @DefaultHandler
@@ -76,7 +76,7 @@ public class ServicesClientActionBean implements ActionBean {
 
     public Resolution edit() {
         logger.debug("edit() {}", service);
-        return new ForwardResolution("/services/edit.jsp");
+        return new ForwardResolution("/services/list.jsp");
     }
 
     public Resolution save() {

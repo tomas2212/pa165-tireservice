@@ -8,7 +8,7 @@
     <td><s:text id="s1" name="service.name"/>   
     <td><s:text id="s2" name="service.description"/>
     <td><s:text id="s3" name="service.price"/> 
-    <s:submit name="add"><f:message key="action.create.service"/></s:submit>
+    <s:submit name="create"><f:message key="action.create.service"/></s:submit>
     
     <td/>
 <tr/>
