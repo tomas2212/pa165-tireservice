@@ -15,12 +15,17 @@ mvn tomcat7:run
 Server should start on address:
 http://localhost:8080/pa165
 
+so open some browser and insert  http://localhost:8080/pa165
+
 
 
 ####  Instruction to run Client ####  
 
-Go to "trunk/stis/stis-rest-client/" directory, then run command:
+Go to "trunk/tireservice/tireservice-rest-client/" directory, then run command:
 mvn tomcat7:run
 
 You should be able to see running client on this address:
-http://localhost:8080/stis-client
+http://localhost:8081/tireservice-rest-client
+
+
+so open some browser and insert http://localhost:8081/tireservice-rest-client
