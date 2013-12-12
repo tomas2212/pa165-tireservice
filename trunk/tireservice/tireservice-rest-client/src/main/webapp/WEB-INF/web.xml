@@ -35,7 +35,7 @@
         </init-param>
         <init-param>
             <param-name>LocalePicker.Locales</param-name>
-            <param-value>cs:utf-8,en:utf-8</param-value>
+            <param-value>sk:utf-8,en:utf-8</param-value>
         </init-param>
         <init-param>
             <description>propojení Stripes se Spring</description>
