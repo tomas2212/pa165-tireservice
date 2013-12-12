@@ -12,6 +12,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import org.slf4j.Logger;
@@ -63,8 +64,10 @@ public class ServicesClientActionBean implements ActionBean {
     
     
     @ValidateNestedProperties(value = {
-        @Validate(on = {"create", "save"}, field = "name", required = true),
-        @Validate(on = {"create", "save"}, field = "price", required = true, minvalue = 1)
+        @Validate(on = {"delete"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "name", required = true, maxlength=20),
+        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength=20),
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue=1, converter = BigDecimalTypeConverter.class)
     })
     private ServiceDTO service;
 
