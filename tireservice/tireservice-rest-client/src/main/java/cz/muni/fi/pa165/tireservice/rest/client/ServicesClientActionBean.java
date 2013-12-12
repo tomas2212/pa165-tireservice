@@ -64,7 +64,6 @@ public class ServicesClientActionBean implements ActionBean {
         @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 20),
         @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 1, converter = BigDecimalTypeConverter.class)
     })
-    
     private ServiceDTO service;
 
     @DefaultHandler

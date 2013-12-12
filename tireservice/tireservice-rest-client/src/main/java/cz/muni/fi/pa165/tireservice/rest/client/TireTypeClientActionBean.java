@@ -34,6 +34,16 @@ public class TireTypeClientActionBean implements ActionBean {
     private static final Logger logger = LoggerFactory.getLogger(TireTypeClientActionBean.class);
     private ActionBeanContext context;
     private List<TireTypeDTO> allTireTypes;
+    
+       @ValidateNestedProperties(value = {
+        @Validate(on = {"delete"}, field = "id", required = true),
+        @Validate(on = {"save", "add"}, field = "type", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "manufacturer", required = true, maxlength = 20),
+        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 100),
+        @Validate(on = {"save", "add"}, field = "tireRimSize", required = true, minvalue = 1),
+        @Validate(on = {"save", "add"}, field = "amountOnStore", required = true, minvalue = 0),
+        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 0, converter = BigDecimalTypeConverter.class)
+    })
     private TireTypeDTO tireType;
 
     public List<TireTypeDTO> getAllTireTypes() {
@@ -65,16 +75,6 @@ public class TireTypeClientActionBean implements ActionBean {
     public void setPh(PropertyHelper ph) {
         this.ph = ph;
     }
-    
-    @ValidateNestedProperties(value = {
-        @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "type", required = true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "manufacturer", required = true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 100),
-        @Validate(on = {"save", "add"}, field = "tireRimSize", required = true, minvalue = 1),
-        @Validate(on = {"save", "add"}, field = "amountOnStore", required = true, minvalue = 0),
-        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 0, converter = BigDecimalTypeConverter.class)
-    })
 
     @DefaultHandler
     public Resolution list() {
