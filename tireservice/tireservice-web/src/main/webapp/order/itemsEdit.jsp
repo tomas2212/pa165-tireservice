@@ -19,7 +19,9 @@
                     <tbody>
                         <c:forEach items="${actionBean.allTireTypes}" var="tireType">
                             <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
-                                <s:hidden name="cartypeee" value="${actionBean.order.carType}"></s:hidden>
+                                 <s:hidden name="editOrder.personId" value="${actionBean.order.personId}"></s:hidden>
+                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
+                                <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
                                 <tr>
                                     <td><c:out value="${tireType.manufacturer}"/></td>
                                     <td><c:out value="${tireType.amountOnStore}"/></td>
@@ -51,6 +53,8 @@
                                 <td><c:out value="${service.name}"/></td>
                                 <td><c:out value="${service.price}"/><td>
                                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="register">
+                                         <s:hidden name="editOrder.personId" value="${actionBean.order.personId}"></s:hidden>
+                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
                                         <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
                                         <s:hidden name="formType" value="edit"></s:hidden>
                                         <s:submit name="addService">
@@ -88,6 +92,8 @@
                 <td>
                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
                         <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
+                         <s:hidden name="editOrder.personId" value="${actionBean.order.personId}"></s:hidden>
+                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
                         <s:hidden name="formType" value="edit"></s:hidden>
                         <s:submit name="removeTire"><s:param name="tireType.id" value="${tire.tireType.id}"/><f:message key="action.remove" /></s:submit>
                     </s:form>
@@ -114,6 +120,9 @@
                 <td><c:out value="${service.price}"/></td>
                 <td>
                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
+                        <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
+                        <s:hidden name="editOrder.personId" value="${actionBean.order.personId}"></s:hidden>
+                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
                         <s:hidden name="formType" value="edit"></s:hidden>
                         <s:submit name="removeService"><s:param name="service.id" value="${service.id}"/><f:message key="action.remove" /></s:submit>
                     </s:form>
