@@ -259,6 +259,10 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         try{
           order.setCarType(carType);
           order.setDate(date);
+          if(personId != null && personId > 0){
+            order.setPerson(personServices.getPersonById(personId));
+          }
+          
           orderServices.createOrder(order);
           getContext().getRequest().getSession().removeAttribute("order");
           getContext().getMessages().add(new LocalizableMessage("order.inserted"));                                                                      
@@ -314,6 +318,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution save() {
         order.setCarType(carType);
         order.setDate(date);
+        if(personId != null && personId > 0){
+            order.setPerson(personServices.getPersonById(personId));
+        }
         orderServices.updateOrder(order);
         
         getContext().getRequest().removeAttribute("order");
