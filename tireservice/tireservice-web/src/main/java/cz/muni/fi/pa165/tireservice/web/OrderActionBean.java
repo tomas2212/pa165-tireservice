@@ -167,19 +167,21 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
    
     private boolean enoughTiresOnStore(TireDTO tire){
         int numberOfOrderedTires = 0;
-        for(TireDTO t :order.getTires()){
-            if(t.getTireType().equals(tire.getTireType())){
-                numberOfOrderedTires = numberOfOrderedTires + t.getAmountOnStore();
-            }   
+        if(order.getTires() != null){
+            for(TireDTO t :order.getTires()){
+                if(t.getTireType().equals(tire.getTireType())){
+                    numberOfOrderedTires = numberOfOrderedTires + t.getAmountOnStore();
+                }   
+            }
+
+            int orderedAndToBeOrderedTires = tire.getAmountOnStore() + numberOfOrderedTires;
+            int tiresOnStore = tire.getTireType().getAmountOnStore();
+
+            if(orderedAndToBeOrderedTires > tiresOnStore){
+                return false;
+            }
         }
-        
-        int orderedAndToBeOrderedTires = tire.getAmountOnStore() + numberOfOrderedTires;
-        int tiresOnStore = tire.getTireType().getAmountOnStore();
-        
-        if(orderedAndToBeOrderedTires > tiresOnStore){
-            return false;
-        }
-        
+
         return true;
     }
     
@@ -200,7 +202,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             getContext().getMessages().add(new LocalizableError("order.noOtherTires")); 
             return ReturnCorrectForm();
         }
-        
+        if(order.getTires() == null){
+            order.setTires(new ArrayList<TireDTO>());
+        }
         order.getTires().add(tire);
         
         return ReturnCorrectForm();
@@ -223,7 +227,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     public Resolution addService(){
         String ids = getContext().getRequest().getParameter("service.id");
-        
+        if(order.getServices() == null){
+            order.setServices(new ArrayList<ServiceDTO>());
+        }
         order.getServices().add(serviceServices.getServiceById(Long.parseLong(ids)));
         SetOrderParams();
         return ReturnCorrectForm();
