@@ -344,7 +344,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         order.setCarType(carType);
         
         if(date == null){
-            date = new SimpleDateFormat("MM, dd, yyyy", Locale.ENGLISH).parse(getContext().getRequest().getParameter("editOrder.date"));
+            date = new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse(getContext().getRequest().getParameter("editOrder.date"));
         }
         
         order.setDate(date);
