@@ -38,9 +38,14 @@
             <param-value>sk:utf-8,en:utf-8</param-value>
         </init-param>
         <init-param>
-            <description>propojení Stripes se Spring</description>
+            <description>connection of Stripes with Spring</description>
             <param-name>Interceptor.Classes</param-name>
             <param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
+        </init-param>
+        
+        <init-param>
+            <param-name>ExceptionHandler.Class</param-name>
+            <param-value>cz.muni.fi.pa165.tireservice.rest.client.RestClientExceptionHandler</param-value>
         </init-param>
        
     </filter>
