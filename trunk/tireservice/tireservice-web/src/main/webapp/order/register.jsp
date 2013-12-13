@@ -15,13 +15,15 @@
         <div class="aui-page-panel margin-fix">
             <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
-            
+                <s:errors/>
+                
+                <%@include file="items.jsp"%>
                 <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="register">
-                <fieldset>
-                 <%@include file="form.jsp"%>
-                 <s:submit name="add"><f:message key="action.create.order"/></s:submit>   
-                </fieldset>
-            </s:form>
+                    <fieldset>
+                        <%@include file="form.jsp"%>
+                        <s:submit name="add"><f:message key="action.create.order"/></s:submit>   
+                    </fieldset>
+                </s:form>
             </section>
         </div>
         </div>

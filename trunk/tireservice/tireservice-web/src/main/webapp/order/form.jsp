@@ -1,6 +1,5 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
-<s:errors/>
-  
+
       
 <table>
     <tr>
@@ -36,13 +35,5 @@
     </tr>
     <s:hidden id="o4" name="order.id" />
 </table>
-<br />
-<br />
-<br />
-<%@include file="tireForm.jsp"%>
-<br />
-<br />
-<br />
-<%@include file="servicesForm.jsp"%>
             
             
