@@ -10,10 +10,12 @@ import cz.muni.fi.pa165.tireservice.services.PersonServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.After;
@@ -185,7 +187,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return true;
     }
     
-    public Resolution addTire(){
+    public Resolution addTire() throws ParseException{
         String ids = getContext().getRequest().getParameter("tireType.id");
         TireDTO tire = new TireDTO();
         tire.setTireType(tireTypeServices.getTireTypeById(Long.parseLong(ids)));
@@ -211,7 +213,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     
-    public Resolution removeTire(){
+    public Resolution removeTire() throws ParseException{
         String ids = getContext().getRequest().getParameter("tireType.id");
         List<TireDTO> list = order.getTires();
         for(TireDTO t : list){
@@ -225,7 +227,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return ReturnCorrectForm();
     }
     
-    public Resolution addService(){
+    public Resolution addService() throws ParseException{
         String ids = getContext().getRequest().getParameter("service.id");
         if(order.getServices() == null){
             order.setServices(new ArrayList<ServiceDTO>());
@@ -235,7 +237,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return ReturnCorrectForm();
     }
     
-    public Resolution removeService(){
+    public Resolution removeService() throws ParseException{
         String ids = getContext().getRequest().getParameter("service.id");
         List<ServiceDTO> list = order.getServices();
         for(ServiceDTO s : list){
@@ -334,9 +336,23 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return null;
     }
 
-    private void SetOrderParams() {
+    private void SetOrderParams() throws ParseException {
+        
+        if(carType == null || carType == ""){
+            carType = getContext().getRequest().getParameter("editOrder.carType");
+        }
         order.setCarType(carType);
+        
+        if(date == null){
+            date = new SimpleDateFormat("MM, dd, yyyy", Locale.ENGLISH).parse(getContext().getRequest().getParameter("editOrder.date"));
+        }
+        
         order.setDate(date);
+        
+        if(personId == null || personId < 1){
+            personId = Long.parseLong(getContext().getRequest().getParameter("editOrder.personId"));
+        }
+        
         if(personId != null && personId > 0){
             order.setPerson(personServices.getPersonById(personId));
         }
