@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <th><s:label for="o2"><f:message key="field.cartype" /></s:label></th>
-        <td><s:text id="o2" name="carType" value="${actionBean.order.carType}"/></td>
+        <td><s:text id="txtCarTypeId" name="carType" value="${actionBean.order.carType}"/></td>
     </tr>
     <tr>
         <th><s:label for="o3"><f:message key="field.date" /></s:label></th>
