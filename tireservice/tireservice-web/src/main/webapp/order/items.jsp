@@ -8,6 +8,11 @@
     <tbody>
         <tr>
             <td>
+                <script type="text/javascript">
+    function someJSFunction(){
+      document.getElementById("editOrder.carType").value = document.getElementById("txtCarTypeId").value;
+    }
+</script>
 
                 <table>
                     <thead>
@@ -19,16 +24,18 @@
                     <tbody>
                         <c:forEach items="${actionBean.allTireTypes}" var="tireType">
                             <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
+                                
                                 <tr>
                                     <td><c:out value="${tireType.manufacturer}"/></td>
                                     <td><c:out value="${tireType.amountOnStore}"/></td>
                                     <td><c:out value="${tireType.price}"/></td>
                                     <td><s:text name="tireAmount"/></td>
                                     <td>
-                                    <s:submit name="addTire">
+                                    <s:submit name="addTire" onclick="someJSFunction();">
                                         <s:param name="tireType.id" value="${tireType.id}"/><f:message key="action.add" /></s:submit>
                                     </td>
                                 </tr>
+                                <s:hidden id="editOrder.carType" name="editOrder.carType" ></s:hidden>
                             </s:form>
                         </c:forEach>
                     </tbody>
