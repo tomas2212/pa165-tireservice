@@ -69,5 +69,11 @@ public class PersonServicesImpl implements PersonServices{
         Person person = PersonUtils.personDTOToEntity(personDTO);
         personDAO.removePerson(person);
     }
+
+    public PersonDTO getPersonByEmail(String email) {
+        Person person = personDAO.getPersonByEmail(email);
+        PersonDTO personDTO = PersonUtils.getPersonDTOFromEntity(person);
+        return personDTO;
+    }
     
 }

@@ -19,6 +19,15 @@ public interface PersonDAO {
      */    
     public Person getPersonById(Long id);
     
+    
+    /**
+     * Returns person with active status by id from the database
+     * 
+     * @param id the ID of person
+     * @return Person with active status by id from the database
+     */    
+    public Person getPersonByEmail(String email);
+    
     /**
      * Returns all persons with active status
      * 

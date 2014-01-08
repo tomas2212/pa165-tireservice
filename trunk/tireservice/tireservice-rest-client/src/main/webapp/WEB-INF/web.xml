@@ -6,7 +6,7 @@
          id="WebApp_ID"
          version="2.5">
  
-   <display-name>STIS REST Client</display-name>      
+   <display-name>TireService REST Client</display-name>      
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -25,7 +25,7 @@
    
     <!-- Stripes -->
     <filter>
-        <description>hlavní místo konfigurace Stripes</description>
+        <description>hlavne miesto konfiguracie Stripes</description>
         <display-name>Stripes Filter</display-name>
         <filter-name>StripesFilter</filter-name>
         <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
