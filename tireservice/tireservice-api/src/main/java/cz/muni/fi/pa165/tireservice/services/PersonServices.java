@@ -16,6 +16,14 @@ public interface PersonServices {
      */    
     public PersonDTO getPersonById(Long id);
     
+     /**
+     * Gets person with active status by id from the database
+     * 
+     * @param id the ID of person
+     * @return Person with active status by id from the database
+     */    
+    public PersonDTO getPersonByEmail(String email);
+    
     /**
      * Gets all persons with active status
      * 

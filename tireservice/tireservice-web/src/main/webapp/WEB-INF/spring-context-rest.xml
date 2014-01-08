@@ -15,7 +15,7 @@
     <mvc:annotation-driven/> 
     
     <context:annotation-config/>
-    <context:component-scan base-package="cz.muni.fi.pa165.stis.ws.rest"/>
+    <context:component-scan base-package="cz.muni.fi.pa165.tireservice.rest"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
     
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  

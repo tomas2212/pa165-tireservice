@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 /**
  *
@@ -14,6 +16,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class PersonDAOImpl implements PersonDAO {
+
+    @Autowired
+    private ShaPasswordEncoder passwordEncoder;
 
     @PersistenceContext
     protected EntityManager entityManager;
@@ -40,7 +45,8 @@ public class PersonDAOImpl implements PersonDAO {
         if (person == null) {
             throw new IllegalArgumentException("You have to set person");
         }
-
+        String encPassword = passwordEncoder.encodePassword(person.getPassword(), person.getEmail());
+        person.setPassword(encPassword);
         entityManager.persist(person);
     }
 
@@ -51,7 +57,8 @@ public class PersonDAOImpl implements PersonDAO {
         if (person.getId() == null) {
             throw new IllegalArgumentException("Can't update, because entity does not contain ID.");
         }
-
+        String encPassword = passwordEncoder.encodePassword(person.getPassword(), person.getEmail());
+        person.setPassword(encPassword);
         entityManager.merge(person);
     }
 
@@ -64,5 +71,23 @@ public class PersonDAOImpl implements PersonDAO {
         }
         person.setActive(Boolean.FALSE);
         entityManager.merge(person);
+    }
+
+    public Person getPersonByEmail(String email) {
+        if (email == null) {
+            throw new IllegalArgumentException("You have to set email.");
+        }
+        if (email.isEmpty()) {
+            throw new IllegalArgumentException("Cannot search for empty email.");
+        }
+        TypedQuery<Person> p = entityManager.createQuery("SELECT p FROM Person p WHERE p.email = :email", Person.class);
+        p.setParameter("email", email);
+        List<Person> people = p.getResultList();
+        if(people != null && !people.isEmpty()){
+            Hibernate.initialize(people.get(0));
+            return people.get(0);
+        }
+        
+        return null;
     }
 }
