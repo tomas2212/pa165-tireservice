@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.tireservice.utils.ServicesUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -52,6 +53,7 @@ public class ServiceServicesImpl implements ServiceServices {
         return toReturn;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void createService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
