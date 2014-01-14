@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.tireservice.utils.TireTypeUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,19 +40,22 @@ public class ServiceTireTypeImpl implements ServiceTireType {
             
         return tireTypesDTO;
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void updateTireType(TireTypeDTO tireTypeDTO) {
         TireType tireType = TireTypeUtils.tireTypeDTOToEntity(tireTypeDTO);
         tireTypeDAO.updateTireType(tireType);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void removeTireType(TireTypeDTO tireTypeDTO) {
         TireType tireType = TireTypeUtils.tireTypeDTOToEntity(tireTypeDTO);
         tireTypeDAO.removeTireType(tireType);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void createTireType(TireTypeDTO tireTypeDTO) {
         TireType tireType = TireTypeUtils.tireTypeDTOToEntity(tireTypeDTO);

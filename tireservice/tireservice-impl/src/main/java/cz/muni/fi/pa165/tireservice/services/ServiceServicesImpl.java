@@ -66,7 +66,8 @@ public class ServiceServicesImpl implements ServiceServices {
         serviceDAO.insertService(service);
         serviceDTO.setId(service.getId());
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void updateService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
@@ -78,7 +79,7 @@ public class ServiceServicesImpl implements ServiceServices {
         Service service = ServicesUtils.serviceDTOToEntity(serviceDTO);
         serviceDAO.updateService(service);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void removeService(ServiceDTO serviceDTO) {
         if (serviceDTO == null) {
