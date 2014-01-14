@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.tireservice.utils.OrderUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,7 @@ public class OrderServicesImpl implements OrderServices {
         return orderDTO;
     }
 
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
@@ -42,6 +44,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public List<OrderDTO> getAllEnabledOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
@@ -63,6 +66,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDTO.setId(order.getId());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void updateOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
@@ -72,6 +76,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDAO.updateOrder(order);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void removeOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {

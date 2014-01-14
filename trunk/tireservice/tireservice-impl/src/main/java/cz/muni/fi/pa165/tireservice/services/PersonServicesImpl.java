@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.tireservice.utils.ValidationHelper;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class PersonServicesImpl implements PersonServices{
     @Autowired
     private PersonDAO personDAO;
     
+
     @Transactional
     public PersonDTO getPersonById(Long id) {
         ValidationHelper.IdIsZero(id);
@@ -29,6 +31,7 @@ public class PersonServicesImpl implements PersonServices{
         return personDTO;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public List<PersonDTO> getAllPersons() {
         List<PersonDTO> toReturn = new ArrayList<PersonDTO>();
@@ -50,6 +53,7 @@ public class PersonServicesImpl implements PersonServices{
         personDAO.insertPerson(person);
     }
 
+
     @Transactional
     public void updatePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
@@ -60,6 +64,7 @@ public class PersonServicesImpl implements PersonServices{
         personDAO.updatePerson(person);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void removePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);
@@ -69,6 +74,7 @@ public class PersonServicesImpl implements PersonServices{
         Person person = PersonUtils.personDTOToEntity(personDTO);
         personDAO.removePerson(person);
     }
+
 
     public PersonDTO getPersonByEmail(String email) {
         Person person = personDAO.getPersonByEmail(email);

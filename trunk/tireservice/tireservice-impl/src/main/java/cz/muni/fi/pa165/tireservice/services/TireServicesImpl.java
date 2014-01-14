@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.tireservice.utils.TireUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,7 @@ public class TireServicesImpl implements TireServices {
         return toReturn;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void createTire(TireDTO tireDTO) {
         if (tireDTO == null) {
@@ -66,6 +68,7 @@ public class TireServicesImpl implements TireServices {
         tireDTO.setId(tire.getId());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void updateTire(TireDTO tireDTO) {
         if (tireDTO == null) {
@@ -78,6 +81,7 @@ public class TireServicesImpl implements TireServices {
         tireDAO.updateTire(tire);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void removeTire(TireDTO tireDTO) {
         if (tireDTO == null) {
