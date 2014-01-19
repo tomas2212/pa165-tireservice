@@ -31,7 +31,7 @@ public class PersonServicesImpl implements PersonServices{
         return personDTO;
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+  
     @Transactional
     public List<PersonDTO> getAllPersons() {
         List<PersonDTO> toReturn = new ArrayList<PersonDTO>();
