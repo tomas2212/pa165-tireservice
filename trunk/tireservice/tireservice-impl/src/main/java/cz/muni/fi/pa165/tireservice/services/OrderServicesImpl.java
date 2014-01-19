@@ -32,7 +32,7 @@ public class OrderServicesImpl implements OrderServices {
         return orderDTO;
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    
     @Transactional
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
@@ -44,7 +44,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+ //   @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public List<OrderDTO> getAllEnabledOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
