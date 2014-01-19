@@ -21,21 +21,28 @@
             <div class="aui-header-inner">
                 <div class="aui-header-primary">		
                     <ul class="aui-nav">
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="menu.person.list"/></s:link></li>
+                        </sec:authorize>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="list"><f:message key="menu.tiretype.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="list"><f:message key="menu.service.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="list"><f:message key="menu.order.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" event="register"><f:message key="menu.order.list.create"/></s:link></li>
                     </ul>
                 </div>
-                <sec:authorize access="not isAuthenticated()">
+               
                     <div class="aui-header-secondary">
-                        <ul class="aui-nav">
+                        <ul class="aui-nav"> 
+                            <sec:authorize access="not isAuthenticated()">
                             <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="login"><f:message key="menu.login"/></s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
+                             </sec:authorize>
+                            <sec:authorize access="isAuthenticated()">
+                            <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="logout"><f:message key="menu.logout"/></s:link></li>
+                            </sec:authorize>
                         </ul>
                     </div>
-                </sec:authorize>
+               
             </div>
         </nav>
     </header>
