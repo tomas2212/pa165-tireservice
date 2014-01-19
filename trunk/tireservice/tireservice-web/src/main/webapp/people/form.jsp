@@ -1,4 +1,5 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <s:errors/>
 <table>
     <tr>
@@ -21,10 +22,12 @@
         <th><s:label for="p5"><f:message key="field.phone.number"/></s:label></th>
         <td><s:text id="p5" name="person.phoneNumber"/></td>
     </tr>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
     <tr>
         <th><s:label for="p6"><f:message key="field.is.admin"/></s:label></th>
         <td><s:checkbox id="p6" name="person.isServiceman"/></td>
     </tr>
+    </sec:authorize>
     <tr>
         <th><s:label for="p7"><f:message key="field.password"/></s:label></th>
         <td><s:password id="p7" name="person.password"/></td>
