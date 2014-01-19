@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="header.services">
     <s:layout-component name="body">
@@ -48,30 +49,35 @@
                                         <td><c:out value="${service.name}"/></td>
                                         <td><c:out value="${service.description}"/></td>
                                         <td><c:out value="${service.price}"/></td>
-
-                                        <td class="adg-actions">
-                                            <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
-                                            <div id="dropdown-button-service${service.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
-                                                <ul class="aui-list-truncate">
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/><f:message key="action.edit"/></s:link>
-                                                    <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="delete"><s:param name="service.id" value="${service.id}"/><f:message key="action.delete"/></s:link>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                            <td class="adg-actions">
+                                                <button aria-owns="dropdown-button-service${service.id}" aria-haspopup="true" class="aui-button aui-button-subtle aui-dropdown2-trigger" data-container="#adg-table-1"><span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span></button>
+                                                <div id="dropdown-button-service${service.id}" class="aui-dropdown2 aui-style-default" aria-hidden="false" data-dropdown2-alignment="right">
+                                                    <ul class="aui-list-truncate">
+                                                        <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="edit"><s:param name="service.id" value="${service.id}"/><f:message key="action.edit"/></s:link>
+                                                        <s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="delete"><s:param name="service.id" value="${service.id}"/><f:message key="action.delete"/></s:link>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                        </sec:authorize>
+                                    </tr>
 
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
 
-                        <c:if test="${actionBean.service.id == service.id}" >
 
-                            <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean">
-                                <%@include file="form.jsp"%>
-                            </s:form> 
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <c:if test="${actionBean.service.id == service.id}" >
 
-                        </c:if>
+                                <s:form beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean">
 
+                                    <%@include file="form.jsp"%>
+
+                                </s:form> 
+
+                            </c:if>
+                        </sec:authorize>
 
                         </tbody>
                     </table>
