@@ -37,12 +37,12 @@ public class TireTypeClientActionBean implements ActionBean {
     
        @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required=true),
-        @Validate(on = {"save", "add"}, field = "type", required=true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "manufacturer", required=true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "description", required=true, maxlength = 100),
-        @Validate(on = {"save", "add"}, field = "tireRimSize", required=true, minvalue = 1),
-        @Validate(on = {"save", "add"}, field = "amountOnStore", required=true, minvalue = 0),
-        @Validate(on = {"save", "add"}, field = "price", required=true, minvalue = 0, converter = BigDecimalTypeConverter.class)
+        @Validate(on = {"save", "create"}, field = "type", required=true, maxlength = 20),
+        @Validate(on = {"save", "create"}, field = "manufacturer", required=true, maxlength = 20),
+        @Validate(on = {"save", "create"}, field = "description", required=true, maxlength = 100),
+        @Validate(on = {"save", "create"}, field = "tireRimSize", required=true, minvalue = 1),
+        @Validate(on = {"save", "create"}, field = "amountOnStore", required=true, minvalue = 0),
+        @Validate(on = {"save", "create"}, field = "price", required=true, minvalue = 0, converter = BigDecimalTypeConverter.class)
     })
     private TireTypeDTO tireType;
 
