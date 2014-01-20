@@ -451,4 +451,20 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return person;
     }
     
+    private PersonDTO loggedUser = null;
+
+    public PersonDTO getLoggedUser() {
+        if(loggedUser == null){
+            setLoggedUser(getUserLoginCredetials());
+        }
+        
+        return loggedUser;
+    }
+
+    public void setLoggedUser(PersonDTO loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+    
+    
+     
 }
