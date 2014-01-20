@@ -31,6 +31,13 @@ public interface OrderServices {
     public List<OrderDTO> getAllEnabledOrders();
     
     /**
+     * Gets all orders for given user
+     * 
+     * @return All orders with active status which belong to the given user
+     */
+    public List<OrderDTO> getAllUsersEnabledOrders(String email);
+    
+    /**
      * Creates new order into database
      * 
      * @param order Order that will be inserted into DB  
