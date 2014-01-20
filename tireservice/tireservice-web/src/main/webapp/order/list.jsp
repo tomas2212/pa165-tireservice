@@ -15,7 +15,26 @@
         <div class="aui-page-panel margin-fix">
             <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
-            
+                <div>
+                    <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean">
+                        <label for="persomFilter">Filter by Customer</label>
+                        <select name="personFilter" class="select" id ="personFilter" >
+                            <option value="${person.id}">All Users</option>
+                            <c:forEach items="${actionBean.people}" var="person">
+                                <c:choose> 
+                                    <c:when test="${person.id == actionBean.personFilter}">
+                                        <option selected="selected" value="${person.id}">${person.firstName} ${person.lastName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${person.id}">${person.firstName} ${person.lastName}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                        <s:submit name="filter">Filtruj</s:submit>
+                    </s:form>
+                </div>
+                
                 <table class="aui">
                     <thead>
                         <tr>

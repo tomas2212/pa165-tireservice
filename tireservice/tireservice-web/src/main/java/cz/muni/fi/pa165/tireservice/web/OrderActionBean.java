@@ -53,6 +53,9 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     @Validate(on = {"save", "add"}, required = true)
     private Long personId;
+    
+    @Validate(on = {"filter"}, required = true)
+    private Long personFilter;
 
     public Long getPersonId() {
         return personId;
@@ -60,6 +63,14 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
 
     public void setPersonId(Long personId) {
         this.personId = personId;
+    }
+
+    public Long getPersonFilter() {
+        return personFilter;
+    }
+
+    public void setPersonFilter(Long personFilter) {
+        this.personFilter = personFilter;
     }
     
     @Validate(on = {"save", "add"}, required = true)
@@ -121,6 +132,16 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     @DefaultHandler
     public Resolution list() {
         orders = getOrdersAccordingToAuthentication();
+        return new ForwardResolution(LIST);
+    }
+    
+    public Resolution filter() {
+        if(getPersonFilter() != null){
+            PersonDTO p = personServices.getPersonById(getPersonFilter());
+            orders = orderServices.getAllUsersEnabledOrders(p.getEmail());
+        }else{
+            orders = orderServices.getAllEnabledOrders();
+        }
         return new ForwardResolution(LIST);
     }
     
