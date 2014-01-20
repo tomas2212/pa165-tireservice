@@ -39,6 +39,9 @@
                              </sec:authorize>
                             <sec:authorize access="isAuthenticated()">
                             <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="logout"><f:message key="menu.logout"/></s:link></li>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                    <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
+                                </sec:authorize>
                             </sec:authorize>
                         </ul>
                     </div>

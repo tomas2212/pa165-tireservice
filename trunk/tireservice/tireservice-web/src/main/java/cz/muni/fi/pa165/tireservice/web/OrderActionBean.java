@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.tireservice.services.OrderServices;
 import cz.muni.fi.pa165.tireservice.services.PersonServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceServices;
 import cz.muni.fi.pa165.tireservice.services.ServiceTireType;
+import cz.muni.fi.pa165.tireservice.web.security.CustomUserDetails;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +34,9 @@ import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -116,7 +120,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     @DefaultHandler
     public Resolution list() {
-        orders = getOrders();
+        orders = getOrdersAccordingToAuthentication();
         return new ForwardResolution(LIST);
     }
     
@@ -287,7 +291,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     }
     
     public List<OrderDTO> getOrders(){
-        return orderServices.getAllEnabledOrders();
+        return orders;
     }
     
     public List<PersonDTO> getPeople(){
@@ -332,7 +336,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         people = personServices.getAllPersons();
-        orders = orderServices.getAllEnabledOrders();
+        orders = getOrdersAccordingToAuthentication();
         return null;
     }
 
@@ -397,4 +401,26 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             return df.format(order.getDate());
         }
     }
+    
+    private List<OrderDTO> getOrdersAccordingToAuthentication(){
+        List<OrderDTO> localOrders;
+        boolean isAdmin = false;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        for(GrantedAuthority ga : auth.getAuthorities()){
+            if("ROLE_ADMIN".equals(ga.getAuthority())){
+                isAdmin = true;
+                break;
+            }
+        }
+        
+        if(!isAdmin){
+            String username = ((CustomUserDetails) auth.getPrincipal()).getUsername();
+            localOrders = orderServices.getAllUsersEnabledOrders(username);
+        }else{
+            localOrders = orderServices.getAllEnabledOrders();
+        }
+        return localOrders;
+    }
+    
 }

@@ -55,6 +55,21 @@ public class OrderServicesImpl implements OrderServices {
         }
         return toReturn;
     }
+    
+    public List<OrderDTO> getAllUsersEnabledOrders(String email){
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be neither null nor empty string.");
+        }
+        List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
+        List<Order> orders = orderDAO.getAllActiveOrders();
+        for (Order order : orders) {
+            OrderDTO orderDTO = OrderUtils.getOrderDTOFromEntity(order);
+            if(orderDTO.getPerson().getEmail().equals(email)){
+                toReturn.add(orderDTO);
+            }
+        }
+        return toReturn;
+    }
 
     @Transactional
     public void createOrder(OrderDTO orderDTO) {
