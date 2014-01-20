@@ -336,21 +336,43 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return null;
     }
 
+    @SuppressWarnings("empty-statement")
     private void SetOrderParams() throws ParseException {
+        
+        if(date == null){
+            String dateTemp = null;
+            try{
+                dateTemp = getContext().getRequest().getParameter("editOrder.date");
+                date = new SimpleDateFormat("DD.MM.YYYY", Locale.ENGLISH).parse(dateTemp);
+            }
+                catch(NullPointerException n)
+            {
+                date = null;
+            }
+                catch(ParseException pe)
+                {
+                    //if the value was passed by javascript
+                    if(dateTemp != null && !"".equals(dateTemp)){
+                        date = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH).parse(dateTemp);
+                    }
+                }
+        }
+        
+        order.setDate(date);
         
         if(carType == null || carType == ""){
             carType = getContext().getRequest().getParameter("editOrder.carType");
         }
         order.setCarType(carType);
         
-        if(date == null){
-            date = new SimpleDateFormat("DD.MM.YYYY", Locale.ENGLISH).parse(getContext().getRequest().getParameter("editOrder.date"));
-        }
-        
-        order.setDate(date);
-        
         if(personId == null || personId < 1){
-            personId = Long.parseLong(getContext().getRequest().getParameter("editOrder.personId"));
+            try{
+                personId = Long.parseLong(getContext().getRequest().getParameter("editOrder.personId"));
+            }
+            catch(NumberFormatException nfe)
+            {
+                //do nothing, when no person passed as param or there is none to choose from, just do nothing
+            }
         }
         
         if(personId != null && personId > 0){

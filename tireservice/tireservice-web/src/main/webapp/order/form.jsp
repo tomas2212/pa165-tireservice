@@ -5,7 +5,7 @@
     <tr>
         <th><s:label for="o1"><f:message key="field.customer" /></s:label></th>
         <td>
-            <select name="personId" class="select">
+            <select name="personId" class="select" id ="optionPerson" >
                 <c:forEach items="${actionBean.people}" var="person">
                     <c:choose> 
                         <c:when test="${person.id == actionBean.order.person.id}">

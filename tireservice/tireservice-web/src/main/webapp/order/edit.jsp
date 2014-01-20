@@ -17,7 +17,7 @@
             <section class="aui-page-panel-content">
                 <s:errors/>
                 
-                <%@include file="itemsEdit.jsp"%>
+                <%@include file="items.jsp"%>
             
                 <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="edit">
                     <fieldset>
