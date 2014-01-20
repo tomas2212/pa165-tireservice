@@ -444,4 +444,11 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         return localOrders;
     }
     
+     public PersonDTO getUserLoginCredetials()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PersonDTO person = ((CustomUserDetails) auth.getPrincipal()).getPerson();
+        return person;
+    }
+    
 }
