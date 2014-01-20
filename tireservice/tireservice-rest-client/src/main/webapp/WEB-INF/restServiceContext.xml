@@ -23,7 +23,8 @@
     <context:property-placeholder location="classpath:server.properties" />
     
     <!-- Rest template for Spring 3.1. Used HttpClientFactory to make request -->
-    <bean name="rt" class="org.springframework.web.client.RestTemplate">             
+    <bean name="rt" class="org.springframework.web.client.RestTemplate">       
+        <constructor-arg ref="httpClientFactory"/>      
     </bean>
     
     <bean name="ph" class="cz.muni.fi.pa165.tireservice.rest.util.PropertyHelper">             
