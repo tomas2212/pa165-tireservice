@@ -60,9 +60,9 @@ public class ServicesClientActionBean implements ActionBean {
     }
     @ValidateNestedProperties(value = {
         @Validate(on = {"delete"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "name", required = true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "description", required = true, maxlength = 20),
-        @Validate(on = {"save", "add"}, field = "price", required = true, minvalue = 1, converter = BigDecimalTypeConverter.class)
+        @Validate(on = {"save", "create"}, field = "name", required = true, maxlength = 20),
+        @Validate(on = {"save", "create"}, field = "description", required = true, maxlength = 20),
+        @Validate(on = {"save", "create"}, field = "price", required = true, minvalue = 1, converter = BigDecimalTypeConverter.class)
     })
     private ServiceDTO service;
 
