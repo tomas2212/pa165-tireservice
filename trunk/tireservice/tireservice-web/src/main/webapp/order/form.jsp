@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
       
@@ -5,6 +6,13 @@
     <tr>
         <th><s:label for="o1"><f:message key="field.customer" /></s:label></th>
         <td>
+        <c:choose>
+            <c:when test="${actionBean.loggedUser.isServiceman == false}">
+            <select name="personId" class="select" id ="optionPerson" >
+                <option selected="selected" value="${actionBean.loggedUser.id}">${actionBean.loggedUser.firstName} ${actionBean.loggedUser.lastName}</option>         
+            </select>
+            </c:when>
+            <c:otherwise>
             <select name="personId" class="select" id ="optionPerson" >
                 <c:forEach items="${actionBean.people}" var="person">
                     <c:choose> 
@@ -17,6 +25,8 @@
                     </c:choose>
                 </c:forEach>
             </select>
+            </c:otherwise>
+        </c:choose>
         </td>
     </tr>
     <tr>
