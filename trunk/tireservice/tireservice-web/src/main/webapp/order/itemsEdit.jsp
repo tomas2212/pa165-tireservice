@@ -9,7 +9,7 @@
         <tr>
             <td>
 
-                <table>
+                <table class="aui">
                     <thead>
                         <td><f:message key="field.manufacturer"/></td>
                         <td><f:message key="field.amount"/></td>
@@ -41,7 +41,7 @@
             </td>
             <td>
 
-            <table>
+            <table class="aui">
                 <thead>
                     <td><f:message key="field.servicename"/></td>
                     <td><f:message key="field.price"/></td>
