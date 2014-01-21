@@ -5,7 +5,13 @@
 <s:layout-render name="/layout.jsp" titlekey="index.title">
     <s:layout-component name="body">
         
-        <h1><f:message key="welcome"/></h1>
+        <div class="aui-page-panel margin-fix">
+            <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                <h1><f:message key="welcome"/></h1>
+            </section>
+            </div>
+        </div>
 
     </s:layout-component>
 </s:layout-render>

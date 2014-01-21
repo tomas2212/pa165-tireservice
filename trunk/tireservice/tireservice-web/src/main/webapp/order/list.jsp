@@ -20,7 +20,7 @@
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <div>
                         <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean">
-                            <label for="persomFilter">Filter by Customer</label>
+                            <s:label for="personFilter"><f:message key="field.filter.by.person" /></s:label>
                             <select name="personFilter" class="select" id ="personFilter" >
                                 <option value="${person.id}">All Users</option>
                                 <c:forEach items="${actionBean.people}" var="person">
@@ -34,7 +34,7 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
-                            <s:submit name="filter">Filtruj</s:submit>
+                            <s:submit name="filter"><f:message key="action.filter"/></s:submit>
                         </s:form>
                     </div>
                 </sec:authorize>
@@ -87,9 +87,9 @@
                     </tbody>
                 </table>
                
-                </section><!-- .aui-page-panel-content -->
+                </section>
 
-            </div><!-- .aui-page-panel-inner -->
+            </div>
         </div>
     </s:layout-component>
 </s:layout-render>
