@@ -19,8 +19,8 @@
                 
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <div>
-                        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean">
-                            <s:label for="personFilter"><f:message key="field.filter.by.person" /></s:label>
+                        <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
+                            <s:label for="personFilter"><f:message key="field.filter.by.person" /></s:label>:
                             <select name="personFilter" class="select" id ="personFilter" >
                                 <option value="${person.id}">All Users</option>
                                 <c:forEach items="${actionBean.people}" var="person">
@@ -39,7 +39,7 @@
                     </div>
                 </sec:authorize>
                 
-                <table class="aui">
+                <table class="aui aui-table-sortable">
                     <thead>
                         <tr>
                             <th id="order-id">#</th>
@@ -49,7 +49,7 @@
                             <th id="order-tires"><f:message key="field.tires"/></th>
                             <th id="order-services"><f:message key="field.services"/></th>
                             <th id="order-price"><f:message key="field.price"/></th>
-                            <th id="order-action"></th>
+                            <th id="order-action" class="aui-table-column-unsortable"></th>
                         </tr>
                     </thead>
                     <tbody>
