@@ -8,9 +8,8 @@
         <td>
         <c:choose>
             <c:when test="${actionBean.loggedUser.isServiceman == false}">
-            <select name="personId" class="select" id ="optionPerson" >
-                <option selected="selected" value="${actionBean.loggedUser.id}">${actionBean.loggedUser.firstName} ${actionBean.loggedUser.lastName}</option>         
-            </select>
+                ${actionBean.loggedUser.firstName} ${actionBean.loggedUser.lastName} (${actionBean.loggedUser.email})
+                <s:hidden id="o4" name="personId" value="${actionBean.loggedUser.id}"/>
             </c:when>
             <c:otherwise>
             <select name="personId" class="select" id ="optionPerson" >
