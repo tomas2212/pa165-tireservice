@@ -8,6 +8,18 @@
     <tbody>
         <tr>
             <td>
+                <script type="text/javascript">
+                    function rememberFields(action){
+                        var carType = document.getElementById("txtCarTypeId").value;
+                        var date = document.getElementById("demo-range-always").value;
+                        var e = document.getElementById("optionPerson");
+                        var person = e.options[e.selectedIndex].value;
+
+                        document.getElementById("editOrder."+action+".carType").value = carType;
+                        document.getElementById("editOrder."+action+".date").value = date;
+                        document.getElementById("editOrder."+action+".personId").value = person;    
+                    }
+                </script>
 
                 <table>
                     <thead>
@@ -19,9 +31,9 @@
                     <tbody>
                         <c:forEach items="${actionBean.allTireTypes}" var="tireType">
                             <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
-                        <s:hidden name="editOrder.personId" value="${actionBean.order.person.id}"></s:hidden>
-                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
-                                <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
+                                <s:hidden id="editOrder.addTire.carType" name="carType" ></s:hidden>
+                                <s:hidden id="editOrder.addTire.date" name="date" ></s:hidden>
+                                <s:hidden id="editOrder.addTire.personId" name="personId" ></s:hidden>
                                 <tr>
                                     <td><c:out value="${tireType.manufacturer}"/></td>
                                     <td><c:out value="${tireType.amountOnStore}"/></td>
@@ -29,7 +41,7 @@
                                     <td><s:text name="tireAmount"/></td>
                                     <td>
                                     <s:hidden name="formType" value="edit"></s:hidden>
-                                    <s:submit name="addTire">
+                                    <s:submit name="addTire" onclick="rememberFields('addTire');">
                                         <s:param name="tireType.id" value="${tireType.id}"/><f:message key="action.add" /></s:submit>
                                     </td>
                                 </tr>
@@ -53,11 +65,11 @@
                                 <td><c:out value="${service.name}"/></td>
                                 <td><c:out value="${service.price}"/><td>
                                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui" id="register">
-                                    <s:hidden name="editOrder.personId" value="${actionBean.order.person.id}"></s:hidden>
-                                    <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
-                                        <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
+                                        <s:hidden id="editOrder.addService.carType" name="carType" ></s:hidden>
+                                        <s:hidden id="editOrder.addService.date" name="date" ></s:hidden>
+                                        <s:hidden id="editOrder.addService.personId" name="personId" ></s:hidden>
                                         <s:hidden name="formType" value="edit"></s:hidden>
-                                        <s:submit name="addService">
+                                        <s:submit name="addService" onclick="rememberFields('addService');">
                                             <s:param name="service.id" value="${service.id}"/><f:message key="action.add" />
                                         </s:submit>
                                     </s:form>
@@ -91,11 +103,11 @@
                 <td><c:out value="${tire.tireType.price}"/></td>
                 <td>
                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
-                        <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
-                        <s:hidden name="editOrder.personId" value="${actionBean.order.person.id}"></s:hidden>
-                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
+                                <s:hidden id="editOrder.removeTire.carType" name="carType" ></s:hidden>
+                                <s:hidden id="editOrder.removeTire.date" name="date" ></s:hidden>
+                                <s:hidden id="editOrder.removeTire.personId" name="personId" ></s:hidden>
                         <s:hidden name="formType" value="edit"></s:hidden>
-                        <s:submit name="removeTire"><s:param name="tireType.id" value="${tire.tireType.id}"/><f:message key="action.remove" /></s:submit>
+                        <s:submit name="removeTire" onclick="rememberFields('removeTire');"><s:param name="tireType.id" value="${tire.tireType.id}"/><f:message key="action.remove" /></s:submit>
                     </s:form>
                 </td>
             </tr>
@@ -120,11 +132,11 @@
                 <td><c:out value="${service.price}"/></td>
                 <td>
                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
-                        <s:hidden name="editOrder.cartype" value="${actionBean.order.carType}"></s:hidden>
-                        <s:hidden name="editOrder.personId" value="${actionBean.order.person.id}"></s:hidden>
-                        <s:hidden name="editOrder.date" value="${actionBean.order.date}"></s:hidden>
+                        <s:hidden id="editOrder.removeService.carType" name="carType" ></s:hidden>
+                        <s:hidden id="editOrder.removeService.date" name="date" ></s:hidden>
+                        <s:hidden id="editOrder.removeService.personId" name="personId" ></s:hidden>
                         <s:hidden name="formType" value="edit"></s:hidden>
-                        <s:submit name="removeService"><s:param name="service.id" value="${service.id}"/><f:message key="action.remove" /></s:submit>
+                        <s:submit name="removeService"  onclick="rememberFields('removeService');"><s:param name="service.id" value="${service.id}"/><f:message key="action.remove" /></s:submit>
                     </s:form>
                 </td>
             </tr>

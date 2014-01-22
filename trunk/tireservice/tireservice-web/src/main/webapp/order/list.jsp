@@ -56,7 +56,7 @@
                         <c:forEach items="${actionBean.orders}" var="order">
                             <tr>
                                 <td><c:out value="${order.person.id}"/></td>
-                                <td><c:out value="${order.person.firstName} ${order.person.lastName}"/></td>
+                                <td><c:out value="${order.person.firstName} ${order.person.lastName} (${order.person.email})"/></td>
                                 <td><c:out value="${order.carType}"/></td>
                                 <td><c:out value="${order.date}"/></td>
                                 <td><ul>
