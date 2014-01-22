@@ -22,14 +22,14 @@
                         <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
                             <s:label for="personFilter"><f:message key="field.filter.by.person" /></s:label>:
                             <select name="personFilter" class="select" id ="personFilter" >
-                                <option value="${person.id}">All Users</option>
+                                <option value="${person.id}"><f:message key="field.all.users" /></option>
                                 <c:forEach items="${actionBean.people}" var="person">
                                     <c:choose> 
                                         <c:when test="${person.id == actionBean.personFilter}">
-                                            <option selected="selected" value="${person.id}">${person.firstName} ${person.lastName}</option>
+                                            <option selected="selected" value="${person.id}">${person.firstName} ${person.lastName} (${person.email})</option>
                                         </c:when>
                                         <c:otherwise>
-                                            <option value="${person.id}">${person.firstName} ${person.lastName}</option>
+                                            <option value="${person.id}">${person.firstName} ${person.lastName} (${person.email})</option>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
@@ -61,12 +61,12 @@
                                 <td><c:out value="${order.date}"/></td>
                                 <td><ul>
                                 <c:forEach items="${order.tires}" var="tire">
-                                            <li><c:out value="${tire.tireType.manufacturer} ${tire.amountOnStore}(amount)"/></li>
+                                            <li><c:out value="${tire.tireType.manufacturer} (${tire.amountOnStore})"/></li>
                                     </c:forEach>
                                 </ul></td>
                                 <td><ul>
                                 <c:forEach items="${order.services}" var="service">
-                                            <li><c:out value="${service.name} ${service.price}(price)"/></li>
+                                            <li><c:out value="${service.name} (${service.price} czk)"/></li>
                                     </c:forEach>
                                 </ul>
                                 </td>

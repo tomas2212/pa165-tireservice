@@ -16,10 +16,14 @@ import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
+import net.sourceforge.stripes.validation.LocalizableError;
+import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
+import net.sourceforge.stripes.validation.ValidationError;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  *
@@ -66,10 +70,13 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
         try{
             serviceServices.createService(serviceDTO);
             getContext().getMessages().add(new LocalizableMessage("service.created"));
-        }
-        catch(Exception ex){
-            getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
-        }
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        }  
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -77,10 +84,13 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
         try{
             serviceServices.removeService(serviceDTO);
             getContext().getMessages().add(new LocalizableMessage("service.removed"));
-        }
-        catch(Exception ex){
-            getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
-        }
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        }   
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -114,6 +124,16 @@ public class ServiceActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         services = serviceServices.getAllServices();
         return null;
+    }
+    
+    private void addValidationError(String key, String cause){
+        ValidationErrors errors = new ValidationErrors();
+        if(cause != null){
+            errors.addGlobalError(new LocalizableError(key, cause) );
+        }else{
+            errors.addGlobalError(new LocalizableError(key) );
+        }
+        getContext().setValidationErrors(errors);
     }
     
 }

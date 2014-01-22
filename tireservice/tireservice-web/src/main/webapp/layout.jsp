@@ -19,10 +19,19 @@
     <header id="header" role="banner">
         <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
             <div class="aui-header-inner">
+                <div class="aui-header-before">
+                    <ul>
+                    </ul>
+                </div>
                 <div class="aui-header-primary">		
                     <ul class="aui-nav">
+                        <li>
+                            <a href="${pageContext.request.contextPath}">
+                                <span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Front Page</span>
+                            </a>
+                        </li>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="menu.person.list"/></s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="list"><f:message key="menu.person.list"/></s:link></li>
                         </sec:authorize>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.TireTypeActionBean" event="list"><f:message key="menu.tiretype.list"/></s:link></li>
                         <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.ServiceActionBean" event="list"><f:message key="menu.service.list"/></s:link></li>
@@ -43,7 +52,7 @@
                                     <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
                                 </sec:authorize>
                                 <span style="padding: 0 15px">
-                                    <img src="images/avatar.png" alt="User Avatar" style="width: 24px; height: 24px; margin-top: 8px">
+                                    <img src="${pageContext.request.contextPath}/images/avatar.png" alt="User Avatar" style="width: 24px; height: 24px; margin-top: 8px">
                                     <span style="vertical-align: super; font-weight: bold;"><sec:authentication property="principal.username" /></span>
                                 </span>
                             </sec:authorize>

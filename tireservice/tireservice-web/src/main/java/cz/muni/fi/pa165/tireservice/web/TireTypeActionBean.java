@@ -11,15 +11,16 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.BigDecimalTypeConverter;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.security.access.AccessDeniedException;
 
 
 /**
@@ -90,9 +91,12 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
           
           tireTypeServices.createTireType(tireTypeDTO);        
          getContext().getMessages().add(new LocalizableMessage("tireType.created"));                                                                      
-        }
-        catch(Exception ex){
-           getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
         }            
         
         return new RedirectResolution(this.getClass(), "list");
@@ -102,9 +106,13 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
         try{
             tireTypeServices.removeTireType(tireTypeDTO);
             getContext().getMessages().add(new LocalizableMessage("tireType.removed"));
-        }catch(Exception ex){
-            getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
-        }
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        }  
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -140,6 +148,16 @@ public class TireTypeActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         tireType = tireTypeServices.getAllTireTypes();
         return null;
+    }
+    
+    private void addValidationError(String key, String cause){
+        ValidationErrors errors = new ValidationErrors();
+        if(cause != null){
+            errors.addGlobalError(new LocalizableError(key, cause) );
+        }else{
+            errors.addGlobalError(new LocalizableError(key) );
+        }
+        getContext().setValidationErrors(errors);
     }
     
 }
