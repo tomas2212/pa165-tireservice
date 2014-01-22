@@ -221,14 +221,14 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         
         if(tireAmount == 0){
             addValidationError("tireAmount.errorMessage", null);
-            return ReturnCorrectForm();
+            return getContext().getSourcePageResolution();
         }
         
         tire.setAmountOnStore(tireAmount);
         
         if(!enoughTiresOnStore(tire)){
             addValidationError("order.noOtherTires", null);
-            return ReturnCorrectForm();
+            return getContext().getSourcePageResolution();
         }
         if(order.getTires() == null){
             order.setTires(new ArrayList<TireDTO>());
