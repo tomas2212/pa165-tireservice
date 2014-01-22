@@ -16,10 +16,10 @@
                 <c:forEach items="${actionBean.people}" var="person">
                     <c:choose> 
                         <c:when test="${person.id == actionBean.order.person.id}">
-                            <option selected="selected" value="${person.id}">${person.firstName} ${person.lastName}</option>
+                            <option selected="selected" value="${person.id}">${person.firstName} ${person.lastName} (${person.email})</option>
                         </c:when>
                         <c:otherwise>
-                            <option value="${person.id}">${person.firstName} ${person.lastName}</option>
+                            <option value="${person.id}">${person.firstName} ${person.lastName} (${person.email})</option>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
