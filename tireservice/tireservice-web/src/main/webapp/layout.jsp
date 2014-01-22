@@ -34,14 +34,18 @@
                     <div class="aui-header-secondary">
                         <ul class="aui-nav"> 
                             <sec:authorize access="not isAuthenticated()">
-                            <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="login"><f:message key="menu.login"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="login"><f:message key="menu.login"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
                              </sec:authorize>
                             <sec:authorize access="isAuthenticated()">
-                            <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="logout"><f:message key="menu.logout"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.SecurityActionBean" event="logout"><f:message key="menu.logout"/></s:link></li>
                                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                                     <li><s:link beanclass="cz.muni.fi.pa165.tireservice.web.PeopleActionBean" event="register"><f:message key="menu.registration"/></s:link></li>
                                 </sec:authorize>
+                                <span style="padding: 0 15px">
+                                    <img src="images/avatar.png" alt="User Avatar" style="width: 24px; height: 24px; margin-top: 8px">
+                                    <span style="vertical-align: super; font-weight: bold;"><sec:authentication property="principal.username" /></span>
+                                </span>
                             </sec:authorize>
                         </ul>
                     </div>
