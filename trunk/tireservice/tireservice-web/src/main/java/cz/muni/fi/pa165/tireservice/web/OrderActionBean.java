@@ -34,6 +34,7 @@ import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -219,14 +220,14 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         SetOrderParams();
         
         if(tireAmount == 0){
-            getContext().getMessages().add(new LocalizableError("tireAmount.errorMessage")); 
+            addValidationError("tireAmount.errorMessage", null);
             return ReturnCorrectForm();
         }
         
         tire.setAmountOnStore(tireAmount);
         
         if(!enoughTiresOnStore(tire)){
-            getContext().getMessages().add(new LocalizableError("order.noOtherTires")); 
+            addValidationError("order.noOtherTires", null);
             return ReturnCorrectForm();
         }
         if(order.getTires() == null){
@@ -293,10 +294,13 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
           orderServices.createOrder(order);
           getContext().getRequest().getSession().removeAttribute("order");
           getContext().getMessages().add(new LocalizableMessage("order.inserted"));                                                                      
-        }
-        catch(Exception ex){
-           getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
-        }            
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        }             
         return new RedirectResolution((Class<? extends ActionBean>) this.getClass(), "register");
     }
     
@@ -305,9 +309,13 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             orderServices.removeOrder(order);
             getContext().getRequest().removeAttribute("order");
             getContext().getMessages().add(new LocalizableMessage("order.removed"));
-        }catch(Exception ex){
-            getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
-        }
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        }   
         return new RedirectResolution((Class<? extends ActionBean>) this.getClass(), "list");
     }
     
@@ -385,7 +393,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         
         order.setDate(date);
         
-        if(carType == null || carType == ""){
+        if(carType == null || carType.isEmpty()){
             carType = getContext().getRequest().getParameter("editOrder.carType");
         }
         order.setCarType(carType);
@@ -465,6 +473,15 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
         this.loggedUser = loggedUser;
     }
     
+    private void addValidationError(String key, String cause){
+        ValidationErrors errors = new ValidationErrors();
+        if(cause != null){
+            errors.addGlobalError(new LocalizableError(key, cause) );
+        }else{
+            errors.addGlobalError(new LocalizableError(key) );
+        }
+        getContext().setValidationErrors(errors);
+    }
     
      
 }

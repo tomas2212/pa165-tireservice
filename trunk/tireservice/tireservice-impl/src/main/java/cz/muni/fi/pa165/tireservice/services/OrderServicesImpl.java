@@ -33,6 +33,7 @@ public class OrderServicesImpl implements OrderServices {
     }
 
     
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Transactional
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
@@ -43,8 +44,8 @@ public class OrderServicesImpl implements OrderServices {
         }
         return toReturn;
     }
-
- //   @PreAuthorize("hasRole('ROLE_ADMIN')")
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Transactional
     public List<OrderDTO> getAllEnabledOrders() {
         List<OrderDTO> toReturn = new ArrayList<OrderDTO>();
@@ -56,6 +57,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<OrderDTO> getAllUsersEnabledOrders(String email){
         if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email cannot be neither null nor empty string.");
@@ -71,6 +73,7 @@ public class OrderServicesImpl implements OrderServices {
         return toReturn;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Transactional
     public void createOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
@@ -81,7 +84,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDTO.setId(order.getId());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Transactional
     public void updateOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {
@@ -91,7 +94,7 @@ public class OrderServicesImpl implements OrderServices {
         orderDAO.updateOrder(order);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @Transactional
     public void removeOrder(OrderDTO orderDTO) {
         if (orderDTO == null) {

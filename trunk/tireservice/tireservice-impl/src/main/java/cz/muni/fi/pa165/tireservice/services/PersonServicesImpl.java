@@ -52,8 +52,8 @@ public class PersonServicesImpl implements PersonServices{
         Person person = PersonUtils.personDTOToEntity(personDTO);
         personDAO.insertPerson(person);
     }
-
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void updatePerson(PersonDTO personDTO) {
         ValidationHelper.ArgumentNull(personDTO);

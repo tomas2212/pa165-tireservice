@@ -11,15 +11,16 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.EmailTypeConverter;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  *
@@ -78,10 +79,17 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
         try{
           personServices.insertPerson(person);        
           getContext().getMessages().add(new LocalizableMessage("user.registered"));                                                                      
-        }
-        catch(Exception ex){
-           getContext().getMessages().add(new SimpleMessage("error: "+ex.getLocalizedMessage()));                                                                      
-        }            
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            if(ex.getMessage().contains("ConstraintViolationException")){
+                addValidationError("error.userexists", null);
+            }else{
+                addValidationError("error", ex.getClass().toString());
+            }
+            return getContext().getSourcePageResolution();
+        } 
         return new RedirectResolution(this.getClass(), "register");
     }
     
@@ -89,9 +97,13 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
         try{
             personServices.removePerson(person);
             getContext().getMessages().add(new LocalizableMessage("user.removed"));
-        }catch(Exception ex){
-            getContext().getMessages().add(new SimpleMessage("error: " + ex.getLocalizedMessage()));
-        }
+        } catch(AccessDeniedException ex){
+            addValidationError("error.notallowed", null);
+            return getContext().getSourcePageResolution();
+        } catch(Exception ex){
+            addValidationError("error", ex.getLocalizedMessage());
+            return getContext().getSourcePageResolution();
+        } 
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -134,6 +146,16 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         people = personServices.getAllPersons();
         return null;
+    }
+    
+    private void addValidationError(String key, String cause){
+        ValidationErrors errors = new ValidationErrors();
+        if(cause != null){
+            errors.addGlobalError(new LocalizableError(key, cause) );
+        }else{
+            errors.addGlobalError(new LocalizableError(key) );
+        }
+        getContext().setValidationErrors(errors);
     }
     
 }
