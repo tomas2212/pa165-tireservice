@@ -169,6 +169,17 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
 
     public List<TireTypeDTO> getAllTireTypes() {
         allTireTypes = tireTypeServices.getAllTireTypes();
+        OrderDTO o = getOrder();
+        if(o != null){
+            List<TireDTO> tires = o.getTires();
+            for(TireDTO t : tires){
+                for(TireTypeDTO tt : allTireTypes){
+                    if(tt.getId().equals(t.getTireType().getId())){
+                        tt.setAmountOnStore(tt.getAmountOnStore()-t.getAmountOnStore());
+                    }
+                }
+            }
+        }
         return allTireTypes;
     }
 
@@ -216,7 +227,8 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     public Resolution addTire() throws ParseException{
         String ids = getContext().getRequest().getParameter("tireType.id");
         TireDTO tire = new TireDTO();
-        tire.setTireType(tireTypeServices.getTireTypeById(Long.parseLong(ids)));
+        TireTypeDTO tireType = tireTypeServices.getTireTypeById(Long.parseLong(ids));
+        tire.setTireType(tireType);
         SetOrderParams();
         
         if(tireAmount == 0){
@@ -230,6 +242,7 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
             addValidationError("order.noOtherTires", null);
             return getContext().getSourcePageResolution();
         }
+        
         if(order.getTires() == null){
             order.setTires(new ArrayList<TireDTO>());
         }
@@ -285,15 +298,20 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     public Resolution add(){
         try{
-          order.setCarType(carType);
-          order.setDate(date);
-          if(personId != null && personId > 0){
-            order.setPerson(personServices.getPersonById(personId));
-          }
+            order.setCarType(carType);
+            order.setDate(date);
+            if(personId != null && personId > 0){
+              order.setPerson(personServices.getPersonById(personId));
+            }
           
-          orderServices.createOrder(order);
-          getContext().getRequest().getSession().removeAttribute("order");
-          getContext().getMessages().add(new LocalizableMessage("order.inserted"));                                                                      
+            orderServices.createOrder(order);
+            for(TireDTO t : order.getTires()){
+                TireTypeDTO tt = tireTypeServices.getTireTypeById(t.getTireType().getId());
+                tt.setAmountOnStore(tt.getAmountOnStore()-t.getAmountOnStore());
+                tireTypeServices.updateTireType(tt);
+            }
+            getContext().getRequest().getSession().removeAttribute("order");
+            getContext().getMessages().add(new LocalizableMessage("order.inserted"));                                                                      
         } catch(AccessDeniedException ex){
             addValidationError("error.notallowed", null);
             return getContext().getSourcePageResolution();
@@ -306,7 +324,15 @@ public class OrderActionBean implements ActionBean, ValidationErrorHandler{
     
     public Resolution delete(){
         try{
+            Date orderDate = order.getDate();
             orderServices.removeOrder(order);
+            if(orderDate.getTime() > System.currentTimeMillis()){
+                for(TireDTO t : order.getTires()){
+                    TireTypeDTO tt = tireTypeServices.getTireTypeById(t.getTireType().getId());
+                    tt.setAmountOnStore(tt.getAmountOnStore()+t.getAmountOnStore());
+                    tireTypeServices.updateTireType(tt);
+                }
+            }
             getContext().getRequest().removeAttribute("order");
             getContext().getMessages().add(new LocalizableMessage("order.removed"));
         } catch(AccessDeniedException ex){

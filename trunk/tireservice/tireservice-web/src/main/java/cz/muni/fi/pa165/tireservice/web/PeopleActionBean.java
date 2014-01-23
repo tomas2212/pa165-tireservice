@@ -86,7 +86,7 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
             if(ex.getMessage().contains("ConstraintViolationException")){
                 addValidationError("error.userexists", null);
             }else{
-                addValidationError("error", ex.getClass().toString());
+                addValidationError("error", ex.getLocalizedMessage());
             }
             return getContext().getSourcePageResolution();
         } 
