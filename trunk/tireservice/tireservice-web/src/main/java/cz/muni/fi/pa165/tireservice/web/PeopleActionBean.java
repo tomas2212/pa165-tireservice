@@ -40,11 +40,11 @@ public class PeopleActionBean implements ActionBean, ValidationErrorHandler{
     
     @ValidateNestedProperties(value = {
         @Validate(on = {"delete, edit"}, field = "id", required = true),
-        @Validate(on = {"save", "add"}, field = "email", required = true, converter = EmailTypeConverter.class),
-        @Validate(on = {"save", "add"}, field = "firstName", required = true),
-        @Validate(on = {"save", "add"}, field = "lastName", required = true),
-        @Validate(on = {"save", "add"}, field = "address", required = true),
-        @Validate(on = {"save", "add"}, field = "phoneNumber", required = true),
+        @Validate(on = {"save", "add"}, field = "email", required = true, maxlength = 50, converter = EmailTypeConverter.class),
+        @Validate(on = {"save", "add"}, field = "firstName", required = true, maxlength = 25),
+        @Validate(on = {"save", "add"}, field = "lastName", required = true, maxlength = 25),
+        @Validate(on = {"save", "add"}, field = "address", required = true, maxlength = 100),
+        @Validate(on = {"save", "add"}, field = "phoneNumber", required = true, maxlength = 12),
         @Validate(on = {"save", "add"}, field = "password", required = true, minlength = 6)
     })
     private PersonDTO person;
