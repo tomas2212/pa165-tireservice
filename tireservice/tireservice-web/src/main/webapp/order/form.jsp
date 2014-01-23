@@ -4,7 +4,7 @@
       
 <table>
     <tr>
-        <th><s:label for="o1"><f:message key="field.customer" /></s:label></th>
+        <th><s:label for="o1"><f:message key="personId" /></s:label></th>
         <td>
         <c:choose>
             <c:when test="${actionBean.loggedUser.isServiceman == false}">
@@ -29,11 +29,11 @@
         </td>
     </tr>
     <tr>
-        <th><s:label for="o2"><f:message key="field.cartype" /></s:label></th>
+        <th><s:label for="o2"><f:message key="carType" /></s:label></th>
         <td><s:text id="txtCarTypeId" name="carType" value="${actionBean.order.carType}"/></td>
     </tr>
     <tr>
-        <th><s:label for="o3"><f:message key="field.date" /></s:label></th>
+        <th><s:label for="o3"><f:message key="date" /></s:label></th>
         <td><input class="aui-date-picker" id="demo-range-always" type="date" name="date" value="${actionBean.convertDateToString()}"/>
         <script>
             AJS.$(document).ready(function() {

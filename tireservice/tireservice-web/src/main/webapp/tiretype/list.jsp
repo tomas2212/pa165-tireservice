@@ -21,12 +21,12 @@
                         <thead>
                             <tr>
                                 <th id="tiretype-id">#</th>
-                                <th id="tiretype-manufacturer"><f:message key="field.manufacturer"/></th>
-                                <th id="tiretype-type"><f:message key="field.type"/></th>
-                                <th id="tiretype-description"><f:message key="field.description"/></th>
-                                <th id="tiretype-tirerimsize"><f:message key="field.tireRimSize"/></th>
-                                <th id="tiretype-amountonstore"><f:message key="field.amount"/></th>
-                                <th id="tiretype-price"><f:message key="field.price"/></th>
+                                <th id="tiretype-manufacturer"><f:message key="tireTypeDTO.manufacturer"/></th>
+                                <th id="tiretype-type"><f:message key="tireTypeDTO.type"/></th>
+                                <th id="tiretype-description"><f:message key="tireTypeDTO.description"/></th>
+                                <th id="tiretype-tirerimsize"><f:message key="tireTypeDTO.tireRimSize"/></th>
+                                <th id="tiretype-amountonstore"><f:message key="tireTypeDTO.amountOnStore"/></th>
+                                <th id="tiretype-price"><f:message key="tireTypeDTO.price"/></th>
                                 <th id="tiretype-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>

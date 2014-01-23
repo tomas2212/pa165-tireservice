@@ -21,10 +21,10 @@
                         <thead>
                             <tr>
                                 <th id="service-id">#</th>
-                                <th id="service-name"><f:message key="field.name"/></th>
-                                <th id="service-description"><f:message key="field.description"/></th>
+                                <th id="service-name"><f:message key="service.name"/></th>
+                                <th id="service-description"><f:message key="service.description"/></th>
                                     <%--<th id="service-active">Activity status</th> --%>
-                                <th id="service-price"><f:message key="field.price"/></th>
+                                <th id="service-price"><f:message key="service.price"/></th>
                                 <th id="service-action" class="aui-table-column-unsortable"></th>
                             </tr>
                         </thead>
