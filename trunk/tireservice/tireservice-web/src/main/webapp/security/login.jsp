@@ -16,8 +16,10 @@
             <div class="aui-page-panel-inner">
                 <section class="aui-page-panel-content">
                     <c:if test="${not empty actionBean.error}">
-                        <div class="errorblock">
-                            <f:message key="login.error" />
+                        <div class="aui-message warning shadowed"><p class="title">Ooops:</p><span class="aui-icon icon-warning"></span>
+                            <p>
+                                <f:message key="login.error" />
+                            </p>
                         </div>
                     </c:if>
                     <c:url value="/j_spring_security_check" var="checkUrl"/>

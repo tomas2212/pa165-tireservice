@@ -20,12 +20,12 @@
                     <thead>
                         <tr>
                             <th id="person-id">#</th>
-                            <th id="person-email"><f:message key="field.email"/></th>
-                            <th id="person-firstname"><f:message key="field.first.name"/></th>
-                            <th id="person-lastname"><f:message key="field.last.name"/></th>
-                            <th id="person-address"><f:message key="field.address"/></th>
-                            <th id="person-phonenumber"><f:message key="field.phone.number"/></th>
-                            <th id="person-isadmin"><f:message key="field.is.admin"/></th>
+                            <th id="person-email"><f:message key="person.email"/></th>
+                            <th id="person-firstname"><f:message key="person.firstName"/></th>
+                            <th id="person-lastname"><f:message key="person.lastName"/></th>
+                            <th id="person-address"><f:message key="person.address"/></th>
+                            <th id="person-phonenumber"><f:message key="person.phoneNumber"/></th>
+                            <th id="person-isadmin"><f:message key="person.isServiceman"/></th>
                             <th id="person-action" class="aui-table-column-unsortable"></th>
                         </tr>
                     </thead>
