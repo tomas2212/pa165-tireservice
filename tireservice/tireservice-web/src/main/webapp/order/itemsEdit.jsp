@@ -23,9 +23,10 @@
 
                 <table>
                     <thead>
-                        <td><f:message key="field.manufacturer"/></td>
-                        <td><f:message key="field.amount"/></td>
-                        <td><f:message key="field.price"/></td>
+                        <td><f:message key="tireTypeDTO.manufacturer"/></td>
+                        <td><f:message key="tireTypeDTO.type"/></td>
+                        <td><f:message key="tireTypeDTO.amountOnStore"/></td>
+                        <td><f:message key="tireTypeDTO.price"/></td>
                         <td></td>
                     </thead>
                     <tbody>
@@ -36,6 +37,7 @@
                                 <s:hidden id="editOrder.addTire.personId" name="personId" ></s:hidden>
                                 <tr>
                                     <td><c:out value="${tireType.manufacturer}"/></td>
+                                    <td><c:out value="${tireType.type}"/></td>
                                     <td><c:out value="${tireType.amountOnStore}"/></td>
                                     <td><c:out value="${tireType.price}"/></td>
                                     <td><s:text name="tireAmount"/></td>
@@ -55,8 +57,8 @@
 
             <table>
                 <thead>
-                    <td><f:message key="field.servicename"/></td>
-                    <td><f:message key="field.price"/></td>
+                    <td><f:message key="service.name"/></td>
+                    <td><f:message key="service.price"/></td>
                     <td></td>
                 </thead>
                 <tbody>
@@ -90,22 +92,24 @@
 <strong style="color: #707070;"><s:label for="o7"><f:message key="selected.tires"/></s:label></strong>
 <table class="aui">
     <thead>
-        <td><f:message key="field.manufacturer"/></td>
-        <td><f:message key="field.amount"/></td>
-        <td><f:message key="field.price"/></td>
+        <td><f:message key="tireTypeDTO.manufacturer"/></td>
+        <td><f:message key="tireTypeDTO.type"/></td>
+        <td><f:message key="tireTypeDTO.amountOnStore"/></td>
+        <td><f:message key="tireTypeDTO.price"/></td>
         <td></td>
     </thead>
     <tbody>
         <c:forEach items="${order.tires}" var="tire">
             <tr>
-                <td><c:out value="${tire.tireType.manufacturer}"/></td>
-                <td><c:out value="${tire.amountOnStore}"/></td>
-                <td><c:out value="${tire.tireType.price}"/></td>
+                <td><c:out value="${tireType.manufacturer}"/></td>
+                <td><c:out value="${tireType.type}"/></td>
+                <td><c:out value="${tireType.amountOnStore}"/></td>
+                <td><c:out value="${tireType.price}"/></td>
                 <td>
                     <s:form beanclass="cz.muni.fi.pa165.tireservice.web.OrderActionBean" class="aui">
-                                <s:hidden id="editOrder.removeTire.carType" name="carType" ></s:hidden>
-                                <s:hidden id="editOrder.removeTire.date" name="date" ></s:hidden>
-                                <s:hidden id="editOrder.removeTire.personId" name="personId" ></s:hidden>
+                        <s:hidden id="editOrder.removeTire.carType" name="carType" ></s:hidden>
+                        <s:hidden id="editOrder.removeTire.date" name="date" ></s:hidden>
+                        <s:hidden id="editOrder.removeTire.personId" name="personId" ></s:hidden>
                         <s:hidden name="formType" value="edit"></s:hidden>
                         <s:submit name="removeTire" onclick="rememberFields('removeTire');"><s:param name="tireType.id" value="${tire.tireType.id}"/><f:message key="action.remove" /></s:submit>
                     </s:form>
@@ -121,8 +125,8 @@
 <strong style="color: #707070;"><s:label for="o6"><f:message key="selected.services"/></s:label></strong>
 <table class="aui">
     <thead>
-        <td><f:message key="field.servicename"/></td>
-        <td><f:message key="field.price"/></td>
+        <td><f:message key="service.name"/></td>
+        <td><f:message key="service.price"/></td>
         <td></td>
     </thead>
     <tbody>
